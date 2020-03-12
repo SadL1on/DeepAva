@@ -13,8 +13,10 @@
     </Design.DataContext>
     
     <Grid Name="Auth">
-      <TextBox Name="Login" Width="100" Height="20"></TextBox>
-      <TextBox Name="Password" Width="100" Height="20"></TextBox>
+      <TextBlock HorizontalAlignment="Center" FontSize="30">Авторизация</TextBlock>
+      <TextBox Name="Login" Width="200" Height="30"></TextBox>
+      <TextBox Name="Password" Width="200" Height="30" Margin="300"></TextBox>
+      <Button Name="On" Width="200" Height="30" VerticalAlignment="Bottom"></Button>
       <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>
