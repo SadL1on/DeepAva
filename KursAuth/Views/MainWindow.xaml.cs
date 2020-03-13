@@ -31,7 +31,10 @@ namespace KursAuth.Views
         {
             string log = login.Text;
             string pass = password.Text;
-            Authorization auth = new Authorization(log, pass);
+            Vk vk = new Vk(log, pass);
+            VkMain vkmain = new VkMain(vk);
+            vkmain.Show();
+            this.Close();
         }
 
         private void InitializeComponent()
