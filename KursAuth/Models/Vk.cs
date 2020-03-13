@@ -5,6 +5,8 @@ using VkNet;
 using VkNet.Enums.Filters;
 using VkNet.Model;
 using VkNet.Model.RequestParams;
+using VkNet.AudioBypassService.Extensions;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace KursAuth.Models
 {
@@ -18,14 +20,18 @@ namespace KursAuth.Models
         {
             login = log;
             password = pass;
-           
 
+
+            var services = new ServiceCollection();
+            services.AddAudioBypass();
+
+            var api = new VkApi(services);
+
+            // Авторизируемся для получения токена валидного для вызова методов Audio / Messages
             api.Authorize(new ApiAuthParams
             {
-                ApplicationId = 7062393,
                 Login = login,
-                Password = password,
-                Settings = Settings.All
+                Password = password
             });
 
         }
