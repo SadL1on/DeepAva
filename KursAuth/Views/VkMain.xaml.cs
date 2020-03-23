@@ -2,44 +2,44 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using KursAuth.Models;
+using VkNet;
+
 
 namespace KursAuth.Views
 {
+   
     public class VkMain : Window
     {
-        Vk vk;
-        Button send;
-        TextBox message;
-        string messagetext;
+        Button MyFriends;
+        VkApi api;
         public VkMain()
         {
             this.InitializeComponent();
 #if DEBUG
             this.AttachDevTools();
 #endif
-        }
-        public VkMain(Vk vk)
-        {
             
+
+        }
+        public VkMain(VkApi api)
+        {
             this.InitializeComponent();
 #if DEBUG
             this.AttachDevTools();
 #endif
-            this.vk = vk;
-            message = this.FindControl<TextBox>("Message");
-            messagetext = message.Text;
-
-            send = this.FindControl<Button>("Send");
-            send.Click += Send_Click1;
-
+            MyFriends = this.FindControl<Button>("MyFriends");
+            MyFriends.Click += MyFriends_Click;
+            this.api = api;
         }
 
-        private void Send_Click1(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        private void MyFriends_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            vk.Message(messagetext);
+            MyFriends myfriends = new MyFriends(api);
+            myfriends.Show();
+            this.Close();
         }
 
-      
+
 
         private void InitializeComponent()
         {

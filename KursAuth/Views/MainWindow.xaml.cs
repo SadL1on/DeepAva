@@ -2,6 +2,10 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using KursAuth.Models;
+using Microsoft.Extensions.DependencyInjection;
+using VkNet;
+using VkNet.AudioBypassService.Extensions;
+using VkNet.Model;
 
 namespace KursAuth.Views
 {
@@ -9,14 +13,14 @@ namespace KursAuth.Views
     {
         public TextBox login;
         public TextBox password;
-        public Button on;
+        public Avalonia.Controls.Button on;
         public MainWindow()
         {
             InitializeComponent();
 #if DEBUG
             this.AttachDevTools();
 #endif
-            on = this.FindControl<Button>("On");
+            on = this.FindControl<Avalonia.Controls.Button>("On");
             login = this.FindControl<TextBox>("Login");
             password = this.FindControl<TextBox>("Password");
 
@@ -29,10 +33,14 @@ namespace KursAuth.Views
 
         private void On_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            string log = login.Text;
-            string pass = password.Text;
-            Vk vk = new Vk(log, pass);
-            VkMain vkmain = new VkMain(vk);
+            string logintext = login.Text;
+            string passwordtext = password.Text;
+
+
+            Vk vk = new Vk();
+           VkApi api = vk.auth(logintext, passwordtext);
+
+            VkMain vkmain = new VkMain(api);
             vkmain.Show();
             this.Close();
         }

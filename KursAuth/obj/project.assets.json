@@ -9312,17 +9312,17 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\DeppAva\\KursAuth\\KursAuth.csproj",
+      "projectUniqueName": "D:\\DeepAva\\KursAuth\\KursAuth.csproj",
       "projectName": "KursAuth",
-      "projectPath": "D:\\DeppAva\\KursAuth\\KursAuth.csproj",
+      "projectPath": "D:\\DeepAva\\KursAuth\\KursAuth.csproj",
       "packagesPath": "C:\\Users\\Daniil\\.nuget\\packages\\",
-      "outputPath": "D:\\DeppAva\\KursAuth\\obj\\",
+      "outputPath": "D:\\DeepAva\\KursAuth\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "D:\\DeppAva\\KursAuth\\NuGet.Config",
+        "D:\\DeepAva\\KursAuth\\NuGet.Config",
         "C:\\Users\\Daniil\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
