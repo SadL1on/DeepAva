@@ -15,26 +15,9 @@
         <vm:MainWindowViewModel />
     </Design.DataContext>
 
-    <Grid Name="Auth">
-        <TextBlock HorizontalAlignment="Center" FontSize="30">Авторизация</TextBlock>
-        <TextBox
-            Name="Login"
-            Width="200"
-            Height="30" />
-        <TextBox
-            Name="Password"
-            Width="200"
-            Height="30"
-            Margin="300" />
-        <Button
-            Name="On"
-            Width="200"
-            Height="30"
-            VerticalAlignment="Bottom" />
-        <TextBlock
-            HorizontalAlignment="Center"
-            VerticalAlignment="Bottom"
-            Text="{Binding Greeting}" />
-    </Grid>
+    <TextBlock
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Text="{Binding Greeting}" />
 
 </Window>
