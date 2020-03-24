@@ -15,6 +15,7 @@ namespace KursAuth.Views
         public TextBox password;
         public Button auth;
         public Button reg;
+
         public MainWindow()
         {
             InitializeComponent();
