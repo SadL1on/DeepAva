@@ -8,13 +8,23 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-  <Grid>
-    <Button Margin="10,66,674,323" Height="33" >Моя страница</Button>
-    <Button Margin="10,101,674,288" Height="33" Name="MyFriends">Друзья</Button>
-    <Button Margin="10,136,674,253" Height="33">Сообщества"</Button>
-    <Button Margin="10,171,674,218" Height="33" >Просто кнопка</Button>
+    <Grid>
+        <Button Height="33" Margin="10,66,674,323">Моя страница</Button>
+        <Button
+            Name="MyFriends"
+            Height="33"
+            Margin="10,101,674,288">
+            Друзья
+        </Button>
+        <Button
+            Name="MyMessages"
+            Height="33"
+            Margin="10,136,674,253">
+            Сообщения
+        </Button>
+        <Button Height="33" Margin="10,171,674,218">Просто кнопка</Button>
 
 
 
-  </Grid>
+    </Grid>
 </Window>

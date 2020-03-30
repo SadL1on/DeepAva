@@ -14,6 +14,7 @@
   </ItemGroup>
   <ItemGroup>
     <AvaloniaResource Remove="Views\MyFriends.xaml" />
+    <AvaloniaResource Remove="Views\MyMessages.xaml" />
     <AvaloniaResource Remove="Views\VkMain.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -23,6 +24,7 @@
     <AvaloniaResource Remove="Views\RegControl.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Views\MyMessages.xaml" />
     <None Remove="Views\RegControl.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -50,6 +52,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\VkMain.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\MyMessages.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>

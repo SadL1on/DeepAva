@@ -36,14 +36,22 @@ namespace KursAuth.Views
             string logintext = login.Text;
             string passwordtext = password.Text;
 
+            try
+            {
+                Vk vk = new Vk();
+                VkApi api = vk.auth(logintext, passwordtext);
 
-            Vk vk = new Vk();
-            VkApi api = vk.auth(logintext, passwordtext);
 
-            VkMain vkmain = new VkMain(api);
-            vkmain.Show();
-            this.Close();
+                VkMain vkmain = new VkMain(api);
+                vkmain.Show();
+                this.Close();
         }
+            catch
+            {
+                login.Text = null;
+                password.Text = null;
+            }
+}
 
         private void InitializeComponent()
         {

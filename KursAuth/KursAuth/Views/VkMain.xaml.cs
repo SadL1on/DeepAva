@@ -11,6 +11,7 @@ namespace KursAuth.Views
     public class VkMain : Window
     {
         Button MyFriends;
+        Button MyMessages;
         VkApi api;
         public VkMain()
         {
@@ -28,8 +29,17 @@ namespace KursAuth.Views
             this.AttachDevTools();
 #endif
             MyFriends = this.FindControl<Button>("MyFriends");
+            MyMessages = this.FindControl<Button>("MyMessages");
             MyFriends.Click += MyFriends_Click;
             this.api = api;
+            MyMessages.Click += MyMessages_Click;
+        }
+
+        private void MyMessages_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            MyMessages mymessages = new MyMessages(api);
+            mymessages.Show();
+            this.Close();
         }
 
         private void MyFriends_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)

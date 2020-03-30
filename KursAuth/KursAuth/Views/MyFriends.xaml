@@ -7,8 +7,17 @@
         Title="MyFriends">
   <Grid>
 
-    <ListBox Name="Friends">
+    <ListBox x:Name="Friends">
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <StackPanel Margin="5">
+            <TextBlock FontSize="16" Text="{Binding Path=FirstName}" />
+            <TextBlock FontSize="16" Text="{Binding Path=LastName}"/>
+          </StackPanel>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
     </ListBox>
+    <Button VerticalAlignment="Bottom" Width="70" HorizontalAlignment="Left" Name="Back">Назад</Button>
 
   </Grid>
 </Window>
