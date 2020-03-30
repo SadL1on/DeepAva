@@ -10,13 +10,14 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace KursAuth.Models
 {
-   public class Vk
+    public class Vk
     {
         public VkApi api = new VkApi();
         private string login;
         private string password;
 
-        public Vk(string log, string pass)
+
+        public VkApi auth(string log, string pass)
         {
             login = log;
             password = pass;
@@ -33,25 +34,34 @@ namespace KursAuth.Models
                 Login = login,
                 Password = password
             });
-
+            return (api);
         }
 
-        public void Message(string message)
-        {
-           
-            api.Messages.Send(new VkNet.Model.RequestParams.MessagesSendParams
-            {
-                RandomId = 123, // уникальный
-                UserId = 107114970,
-                Message = message
-            });
+        //public void GetFriends() 
+        //{
+
+        //    var users = api.Friends.Get(new FriendsGetParams
+        //    {
+        //        UserId = 170426526,
+        //        Count = 10,
+        //        Fields = ProfileFields.FirstName,
+        //    });
 
 
-        }
+        //    foreach (var item in users)
+        //    {
+        //        Console.WriteLine(item.Id + item.FirstName + item.LastName);
+        //    }
+
+
+
+
+
+        //}
+
 
 
 
     }
 
 }
-
