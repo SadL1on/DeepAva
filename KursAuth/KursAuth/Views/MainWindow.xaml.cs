@@ -1,52 +1,59 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Avalonia.ReactiveUI;
-using Avalonia.Interactivity;
 using KursAuth.Models;
 using KursAuth.ViewModels;
-using System;
+using Microsoft.Extensions.DependencyInjection;
+using VkNet;
+using VkNet.AudioBypassService.Extensions;
+using VkNet.Model;
 
 namespace KursAuth.Views
 {
-    public class MainWindow : ReactiveWindow<MainWindowViewModel>
+    public class MainWindow : Window
     {
         public TextBox login;
         public TextBox password;
-        public Button auth;
-        public Button reg;
+        public Avalonia.Controls.Button on;
         public MainWindow()
         {
             InitializeComponent();
 #if DEBUG
             this.AttachDevTools();
 #endif
-            auth = this.FindControl<Button>("On");
+            on = this.FindControl<Avalonia.Controls.Button>("On");
             login = this.FindControl<TextBox>("Login");
             password = this.FindControl<TextBox>("Password");
-            auth.Click += On_Click;
 
-            reg = this.FindControl<Button>("Reg");
-            reg.Click += Reg_Click;
+
+
+            on.Click += On_Click;
+
+
         }
 
-        private void Reg_Click(object sender, RoutedEventArgs e)
+        private void On_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            ViewModel.IsVisRegControl = !(ViewModel.IsVisRegControl);
-        }
 
-        private void On_Click(object sender, RoutedEventArgs e)
-        {
-            string log = login.Text;
-            string pass = password.Text;
-            Authorization auth = new Authorization(log, pass);
-        }
+            try
+            {
+                VkApi api = ViewModels.MainWindowViewModel.Auth(login,password);
+                VkMain vkmain = new VkMain(api);
+                vkmain.Show();
+                this.Close();
+            }
+            catch
+            {
+                login.Text = null;
+                password.Text = null;
+            }
+}
 
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-           
+
         }
-       
+
     }
 }
