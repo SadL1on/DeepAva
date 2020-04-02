@@ -30,8 +30,9 @@ namespace KursAuth.Views
 #endif
             MyFriends = this.FindControl<Button>("MyFriends");
             MyMessages = this.FindControl<Button>("MyMessages");
-            MyFriends.Click += MyFriends_Click;
             this.api = api;
+           
+            MyFriends.Click += MyFriends_Click;
             MyMessages.Click += MyMessages_Click;
         }
 

@@ -5,6 +5,9 @@ using KursAuth.Models;
 using VkNet;
 using VkNet.Enums.Filters;
 using VkNet.Model.RequestParams;
+using KursAuth.ViewModels;
+
+
 
 namespace KursAuth.Views
 {
@@ -31,23 +34,9 @@ namespace KursAuth.Views
 #endif
             back = this.FindControl<Button>("Back");
             this.api = api;
-            var users = api.Friends.Get(new FriendsGetParams
-            {
-                UserId = 587033839,
-                Count = 10,
-                Fields = ProfileFields.FirstName,
-            });
-            ;
-
             friends = this.FindControl<ListBox>("Friends");
-            foreach (var item in users)
-            {
 
-                friends.Items = users;
-
-
-                //friends.Items = item.FirstName + " " + item.LastName;
-            }
+            ViewModels.MyFriendsViewModel.GetFriends(api, friends);
 
             back.Click += Back_Click;
         }
