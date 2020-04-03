@@ -14,18 +14,18 @@ namespace KursAuth.ViewModels
     {
 
 
-        public static VkApi Auth(TextBox login, TextBox password)
+        public static Vk Auth(TextBox login, TextBox password)
         {
 
             string logintext = login.Text;
             string passwordtext = password.Text;
 
             Vk vk = new Vk();
-            VkApi api = vk.auth(logintext, passwordtext);
+             vk = vk.auth(logintext, passwordtext);
 
 
 
-            return (api);
+            return (vk);
 
 
 

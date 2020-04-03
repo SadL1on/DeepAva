@@ -9,6 +9,7 @@ using KursAuth.Views;
 using Avalonia.Controls;
 using VkNet.Model.RequestParams;
 using VkNet.Enums.Filters;
+using VkNet.Utils;
 
 namespace KursAuth.ViewModels
 {
@@ -16,16 +17,11 @@ namespace KursAuth.ViewModels
     {
 
        
-        public static void  GetFriends(VkApi api, ListBox friends)
+        public static void  GetFriends(Vk vk, ListBox friends)
         {
-            
-            var users = api.Friends.Get(new FriendsGetParams
-            {
-                UserId = 587033839,
-                Count = 10,
-                Fields = ProfileFields.FirstName,
-            });
-            ;
+
+            VkCollection<VkNet.Model.User> users = vk.GetFriends(vk);
+           
 
            
             foreach (var item in users)

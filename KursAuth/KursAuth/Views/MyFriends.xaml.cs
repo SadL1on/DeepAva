@@ -16,6 +16,7 @@ namespace KursAuth.Views
         public VkApi api;
         ListBox friends;
         Button back;
+        Vk vk;
 
         public MyFriends()
         {
@@ -26,24 +27,24 @@ namespace KursAuth.Views
         }
 
 
-        public MyFriends(VkApi api)
+        public MyFriends(Vk vk)
         {
             this.InitializeComponent();
 #if DEBUG
             this.AttachDevTools();
 #endif
             back = this.FindControl<Button>("Back");
-            this.api = api;
+            this.vk = vk;
             friends = this.FindControl<ListBox>("Friends");
 
-            ViewModels.MyFriendsViewModel.GetFriends(api, friends);
+            ViewModels.MyFriendsViewModel.GetFriends(vk, friends);
 
             back.Click += Back_Click;
         }
 
         private void Back_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            VkMain vkmain = new VkMain(api);
+            VkMain vkmain = new VkMain(vk);
             vkmain.Show();
             this.Close();
         }

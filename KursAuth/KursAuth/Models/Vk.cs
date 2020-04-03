@@ -7,17 +7,18 @@ using VkNet.Model;
 using VkNet.Model.RequestParams;
 using VkNet.AudioBypassService.Extensions;
 using Microsoft.Extensions.DependencyInjection;
+using VkNet.Utils;
 
 namespace KursAuth.Models
 {
     public class Vk
     {
         public VkApi api = new VkApi();
-        private string login;
-        private string password;
+        private static string login;
+        private static string password;
 
 
-        public VkApi auth(string log, string pass)
+        public Vk auth(string log, string pass)
         {
             login = log;
             password = pass;
@@ -34,30 +35,21 @@ namespace KursAuth.Models
                 Login = login,
                 Password = password
             });
-            return (api);
+            this.api = api;
+            return (this);
         }
 
-        //public void GetFriends() 
-        //{
-
-        //    var users = api.Friends.Get(new FriendsGetParams
-        //    {
-        //        UserId = 170426526,
-        //        Count = 10,
-        //        Fields = ProfileFields.FirstName,
-        //    });
-
-
-        //    foreach (var item in users)
-        //    {
-        //        Console.WriteLine(item.Id + item.FirstName + item.LastName);
-        //    }
-
-
-
-
-
-        //}
+        public  VkCollection<VkNet.Model.User> GetFriends(Vk vk)
+        {
+        
+            var users = vk.api.Friends.Get(new FriendsGetParams
+            {
+                UserId = 587033839,
+                Count = 1000,
+                Fields = ProfileFields.FirstName,
+            });
+            return (users);
+        }
 
 
 

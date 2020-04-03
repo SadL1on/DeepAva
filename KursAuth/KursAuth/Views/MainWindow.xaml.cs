@@ -37,8 +37,8 @@ namespace KursAuth.Views
 
             try
             {
-                VkApi api = ViewModels.MainWindowViewModel.Auth(login,password);
-                VkMain vkmain = new VkMain(api);
+                Vk vk = ViewModels.MainWindowViewModel.Auth(login,password);
+                VkMain vkmain = new VkMain(vk);
                 vkmain.Show();
                 this.Close();
             }
