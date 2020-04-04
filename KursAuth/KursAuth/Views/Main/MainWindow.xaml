@@ -27,6 +27,7 @@
             Height="30"
             Margin="10, 70, 10, 30" />
         <TextBox
+            PasswordChar="*"
             Name="Password"
             Width="200"
             Height="30"
@@ -36,13 +37,6 @@
             Width="200"
             Height="30">
           Войти
-        </Button>
-        <Button
-            Name="Reg"
-            Width="200"
-            Height="30"
-            Margin="10, 10, 10, 30">
-          Регистрация
         </Button>
       </StackPanel>
 

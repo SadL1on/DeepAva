@@ -11,37 +11,38 @@ using VkNet.Utils;
 
 namespace KursAuth.Models
 {
-    public class Vk
+    public class AutorizationVk
     {
         public VkApi api = new VkApi();
         private static string login;
         private static string password;
 
-
-        public Vk auth(string log, string pass)
+        public AutorizationVk auth(string log, string pass)
         {
             login = log;
             password = pass;
 
-
             var services = new ServiceCollection();
             services.AddAudioBypass();
-
             var api = new VkApi(services);
 
-            // Авторизируемся для получения токена валидного для вызова методов Audio / Messages
             api.Authorize(new ApiAuthParams
             {
+                ApplicationId = 7062393,
                 Login = login,
-                Password = password
+                Password = password,
+                Settings = Settings.All,
+                TwoFactorAuthorization = () =>
+                {
+                    return "";
+                }
             });
             this.api = api;
             return (this);
         }
 
-        public  VkCollection<VkNet.Model.User> GetFriends(Vk vk)
-        {
-        
+        public  VkCollection<User> GetFriends(AutorizationVk vk)
+        {      
             var users = vk.api.Friends.Get(new FriendsGetParams
             {
                 UserId = 587033839,
