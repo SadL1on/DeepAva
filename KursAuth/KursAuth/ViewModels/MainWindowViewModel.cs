@@ -12,31 +12,14 @@ namespace KursAuth.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
     {
+        
 
-
-        public static VkApi Auth(TextBox login, TextBox password)
+        private bool _isVisRegControl = false;
+        public bool IsVisRegControl
         {
-
-            string logintext = login.Text;
-            string passwordtext = password.Text;
-
-            Vk vk = new Vk();
-            VkApi api = vk.auth(logintext, passwordtext);
-
-
-
-            return (api);
-
-
-
+            get => _isVisRegControl;
+            set => this.RaiseAndSetIfChanged(ref _isVisRegControl, value);
         }
-            public string Greeting => "Welcome to Avalonia!";
-            private bool _isVisRegControl = false;
-            public bool IsVisRegControl
-            {
-                get => _isVisRegControl;
-                set => this.RaiseAndSetIfChanged(ref _isVisRegControl, value);
-            }
 
     }
 }

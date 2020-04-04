@@ -1,46 +1,40 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.ReactiveUI;
+using Avalonia.Interactivity;
 using KursAuth.Models;
 using KursAuth.ViewModels;
-using Microsoft.Extensions.DependencyInjection;
-using VkNet;
-using VkNet.AudioBypassService.Extensions;
-using VkNet.Model;
+using System;
 
 namespace KursAuth.Views
 {
-    public class MainWindow : Window
+    public class MainWindow : ReactiveWindow<MainWindowViewModel>
     {
         public TextBox login;
         public TextBox password;
-        public Avalonia.Controls.Button on;
+        public Button on;
+
         public MainWindow()
         {
             InitializeComponent();
 #if DEBUG
             this.AttachDevTools();
 #endif
-            on = this.FindControl<Avalonia.Controls.Button>("On");
+            on = this.FindControl<Button>("On");
             login = this.FindControl<TextBox>("Login");
             password = this.FindControl<TextBox>("Password");
-
-
-
             on.Click += On_Click;
-
-
         }
 
-        private void On_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        private void On_Click(object sender, RoutedEventArgs e)
         {
-
             try
             {
-                VkApi api = ViewModels.MainWindowViewModel.Auth(login,password);
-                VkMain vkmain = new VkMain(api);
+                AutorizationVk vk = VkVeiwModel.Auth(login,password);
+                VkMain vkmain = new VkMain(vk);
                 vkmain.Show();
-                this.Close();
+                Close();
             }
             catch
             {

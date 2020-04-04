@@ -1,28 +1,29 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Avalonia.ReactiveUI;
 using KursAuth.Models;
+using KursAuth.ViewModels;
 using VkNet;
 
 
 namespace KursAuth.Views
 {
 
-    public class VkMain : Window
+    public class VkMain : ReactiveWindow<MainWindowViewModel>
     {
         Button MyFriends;
         Button MyMessages;
-        VkApi api;
+        AutorizationVk vk;
         public VkMain()
         {
             this.InitializeComponent();
 #if DEBUG
             this.AttachDevTools();
 #endif
-
-
         }
-        public VkMain(VkApi api)
+        public VkMain(AutorizationVk vk)
         {
             this.InitializeComponent();
 #if DEBUG
@@ -30,24 +31,24 @@ namespace KursAuth.Views
 #endif
             MyFriends = this.FindControl<Button>("MyFriends");
             MyMessages = this.FindControl<Button>("MyMessages");
-            this.api = api;
+            this.vk = vk;
            
             MyFriends.Click += MyFriends_Click;
-            MyMessages.Click += MyMessages_Click;
+            //MyMessages.Click += MyMessages_Click;
         }
 
-        private void MyMessages_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
-        {
-            MyMessages mymessages = new MyMessages(api);
-            mymessages.Show();
-            this.Close();
-        }
+        //private void MyMessages_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        //{
+        //    MyMessages mymessages = new MyMessages(vk);
+        //    mymessages.Show();
+        //    this.Close();
+        //}
 
-        private void MyFriends_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        private void MyFriends_Click(object sender, RoutedEventArgs e)
         {
-            MyFriends myfriends = new MyFriends(api);
+            MyFriends myfriends = new MyFriends(vk);
             myfriends.Show();
-            this.Close();
+            Close();
         }
 
 

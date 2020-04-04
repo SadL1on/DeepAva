@@ -28,7 +28,7 @@
     <None Remove="Views\RegControl.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Views\MainWindow.xaml" />
+  <!--  <None Remove="Views\MainWindow.xaml" /> -->
     <None Remove="Views\RegControl.xaml" />
     <None Remove="Views\VkMain.xaml" />
   </ItemGroup>
@@ -36,12 +36,13 @@
     <PackageReference Include="Avalonia" Version="0.9.0" />
     <PackageReference Include="Avalonia.Desktop" Version="0.9.0" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="VkNet" Version="1.50.0" />
     <PackageReference Include="VkNet.AudioBypassService" Version="1.5.3" />
     <PackageReference Include="VkNet" Version="1.50.0" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\MyFriends.xaml">
+    <EmbeddedResource Include="Views\VK\MyFriends.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
@@ -51,12 +52,12 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\VkMain.xaml">
+    <EmbeddedResource Include="Views\VK\VkMain.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\MyMessages.xaml">
+    <EmbeddedResource Include="Views\VK\MyMessages.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
