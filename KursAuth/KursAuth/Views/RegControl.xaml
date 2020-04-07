@@ -1,14 +1,30 @@
 ﻿<UserControl
-    x:Class="KursAuth.Views.RegControl"
+    x:Class="KursAuth.Views.VkMain"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="VkMain"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <Button
-        Width="50"
-        Height="50"
-        Background="AliceBlue" />
+    <Grid>
+        <Button Height="33" Margin="10,66,674,323">Моя страница</Button>
+        <Button
+            Name="MyFriends"
+            Height="33"
+            Margin="10,101,674,288">
+            Друзья
+        </Button>
+        <Button
+            Name="MyMessages"
+            Height="33"
+            Margin="10,136,674,253">
+            Сообщения
+        </Button>
+        <Button Height="33" Margin="10,171,674,218">Просто кнопка</Button>
+
+
+
+    </Grid>
 </UserControl>

@@ -14,12 +14,13 @@ namespace KursAuth.ViewModels
     {
         
 
-        private bool _isVisRegControl = false;
-        public bool IsVisRegControl
+        private bool _isVisVkMainControl = false;
+        public bool IsVisVkMainControl
         {
-            get => _isVisRegControl;
-            set => this.RaiseAndSetIfChanged(ref _isVisRegControl, value);
+            get => _isVisVkMainControl;
+            set => this.RaiseAndSetIfChanged(ref _isVisVkMainControl, value);
         }
+
 
     }
 }

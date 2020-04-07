@@ -1,4 +1,4 @@
-﻿<Window
+﻿<UserControl
     x:Class="KursAuth.Views.VkMain"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -27,4 +27,4 @@
 
 
     </Grid>
-</Window>
+</UserControl>

@@ -11,9 +11,7 @@ namespace KursAuth.Views
 {
     public class MainWindow : ReactiveWindow<MainWindowViewModel>
     {
-        public TextBox login;
-        public TextBox password;
-        public Button on;
+        public Button vkOpen;
 
         public MainWindow()
         {
@@ -21,27 +19,14 @@ namespace KursAuth.Views
 #if DEBUG
             this.AttachDevTools();
 #endif
-            on = this.FindControl<Button>("On");
-            login = this.FindControl<TextBox>("Login");
-            password = this.FindControl<TextBox>("Password");
-            on.Click += On_Click;
+            vkOpen = this.FindControl<Button>("VkOpen");
+            vkOpen.Click += VkOpen_Click;
         }
 
-        private void On_Click(object sender, RoutedEventArgs e)
+        private void VkOpen_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                AutorizationVk vk = VkVeiwModel.Auth(login,password);
-                VkMain vkmain = new VkMain(vk);
-                vkmain.Show();
-                Close();
-            }
-            catch
-            {
-                login.Text = null;
-                password.Text = null;
-            }
-}
+            ViewModel.IsVisVkMainControl = !(ViewModel.IsVisVkMainControl);
+        }
 
         private void InitializeComponent()
         {

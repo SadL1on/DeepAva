@@ -16,6 +16,8 @@
     <AvaloniaResource Remove="Views\MyFriends.xaml" />
     <AvaloniaResource Remove="Views\MyMessages.xaml" />
     <AvaloniaResource Remove="Views\VkMain.xaml" />
+    <AvaloniaResource Remove="Views\VK\VkAuth.xaml" />
+    <AvaloniaResource Remove="Views\VK\VkMain.xaml" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\MyFriends.xaml" />
@@ -31,6 +33,7 @@
   <!--  <None Remove="Views\MainWindow.xaml" /> -->
     <None Remove="Views\RegControl.xaml" />
     <None Remove="Views\VkMain.xaml" />
+    <None Remove="Views\VK\VkAuth.xaml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.9.0" />
@@ -62,8 +65,16 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Views\VK\VkAuth.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="Views\RegControl.xaml.cs">
       <DependentUpon>RegControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\VK\VkMain.xaml.cs">
+      <DependentUpon>VkMain.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>
