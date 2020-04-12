@@ -13,6 +13,8 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
+    <AvaloniaResource Remove="Views\Messengers\Contacts.xaml" />
+    <AvaloniaResource Remove="Views\Messengers\Messages.xaml" />
     <AvaloniaResource Remove="Views\MyFriends.xaml" />
     <AvaloniaResource Remove="Views\MyMessages.xaml" />
     <AvaloniaResource Remove="Views\VkMain.xaml" />
@@ -20,18 +22,14 @@
     <AvaloniaResource Remove="Views\VK\VkMain.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Views\Messengers\Contacts.xaml" />
+    <None Remove="Views\Messengers\Messages.xaml" />
     <None Remove="Views\MyFriends.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <AvaloniaResource Remove="Views\RegControl.xaml" />
-  </ItemGroup>
-  <ItemGroup>
     <None Remove="Views\MyMessages.xaml" />
-    <None Remove="Views\RegControl.xaml" />
   </ItemGroup>
   <ItemGroup>
-  <!--  <None Remove="Views\MainWindow.xaml" /> -->
-    <None Remove="Views\RegControl.xaml" />
     <None Remove="Views\VkMain.xaml" />
     <None Remove="Views\VK\VkAuth.xaml" />
   </ItemGroup>
@@ -46,11 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\VK\MyFriends.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\RegControl.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
@@ -70,11 +63,18 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Views\RegControl.xaml.cs">
-      <DependentUpon>RegControl.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\VK\VkMain.xaml.cs">
       <DependentUpon>VkMain.xaml</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Messengers\Contacts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Messengers\Messages.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

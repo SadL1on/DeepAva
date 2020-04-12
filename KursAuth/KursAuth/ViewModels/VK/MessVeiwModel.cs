@@ -12,7 +12,7 @@ using VkNet.Model;
 
 namespace KursAuth.ViewModels
 {
-    class VkVeiwModel : ViewModelBase, INotifyPropertyChanged
+    public class MessVeiwModel : ViewModelBase, INotifyPropertyChanged
     {
         public static AutorizationVk Auth(TextBox login, TextBox password)
         {

@@ -6,9 +6,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:v="clr-namespace:KursAuth.Views;assembly=KursAuth"
     xmlns:vm="clr-namespace:KursAuth.ViewModels;assembly=KursAuth"
+    xmlns:vv="clr-namespace:KursAuth.Views.Messengers;assembly=KursAuth"
     Title="KursAuth"
-    Width="1000"
-    Height="700"
+    Width="450"
+    Height="800"
     d:DesignHeight="450"
     d:DesignWidth="800"
     Icon="/Assets/avalonia-logo.ico"
@@ -21,9 +22,13 @@
     <Grid Name="MainWin">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50" />
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <DockPanel Grid.Column="0" Background="Aquamarine">
+        <DockPanel
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Grid.Column="0"
+            Background="Aquamarine">
             <!--  TODO Create binding for all buttons  -->
             <Button
                 Name="Settings"
@@ -59,10 +64,8 @@
             <Grid />
         </DockPanel>
 
-        <Grid Name="MainAuth" />
-
     </Grid>
-
+    <vv:Contacts Grid.Column="1" IsVisible="True" />
     <!--  <v:MainAuth Grid.Column="1" IsVisible="{Binding IsVisRegControl}" />-->
 
 </Window>

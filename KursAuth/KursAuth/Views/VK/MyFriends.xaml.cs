@@ -35,7 +35,7 @@ namespace KursAuth.Views
             this.vk = vk;
             friends = this.FindControl<ListBox>("Friends");
 
-            VkVeiwModel.GetFriends(vk, friends);
+            MessVeiwModel.GetFriends(vk, friends);
 
             back.Click += Back_Click;
         }

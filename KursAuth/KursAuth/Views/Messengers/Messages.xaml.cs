@@ -2,11 +2,11 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace KursAuth.Views
+namespace KursAuth.Views.Messengers
 {
-    public class RegControl : UserControl
+    public class Messages : UserControl
     {
-        public RegControl()
+        public Messages()
         {
             this.InitializeComponent();
         }

@@ -32,7 +32,7 @@ namespace KursAuth.Views.VK
         {
             try
             {
-                AutorizationVk vk = VkVeiwModel.Auth(login, password);
+                AutorizationVk vk = MessVeiwModel.Auth(login, password);
                 VkMain vkmain = new VkMain(vk);
                 vkmain.Show();
 

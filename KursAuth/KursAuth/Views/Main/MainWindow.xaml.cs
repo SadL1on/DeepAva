@@ -25,7 +25,7 @@ namespace KursAuth.Views
 
         private void VkOpen_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.IsVisVkMainControl = !(ViewModel.IsVisVkMainControl);
+            
         }
 
         private void InitializeComponent()
