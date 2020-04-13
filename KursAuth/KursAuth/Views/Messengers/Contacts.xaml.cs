@@ -7,7 +7,7 @@ using KursAuth.ViewModels;
 
 namespace KursAuth.Views.Messengers
 {
-    public class Contacts : ReactiveUserControl<MessVeiwModel>
+    public class Contacts : ReactiveUserControl<MainWindowViewModel>
     {
         ListBox contacts;
 
@@ -21,7 +21,7 @@ namespace KursAuth.Views.Messengers
             this.InitializeComponent();
 
             contacts = this.FindControl<ListBox>("Contacts");
-            MessVeiwModel.GetFriends(vk, contacts);
+            MainWindowViewModel.GetFriends(vk, contacts);
         }
 
         private void InitializeComponent()

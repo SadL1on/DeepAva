@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace KursAuth.Views
 {
-    public class rrr : UserControl
+    public class MainAuth : UserControl
     {
-        public rrr()
+        public MainAuth()
         {
             this.InitializeComponent();
         }

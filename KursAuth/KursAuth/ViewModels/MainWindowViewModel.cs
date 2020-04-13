@@ -1,0 +1,56 @@
+﻿using ReactiveUI;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Text;
+using VkNet;
+using KursAuth.Models;
+using KursAuth.Views;
+using Avalonia.Controls;
+using VkNet.Utils;
+using VkNet.Model;
+
+namespace KursAuth.ViewModels
+{
+    public class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
+    {
+        
+
+        private bool _isVisConCtrl = false;
+        public bool IsVisConCtrl
+        {
+            get => _isVisConCtrl;
+            set => this.RaiseAndSetIfChanged(ref _isVisConCtrl, value);
+        }
+
+        private bool _isVisVkAuth = false;
+        public bool IsVisVkAuth
+        {
+            get => _isVisVkAuth;
+            set => this.RaiseAndSetIfChanged(ref _isVisVkAuth, value);
+        }
+
+        public static AutorizationVk Auth(TextBox login, TextBox password)
+        {
+            string logintext = login.Text;
+            string passwordtext = password.Text;
+
+            AutorizationVk vk = new AutorizationVk();
+            vk = vk.auth(logintext, passwordtext);
+
+            return (vk);
+        }
+
+        public static void GetFriends(AutorizationVk vk, ListBox friends)
+        {
+            VkCollection<User> users = vk.GetFriends(vk);
+            foreach (var item in users)
+            {
+                friends.Items = users;
+                //friends.Items = item.FirstName + " " + item.LastName;
+            }
+
+        }
+
+    }
+}
