@@ -6,12 +6,15 @@ using Avalonia.Interactivity;
 using KursAuth.Models;
 using KursAuth.ViewModels;
 using System;
+using KursAuth.Views.Messengers;
+using ReactiveUI;
 
 namespace KursAuth.Views
 {
     public class MainWindow : ReactiveWindow<MainWindowViewModel>
     {
         public Button vkOpen;
+        ListBox contacts;
 
         public MainWindow()
         {
@@ -32,6 +35,8 @@ namespace KursAuth.Views
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
+            contacts = this.FindControl<ListBox>("contacts");
+            //this.Bind(ViewModel, vm => vm.Users, v => v.contacts.Items);
 
         }
 

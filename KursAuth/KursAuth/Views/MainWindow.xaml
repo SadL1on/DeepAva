@@ -19,7 +19,7 @@
         <vm:MainWindowViewModel />
     </Design.DataContext>
 
-    <Grid Name="MainWin" IsVisible="{Binding }">
+    <Grid Name="MainWin" IsVisible="{Binding}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50" />
             <ColumnDefinition Width="*" />
@@ -63,8 +63,53 @@
                 DockPanel.Dock="Top" />
             <Grid />
         </DockPanel>
-        <vv:Contacts Grid.Column="1" IsVisible="{Binding IsVisConCtrl}" />
-      <vv:VkAuth Grid.Column="1" IsVisible="{Binding IsVisVkAuth}" />
+        
+           
+       
+
+      <Grid Grid.Column="1" IsVisible="{Binding IsVisConCtrl}">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="200" />
+          <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="50" />
+          <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <ListBox
+          Items="{Binding Users}"
+            Name="Contacts"
+            Grid.Row="1"
+            Grid.Column="0">
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <StackPanel Margin="5">
+                <TextBlock FontSize="16" Text="{Binding FirstName}" />
+                <TextBlock FontSize="16" Text="{Binding LastName}"  />
+              </StackPanel>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+
+
+
+
+        </ListBox>
+
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Background="Aqua"
+            Text="Title"
+            TextAlignment="Center" />
+
+      </Grid>
+      
+        <vv:VkAuth Grid.Column="1" IsVisible="{Binding IsVisVkAuth}">
+        
+
+        </vv:VkAuth>
     </Grid>
 
 </Window>

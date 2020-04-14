@@ -20,7 +20,20 @@
         <ListBox
             Name="Contacts"
             Grid.Row="1"
-            Grid.Column="0" />
+            Grid.Column="0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5">
+                        <TextBlock FontSize="16" Text="{Binding FirstName}" />
+                        <TextBlock FontSize="16" Text="{Binding LastName}"  />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+
+
+
+        </ListBox>
 
         <TextBlock
             Grid.Row="0"
