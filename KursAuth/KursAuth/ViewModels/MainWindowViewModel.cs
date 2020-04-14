@@ -51,9 +51,9 @@ namespace KursAuth.ViewModels
 
         public void  GetFriends(AutorizationVk vk)
         {
-            VkCollection<User> users = vk.GetFriends(vk);
+          
 
-            this.users = users;
+            Users = vk.GetFriends(vk);
            
         }
 

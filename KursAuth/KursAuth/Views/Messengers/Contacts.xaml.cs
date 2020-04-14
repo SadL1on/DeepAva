@@ -1,4 +1,5 @@
 ﻿using Avalonia;
+using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
@@ -12,9 +13,26 @@ namespace KursAuth.Views.Messengers
 {
     public class Contacts : ReactiveUserControl<MainWindowViewModel>
     {
-       public ListBox contacts;
+
+
+        public static readonly DirectProperty<Contacts, IEnumerable> ItemsProperty =
+            AvaloniaProperty.RegisterDirect<Contacts, IEnumerable>(
+                nameof(Items),
+                o => o.Items,
+                (o, v) => o.Items = v);
+
+        private IEnumerable _items = new AvaloniaList<object>();
+
+        public IEnumerable Items
+        {
+            get => _items;
+            set => SetAndRaise(ItemsProperty, ref _items, value);
+        }
+
+
+        public ListBox contacts;
         AutorizationVk vk;
-        public IEnumerable Items { get => contacts.Items; set => contacts.Items = value; }
+       
 
         public Contacts()
         {
@@ -23,6 +41,7 @@ namespace KursAuth.Views.Messengers
 
         public Contacts(AutorizationVk vk)
         {
+            
             this.vk = vk;
             this.InitializeComponent();
 

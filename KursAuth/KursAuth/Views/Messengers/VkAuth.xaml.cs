@@ -32,15 +32,15 @@ namespace KursAuth.Views.Messengers
                 AutorizationVk vk = ViewModel.Auth(login, password);
                 ViewModel.IsVisConCtrl = !(ViewModel.IsVisConCtrl);
                 ViewModel.IsVisVkAuth = !(ViewModel.IsVisVkAuth);
-            ViewModel.Users = vk.GetFriends(vk);
-            //ViewModel.GetFriends(vk);
+
+            ViewModel.GetFriends(vk);
             //}
             //catch
             //{
             //    login.Text = null;
             //    password.Text = null;
             //}
-            
+
         }
 
 
