@@ -29,10 +29,10 @@ namespace KursAuth.Views.Messengers
         {
             try
             {
-                AutorizationVk vk = MainWindowViewModel.Auth(login, password);
+                AutorizationVk vk = ViewModel.Auth(login, password);
                 ViewModel.IsVisConCtrl = !(ViewModel.IsVisConCtrl);
                 ViewModel.IsVisVkAuth = !(ViewModel.IsVisVkAuth);
-                MainWindowViewModel.GetFriends(vk, contacts);
+                ViewModel.GetFriends(vk);
             }
             catch
             {

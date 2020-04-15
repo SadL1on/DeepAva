@@ -45,7 +45,7 @@ namespace KursAuth.Models
         {      
             var users = vk.api.Friends.Get(new FriendsGetParams
             {
-                UserId = 587033839,
+                UserId = vk.api.UserId,
                 Count = 1000,
                 Fields = ProfileFields.FirstName,
             });

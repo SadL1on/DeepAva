@@ -19,7 +19,7 @@
         <vm:MainWindowViewModel />
     </Design.DataContext>
 
-    <Grid Name="MainWin" IsVisible="{Binding }">
+    <Grid Name="MainWin" IsVisible="{Binding}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50" />
             <ColumnDefinition Width="*" />
@@ -63,8 +63,11 @@
                 DockPanel.Dock="Top" />
             <Grid />
         </DockPanel>
-        <vv:Contacts Grid.Column="1" IsVisible="{Binding IsVisConCtrl}" />
-      <vv:VkAuth Grid.Column="1" IsVisible="{Binding IsVisVkAuth}" />
+        <vv:Contacts
+            Grid.Column="1"
+            IsVisible="{Binding IsVisConCtrl}"
+            Items="{Binding Users}" />
+        <vv:VkAuth Grid.Column="1" IsVisible="{Binding IsVisVkAuth}" />
     </Grid>
 
 </Window>

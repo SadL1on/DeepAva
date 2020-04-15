@@ -9,12 +9,19 @@ using KursAuth.Views;
 using Avalonia.Controls;
 using VkNet.Utils;
 using VkNet.Model;
+using System.Collections;
 
 namespace KursAuth.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
     {
-        
+        private IEnumerable users;
+
+        public IEnumerable Users
+        {
+            get => users;
+            set => this.RaiseAndSetIfChanged(ref users, value);
+        }
 
         private bool _isVisConCtrl = false;
         public bool IsVisConCtrl
@@ -30,7 +37,7 @@ namespace KursAuth.ViewModels
             set => this.RaiseAndSetIfChanged(ref _isVisVkAuth, value);
         }
 
-        public static AutorizationVk Auth(TextBox login, TextBox password)
+        public AutorizationVk Auth(TextBox login, TextBox password)
         {
             string logintext = login.Text;
             string passwordtext = password.Text;
@@ -41,14 +48,9 @@ namespace KursAuth.ViewModels
             return (vk);
         }
 
-        public static void GetFriends(AutorizationVk vk, ListBox friends)
+        public void GetFriends(AutorizationVk vk)
         {
-            VkCollection<User> users = vk.GetFriends(vk);
-            foreach (var item in users)
-            {
-                friends.Items = users;
-                //friends.Items = item.FirstName + " " + item.LastName;
-            }
+            Users = vk.GetFriends(vk);
 
         }
 

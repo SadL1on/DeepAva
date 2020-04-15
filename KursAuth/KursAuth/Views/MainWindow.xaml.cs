@@ -12,6 +12,7 @@ namespace KursAuth.Views
     public class MainWindow : ReactiveWindow<MainWindowViewModel>
     {
         public Button vkOpen;
+        private ListBox contacts;
 
         public MainWindow()
         {
@@ -32,7 +33,7 @@ namespace KursAuth.Views
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-
+            contacts = this.FindControl<ListBox>("contacts");
         }
 
     }
