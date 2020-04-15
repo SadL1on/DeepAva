@@ -11,12 +11,19 @@ using VkNet.Utils;
 using VkNet.Model;
 using System.Collections;
 using System.Linq;
+using KursAuth.Interfaces;
 
 namespace KursAuth.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
     {
         private AutorizationVk vk;
+        private readonly IUserService _userservice;
+
+        public MainWindowViewModel(IUserService userService)
+        {
+            _userservice = userService;
+        }
 
         //private IEnumerable mess;
 
@@ -48,34 +55,20 @@ namespace KursAuth.ViewModels
             set => this.RaiseAndSetIfChanged(ref _isVisVkAuth, value);
         }
 
-        public AutorizationVk Auth(TextBox login, TextBox password)
+        public void Auth(string login, string password)
         {
-            string logintext = login.Text;
-            string passwordtext = password.Text;
-
-            AutorizationVk vk = new AutorizationVk();
-            vk = vk.auth(logintext, passwordtext);
-
-            return (vk);
+            _userservice.Authorization(login, password);
         }
 
-        public void GetFriends(AutorizationVk vk)
+        public void GetFriends()
         {
-            Users = vk.GetFriends(vk);
-            this.vk = vk;
+            Users = _userservice.GetFriends();
         }
 
-        public void GetHisVM(User user, ListBox messHist)
-        {
-            var UserId = user.Id;
-            var getHistory = vk.GetHistory(vk, UserId);
-            var messages = getHistory.Messages.ToArray();
-            //for (int i = 0; i < getHistory.Messages.Count(); i++)
-            //{
-                
-                messHist.Items = messages;
-           // }
-        }
+        //public Message[] GetHistoryVM(long UserId)
+        //{
+        //    return vk.GetHistory(UserId).Messages.ToArray();          
+        //}
 
     }
 }

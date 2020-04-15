@@ -2,6 +2,7 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
+using KursAuth.Interfaces;
 using KursAuth.Models;
 using KursAuth.ViewModels;
 
@@ -13,6 +14,11 @@ namespace KursAuth.Views.Messengers
         private TextBox password;
         private Button on;
         //private ListBox contacts;
+
+//public VkAuth()
+//        {
+
+//        }
 
         public VkAuth()
         {
@@ -27,23 +33,23 @@ namespace KursAuth.Views.Messengers
 
         private void On_Click1(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            try
-            {
-                AutorizationVk vk = ViewModel.Auth(login, password);
+            //try
+            //{
+                var Login = login.Text;
+                var Password = password.Text;
+                ViewModel.Auth(Login, Password);
                 ViewModel.IsVisConCtrl = !(ViewModel.IsVisConCtrl);
                 ViewModel.IsVisVkAuth = !(ViewModel.IsVisVkAuth);
-                ViewModel.GetFriends(vk);
+                ViewModel.GetFriends();
                 
-            }
-            catch
-            {
-                login.Text = null;
-                password.Text = null;
-            }
+            //}
+            //catch
+            //{
+            //    login.Text = null;
+            //    password.Text = null;
+            //}
             
         }
-
-
 
         private void InitializeComponent()
         {

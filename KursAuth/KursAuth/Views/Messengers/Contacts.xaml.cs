@@ -57,9 +57,10 @@ namespace KursAuth.Views.Messengers
 
         private void Contacts_Tapped(object sender, RoutedEventArgs e)
         {
-            User user = (User)contacts.SelectedItem;
-            ViewModel.GetHisVM(user, messHist);
-
+            //User user = (User)contacts.SelectedItem;
+            //var UserId = user.Id;
+            //var messages = ViewModel.GetHistoryVM(UserId);
+            //messHist.Items = messages;
         }
 
 

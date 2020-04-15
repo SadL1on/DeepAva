@@ -8,6 +8,7 @@ using KursAuth.ViewModels;
 using System;
 using KursAuth.Views.Messengers;
 using ReactiveUI;
+using KursAuth.Interfaces;
 
 namespace KursAuth.Views
 {
@@ -15,13 +16,17 @@ namespace KursAuth.Views
     {
         public Button vkOpen;
         private ListBox contacts;
+        private readonly IUserService _userservice;
 
         public MainWindow()
         {
+            this._userservice = App.GetInstance<IUserService>();
+
             InitializeComponent();
 #if DEBUG
             this.AttachDevTools();
 #endif
+            
             vkOpen = this.FindControl<Button>("VkOpen");
             vkOpen.Click += VkOpen_Click;
         }
