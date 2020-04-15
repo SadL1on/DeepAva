@@ -48,9 +48,11 @@
           Name="MessHist"
           Grid.Row="0"
           Background="Bisque">
-        
+        <ListBox.ItemTemplate>
+          <DataTemplate>
               <TextBlock Text="{Binding Text}"/>
-
+          </DataTemplate>
+        </ListBox.ItemTemplate>
       </ListBox>
       <!--<TextBox Grid.Row="1" Name="SendMess" Background="DarkGreen" Width="10" Height="40" VerticalAlignment="Bottom"/>-->
     </Grid>
