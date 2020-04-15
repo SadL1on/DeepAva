@@ -12,7 +12,7 @@ namespace KursAuth.Views.Messengers
         private TextBox login;
         private TextBox password;
         private Button on;
-        private ListBox contacts;
+        //private ListBox contacts;
 
         public VkAuth()
         {
@@ -21,7 +21,7 @@ namespace KursAuth.Views.Messengers
             login = this.FindControl<TextBox>("Login");
             password = this.FindControl<TextBox>("Password");
             on = this.FindControl<Button>("On");
-            contacts = this.FindControl<ListBox>("Contacts");
+            //contacts = this.FindControl<ListBox>("Contacts");
             on.Click += On_Click1;
         }
 
@@ -33,6 +33,7 @@ namespace KursAuth.Views.Messengers
                 ViewModel.IsVisConCtrl = !(ViewModel.IsVisConCtrl);
                 ViewModel.IsVisVkAuth = !(ViewModel.IsVisVkAuth);
                 ViewModel.GetFriends(vk);
+                
             }
             catch
             {

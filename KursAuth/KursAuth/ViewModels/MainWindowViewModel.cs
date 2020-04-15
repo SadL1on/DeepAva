@@ -10,11 +10,22 @@ using Avalonia.Controls;
 using VkNet.Utils;
 using VkNet.Model;
 using System.Collections;
+using System.Linq;
 
 namespace KursAuth.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
     {
+        private AutorizationVk vk;
+
+        //private IEnumerable mess;
+
+        //public IEnumerable Mess
+        //{
+        //    get => mess;
+        //    set => this.RaiseAndSetIfChanged(ref mess, value);
+        //}
+
         private IEnumerable users;
 
         public IEnumerable Users
@@ -51,9 +62,19 @@ namespace KursAuth.ViewModels
         public void GetFriends(AutorizationVk vk)
         {
             Users = vk.GetFriends(vk);
+            this.vk = vk;
+        }
 
-            Users = vk.GetFriends(vk);
-           
+        public void GetHisVM(User user, ListBox messHist)
+        {
+            var UserId = user.Id;
+            var getHistory = vk.GetHistory(vk, UserId);
+            var messages = getHistory.Messages.ToArray();
+            for (int i = 0; i < getHistory.Messages.Count(); i++)
+            {
+                
+                messHist.Items = messages[i].Text;
+            }
         }
 
     }

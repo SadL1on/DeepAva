@@ -53,41 +53,28 @@ namespace KursAuth.Models
             return (users);
         }
 
-        public void GetHistory(AutorizationVk vk, userid)
+        public MessageGetHistoryObject GetHistory(AutorizationVk vk, long userid)
         {
 
-
-
-            var getHistory = api.Messages.GetHistory(new MessagesGetHistoryParams
+            var getHistory = vk.api.Messages.GetHistory(new MessagesGetHistoryParams
             {
                 Count = 200,
-                UserId = 107114970
+                UserId = userid
 
             });
-
-
-
-            var messages = getHistory.Messages.ToArray();
-
-            for (int i = 0; i < getHistory.Messages.Count(); i++)
-            {
-                //Console.WriteLine(messages[i].Text);
-            }
-
-
-
+            return getHistory;
         }
 
-        public void SendMessage(AutorizationVk vk, userid)
-        {
+        //public void SendMessage(AutorizationVk vk, userid)
+        //{
 
-            api.Messages.Send(new MessagesSendParams
-            {
-                UserId = userid, //Id получателя
-                Message = "Message", //Сообщение
-                RandomId = new Random().Next(999999) //ужасный уникальный идентификатор
-            });
-        }
+        //    api.Messages.Send(new MessagesSendParams
+        //    {
+        //        UserId = userid, //Id получателя
+        //        Message = "Message", //Сообщение
+        //        RandomId = new Random().Next(999999) //ужасный уникальный идентификатор
+        //    });
+        //}
 
 
     }
