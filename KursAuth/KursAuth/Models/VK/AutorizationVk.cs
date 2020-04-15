@@ -8,6 +8,7 @@ using VkNet.Model.RequestParams;
 using VkNet.AudioBypassService.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using VkNet.Utils;
+using System.Linq;
 
 namespace KursAuth.Models
 {
@@ -52,6 +53,30 @@ namespace KursAuth.Models
             return (users);
         }
 
+        public void GetHistory(AutorizationVk vk)
+        {
+
+
+
+            var getHistory = api.Messages.GetHistory(new MessagesGetHistoryParams
+            {
+                Count = 200,
+                UserId = 107114970
+
+            });
+
+
+
+            var messages = getHistory.Messages.ToArray();
+
+            for (int i = 0; i < getHistory.Messages.Count(); i++)
+            {
+                Console.WriteLine(messages[i].Text);
+            }
+
+
+
+        }
 
 
 
