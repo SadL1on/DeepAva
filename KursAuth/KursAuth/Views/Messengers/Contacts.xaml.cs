@@ -43,6 +43,7 @@ namespace KursAuth.Views.Messengers
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
+            
         }
     }
 }

@@ -52,6 +52,8 @@ namespace KursAuth.ViewModels
         {
             Users = vk.GetFriends(vk);
 
+            Users = vk.GetFriends(vk);
+           
         }
 
     }

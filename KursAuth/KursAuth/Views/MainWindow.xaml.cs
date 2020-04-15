@@ -6,6 +6,8 @@ using Avalonia.Interactivity;
 using KursAuth.Models;
 using KursAuth.ViewModels;
 using System;
+using KursAuth.Views.Messengers;
+using ReactiveUI;
 
 namespace KursAuth.Views
 {
