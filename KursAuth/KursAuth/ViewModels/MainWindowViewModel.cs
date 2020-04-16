@@ -70,11 +70,25 @@ namespace KursAuth.ViewModels
             var UserId = user.Id;
             var getHistory = vk.GetHistory(vk, UserId);
             var messages = getHistory.Messages.ToArray();
+            
             //for (int i = 0; i < getHistory.Messages.Count(); i++)
             //{
                 
                 messHist.Items = messages;
            // }
+        }
+
+        public void SendMessage(long userid, string text)
+        {
+            try
+            {
+                vk.SendMessage(vk, userid, text);
+            }
+            catch
+            { }
+
+        
+        
         }
 
     }

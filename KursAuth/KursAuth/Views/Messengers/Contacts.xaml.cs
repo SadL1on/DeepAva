@@ -44,12 +44,18 @@ namespace KursAuth.Views.Messengers
 
         public ListBox contacts;
         private ListBox messHist;
+        private Avalonia.Controls.Button sendmessage;
+        private TextBox messagetext;
+        private User user;
 
         public Contacts()
         {
             this.InitializeComponent();
             messHist = this.FindControl<ListBox>("MessHist");
             contacts = this.FindControl<ListBox>("Contacts");
+            sendmessage = this.FindControl<Avalonia.Controls.Button>("SendMessage");
+            messagetext = this.FindControl<TextBox>("MessageText");
+
             contacts.Tapped += Contacts_Tapped;
             
         }
@@ -58,10 +64,23 @@ namespace KursAuth.Views.Messengers
         private void Contacts_Tapped(object sender, RoutedEventArgs e)
         {
             User user = (User)contacts.SelectedItem;
+            this.user = user;
             ViewModel.GetHisVM(user, messHist);
+            sendmessage.Click += Sendmessage_Click;
 
         }
 
+        private void Sendmessage_Click(object sender, RoutedEventArgs e)
+        {
+            string text = messagetext.Text;
+            var userid = user.Id;
+            ViewModel.SendMessage(userid, text);
+            messagetext.Text = null;
+
+           
+
+
+        }
 
         private void InitializeComponent()
         {
