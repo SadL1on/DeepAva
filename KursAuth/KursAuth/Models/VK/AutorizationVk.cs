@@ -65,16 +65,16 @@ namespace KursAuth.Models
             return getHistory;
         }
 
-        //public void SendMessage(AutorizationVk vk, userid)
-        //{
+        public void SendMessage(AutorizationVk vk, long userid,string text)
+        {
 
-        //    api.Messages.Send(new MessagesSendParams
-        //    {
-        //        UserId = userid, //Id получателя
-        //        Message = "Message", //Сообщение
-        //        RandomId = new Random().Next(999999) //ужасный уникальный идентификатор
-        //    });
-        //}
+            vk.api.Messages.Send(new MessagesSendParams
+            {
+                UserId = userid, //Id получателя
+                Message = text, //Сообщение
+                RandomId = new Random().Next(999999) //ужасный уникальный идентификатор
+            });
+        }
 
 
     }
