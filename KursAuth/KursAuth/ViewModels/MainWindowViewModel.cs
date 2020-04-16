@@ -80,9 +80,13 @@ namespace KursAuth.ViewModels
 
         public void SendMessage(long userid, string text)
         {
+            try
+            {
+                vk.SendMessage(vk, userid, text);
+            }
+            catch
+            { }
 
-            vk.SendMessage(vk, userid, text);
-        
         
         
         }
