@@ -50,28 +50,26 @@ namespace KursAuth.ViewModels
 
         public void Auth(string login, string password)
         {
-             vk = new AutorizationVk(login, password);
-            var n = vk.api.IsAuthorized;
-            // vk = vk.Authorization();
-            Users = vk.GetFriends();
+            vk = new AutorizationVk(login, password);
+           // var n = vk.api.IsAuthorized;
+            
         }
 
         public void GetFriends()
         {
-          //  
-            
+            Users = vk.GetFriends();
         }
 
-        public void GetHisVM(long userId)
+        public Message[] GetHisVM(long userId)
         {
-            vk.GetHistory(userId).Messages.ToArray();
+            return vk.GetHistory(userId).Messages.ToArray();
         }
 
         public void SendMessage(long userid, string text)
         {
             try
             {
-                vk.SendMessage(vk, userid, text);
+                vk.SendMessage(userid, text);
             }
             catch
             { }

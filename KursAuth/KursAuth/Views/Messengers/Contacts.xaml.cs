@@ -50,7 +50,8 @@ namespace KursAuth.Views.Messengers
         {
             User user = (User)contacts.SelectedItem;
             var UserId = user.Id;
-            ViewModel.GetHisVM(UserId);
+            var messages = ViewModel.GetHisVM(UserId);
+            messHist.Items = messages;
             sendmessage.Click += Sendmessage_Click;
 
         }

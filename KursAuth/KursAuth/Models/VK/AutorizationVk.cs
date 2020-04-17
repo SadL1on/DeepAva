@@ -14,7 +14,7 @@ namespace KursAuth.Models
 {
     public class AutorizationVk
     {
-        public VkApi api = new VkApi();
+        public VkApi api;
         private string login;
         private string password;
 
@@ -26,7 +26,7 @@ namespace KursAuth.Models
 
             var services = new ServiceCollection();
             services.AddAudioBypass();
-            var api = new VkApi(services);
+            api = new VkApi(services);
 
             api.Authorize(new ApiAuthParams
             {
@@ -39,6 +39,7 @@ namespace KursAuth.Models
                     throw new Exception("двухфакторка");
                 }
             });
+
         }
 
         /// <inheritdoc/> 
@@ -65,10 +66,10 @@ namespace KursAuth.Models
             return getHistory;
         }
 
-        public void SendMessage(AutorizationVk vk, long userid,string text)
+        public void SendMessage(long userid,string text)
         {
 
-            vk.api.Messages.Send(new MessagesSendParams
+            api.Messages.Send(new MessagesSendParams
             {
                 UserId = userid, //Id получателя
                 Message = text, //Сообщение
