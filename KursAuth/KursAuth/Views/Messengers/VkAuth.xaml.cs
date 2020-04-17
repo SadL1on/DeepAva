@@ -27,19 +27,12 @@ namespace KursAuth.Views.Messengers
 
         private void On_Click1(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            try
-            {
-                AutorizationVk vk = ViewModel.Auth(login, password);
+
+                ViewModel.Auth(login.Text, password.Text);
                 ViewModel.IsVisConCtrl = !(ViewModel.IsVisConCtrl);
                 ViewModel.IsVisVkAuth = !(ViewModel.IsVisVkAuth);
-                ViewModel.GetFriends(vk);
-                
-            }
-            catch
-            {
-                login.Text = null;
-                password.Text = null;
-            }
+                ViewModel.GetFriends();
+
             
         }
 

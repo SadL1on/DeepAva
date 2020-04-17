@@ -48,34 +48,23 @@ namespace KursAuth.ViewModels
             set => this.RaiseAndSetIfChanged(ref _isVisVkAuth, value);
         }
 
-        public AutorizationVk Auth(TextBox login, TextBox password)
+        public void Auth(string login, string password)
         {
-            string logintext = login.Text;
-            string passwordtext = password.Text;
-
-            AutorizationVk vk = new AutorizationVk();
-            vk = vk.auth(logintext, passwordtext);
-
-            return (vk);
+             vk = new AutorizationVk(login, password);
+            var n = vk.api.IsAuthorized;
+            // vk = vk.Authorization();
+            Users = vk.GetFriends();
         }
 
-        public void GetFriends(AutorizationVk vk)
+        public void GetFriends()
         {
-            Users = vk.GetFriends(vk);
-            this.vk = vk;
-        }
-
-        public void GetHisVM(User user, ListBox messHist)
-        {
-            var UserId = user.Id;
-            var getHistory = vk.GetHistory(vk, UserId);
-            var messages = getHistory.Messages.ToArray();
+          //  
             
-            //for (int i = 0; i < getHistory.Messages.Count(); i++)
-            //{
-                
-                messHist.Items = messages;
-           // }
+        }
+
+        public void GetHisVM(long userId)
+        {
+            vk.GetHistory(userId).Messages.ToArray();
         }
 
         public void SendMessage(long userid, string text)

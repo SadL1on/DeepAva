@@ -7,7 +7,7 @@
     xmlns:v="clr-namespace:KursAuth.Views;assembly=KursAuth"
     xmlns:vm="clr-namespace:KursAuth.ViewModels;assembly=KursAuth"
     xmlns:vv="clr-namespace:KursAuth.Views.Messengers;assembly=KursAuth"
-    Title="KursAuth"
+    Title="MultiMess"
     Width="800"
     Height="400"
     d:DesignHeight="450"

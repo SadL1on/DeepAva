@@ -28,7 +28,6 @@ namespace KursAuth.Views
 
         private void VkOpen_Click(object sender, RoutedEventArgs e)
         {
-            // ViewModel.IsVisConCtrl = !(ViewModel.IsVisConCtrl);
             ViewModel.IsVisVkAuth = !(ViewModel.IsVisVkAuth);
         }
 

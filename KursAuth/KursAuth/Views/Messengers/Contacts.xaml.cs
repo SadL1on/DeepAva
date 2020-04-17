@@ -27,21 +27,6 @@ namespace KursAuth.Views.Messengers
             set => SetAndRaise(ItemsProperty, ref _items, value);
         }
 
-
-        //public static readonly DirectProperty<Contacts, IEnumerable> ItemsssP =
-        //    AvaloniaProperty.RegisterDirect<Contacts, IEnumerable>(
-        //        nameof(Itemsss),
-        //        o => o.Itemsss,
-        //        (o, v) => o.Itemsss = v);
-
-        //private IEnumerable _itemsss = new AvaloniaList<object>();
-
-        //public IEnumerable Itemsss
-        //{
-        //    get => _itemsss;
-        //    set => SetAndRaise(ItemsProperty, ref _itemsss, value);
-        //}
-
         public ListBox contacts;
         private ListBox messHist;
         private Avalonia.Controls.Button sendmessage;
@@ -64,8 +49,8 @@ namespace KursAuth.Views.Messengers
         private void Contacts_Tapped(object sender, RoutedEventArgs e)
         {
             User user = (User)contacts.SelectedItem;
-            this.user = user;
-            ViewModel.GetHisVM(user, messHist);
+            var UserId = user.Id;
+            ViewModel.GetHisVM(UserId);
             sendmessage.Click += Sendmessage_Click;
 
         }
@@ -76,9 +61,6 @@ namespace KursAuth.Views.Messengers
             var userid = user.Id;
             ViewModel.SendMessage(userid, text);
             messagetext.Text = null;
-
-           
-
 
         }
 

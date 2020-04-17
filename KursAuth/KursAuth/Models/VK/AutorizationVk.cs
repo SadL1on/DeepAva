@@ -15,10 +15,11 @@ namespace KursAuth.Models
     public class AutorizationVk
     {
         public VkApi api = new VkApi();
-        private static string login;
-        private static string password;
+        private string login;
+        private string password;
 
-        public AutorizationVk auth(string log, string pass)
+        /// <inheritdoc/> 
+        public AutorizationVk(string log, string pass)
         {
             login = log;
             password = pass;
@@ -35,28 +36,27 @@ namespace KursAuth.Models
                 Settings = Settings.All,
                 TwoFactorAuthorization = () =>
                 {
-                    return "";
+                    throw new Exception("двухфакторка");
                 }
             });
-            this.api = api;
-            return (this);
         }
 
-        public  VkCollection<User> GetFriends(AutorizationVk vk)
-        {      
-            var users = vk.api.Friends.Get(new FriendsGetParams
+        /// <inheritdoc/> 
+        public VkCollection<User> GetFriends()
+        {
+            var users = api.Friends.Get(new FriendsGetParams
             {
-                UserId = vk.api.UserId,
+                UserId = api.UserId,
                 Count = 1000,
                 Fields = ProfileFields.FirstName,
             });
-            return (users);
+            return users;
         }
 
-        public MessageGetHistoryObject GetHistory(AutorizationVk vk, long userid)
+        public MessageGetHistoryObject GetHistory(long userid)
         {
 
-            var getHistory = vk.api.Messages.GetHistory(new MessagesGetHistoryParams
+            var getHistory = api.Messages.GetHistory(new MessagesGetHistoryParams
             {
                 Count = 200,
                 UserId = userid
