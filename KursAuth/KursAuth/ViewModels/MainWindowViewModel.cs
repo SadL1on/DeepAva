@@ -62,7 +62,13 @@ namespace KursAuth.ViewModels
 
         public Message[] GetHisVM(long userId)
         {
-            return vk.GetHistory(userId).Messages.ToArray();
+            var id = vk.api.UserId;
+            var mess = vk.GetHistory(userId).Messages.OrderBy(x => x.Date).ToArray();
+            //for (int i = 0; i < mess.Length; i++)
+            //{
+            //    mess[i].Text = mess[i].Text + "   " + mess[i]
+            //}
+            return mess;
         }
 
         public void SendMessage(long userid, string text)

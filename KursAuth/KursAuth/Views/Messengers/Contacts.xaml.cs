@@ -62,7 +62,8 @@ namespace KursAuth.Views.Messengers
             var userid = user.Id;
             ViewModel.SendMessage(userid, text);
             messagetext.Text = null;
-
+            ViewModel.IsVisConCtrl = !(ViewModel.IsVisConCtrl);
+            ViewModel.IsVisConCtrl = !(ViewModel.IsVisConCtrl);
         }
 
         private void InitializeComponent()
