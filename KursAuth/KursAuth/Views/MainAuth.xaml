@@ -37,7 +37,7 @@
                 PasswordChar="*" />
             <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
                 <Button
-                    Name="BmainAuth"
+                    Name="MainAuth"
                     Width="70"
                     Height="30"
                     Margin="300,0,0,0"

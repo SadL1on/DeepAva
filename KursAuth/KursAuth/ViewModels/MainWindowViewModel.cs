@@ -11,6 +11,8 @@ using VkNet.Utils;
 using VkNet.Model;
 using System.Collections;
 using System.Linq;
+using System.Net;
+using System.IO;
 
 namespace KursAuth.ViewModels
 {
@@ -32,6 +34,13 @@ namespace KursAuth.ViewModels
         {
             get => users;
             set => this.RaiseAndSetIfChanged(ref users, value);
+        }
+
+        private bool _isVisMainAuth = false;
+        public bool IsVisMainAuth
+        {
+            get => _isVisMainAuth;
+            set => this.RaiseAndSetIfChanged(ref _isVisMainAuth, value);
         }
 
         private bool _isVisConCtrl = false;
@@ -79,9 +88,37 @@ namespace KursAuth.ViewModels
             }
             catch
             { }
+        }
 
-        
-        
+        public void Login(string log, string pass)
+        {
+            var request = WebRequest.Create("http://saber011-001-site1.htempurl.com/api/Account/register");
+            request.ContentType = "application/json";
+
+            request.Method = "POST";
+
+            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+            {
+                // string json = "{\"login\":\"" + log + "\",password:\"\"" + pass + "\"}";
+                string json = "{\"login\":\"" + log + "\",\"password\":\"" + pass + "\"}";
+                streamWriter.Write(json);
+            }
+
+            try
+            {
+                HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+                using (Stream responseStream = response.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
+                }
+                IsVisMainAuth = !IsVisMainAuth;
+            }
+            catch (WebException e)
+            {
+
+                Console.WriteLine(e.Message);
+
+            }
         }
 
     }

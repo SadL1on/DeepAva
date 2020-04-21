@@ -48,19 +48,18 @@ namespace KursAuth.Views.Messengers
 
         private void Contacts_Tapped(object sender, RoutedEventArgs e)
         {
-            User user = (User)contacts.SelectedItem;
-            var UserId = user.Id;
-            var messages = ViewModel.GetHisVM(UserId);
+            user = (User)contacts.SelectedItem;
+
+            var messages = ViewModel.GetHisVM(user.Id);
             messHist.Items = messages;
             sendmessage.Click += Sendmessage_Click;
-
+            
         }
 
         private void Sendmessage_Click(object sender, RoutedEventArgs e)
         {
             string text = messagetext.Text;
-            var userid = user.Id;
-            ViewModel.SendMessage(userid, text);
+            ViewModel.SendMessage(user.Id, text);
             messagetext.Text = null;
             ViewModel.IsVisConCtrl = !(ViewModel.IsVisConCtrl);
             ViewModel.IsVisConCtrl = !(ViewModel.IsVisConCtrl);

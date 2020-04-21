@@ -19,7 +19,9 @@
         <vm:MainWindowViewModel />
     </Design.DataContext>
 
-    <Grid Name="MainWin" IsVisible="{Binding}">
+        
+
+    <Grid Name="MainWin">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50" />
             <ColumnDefinition Width="*" />
@@ -68,6 +70,7 @@
             IsVisible="{Binding IsVisConCtrl}"
             Items="{Binding Users}" />
         <vv:VkAuth Grid.Column="1" IsVisible="{Binding IsVisVkAuth}" />
+        <v:MainAuth Grid.Column="0" Grid.ColumnSpan="2"  IsVisible="{Binding !IsVisMainAuth}" />
     </Grid>
 
 </Window>
