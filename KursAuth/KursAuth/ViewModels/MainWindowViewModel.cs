@@ -20,20 +20,19 @@ namespace KursAuth.ViewModels
     {
         private AutorizationVk vk;
 
-        //private IEnumerable mess;
-
-        //public IEnumerable Mess
-        //{
-        //    get => mess;
-        //    set => this.RaiseAndSetIfChanged(ref mess, value);
-        //}
-
         private IEnumerable users;
 
         public IEnumerable Users
         {
             get => users;
             set => this.RaiseAndSetIfChanged(ref users, value);
+        }
+
+        private bool _isVisMainReg = false;
+        public bool IsVisMainReg
+        {
+            get => _isVisMainReg;
+            set => this.RaiseAndSetIfChanged(ref _isVisMainReg, value);
         }
 
         private bool _isVisMainAuth = false;
@@ -59,9 +58,7 @@ namespace KursAuth.ViewModels
 
         public void Auth(string login, string password)
         {
-            vk = new AutorizationVk(login, password);
-           // var n = vk.api.IsAuthorized;
-            
+            vk = new AutorizationVk(login, password);           
         }
 
         public void GetFriends()
@@ -71,12 +68,7 @@ namespace KursAuth.ViewModels
 
         public Message[] GetHisVM(long userId)
         {
-            var id = vk.api.UserId;
             var mess = vk.GetHistory(userId).Messages.OrderBy(x => x.Date).ToArray();
-            //for (int i = 0; i < mess.Length; i++)
-            //{
-            //    mess[i].Text = mess[i].Text + "   " + mess[i]
-            //}
             return mess;
         }
 
@@ -90,16 +82,24 @@ namespace KursAuth.ViewModels
             { }
         }
 
-        public void Login(string log, string pass)
-        {
-            var request = WebRequest.Create("http://saber011-001-site1.htempurl.com/api/Account/register");
-            request.ContentType = "application/json";
+        WebRequest request;
 
+        public void Login(string log, string pass, bool flag)
+        {
+            if (flag)
+            {
+                request = WebRequest.Create("http://saber011-001-site1.htempurl.com/api/Account/login");
+            }
+            else
+            {
+                request = WebRequest.Create("http://saber011-001-site1.htempurl.com/api/Account/register");
+            }
+                        
+            request.ContentType = "application/json";
             request.Method = "POST";
 
             using (var streamWriter = new StreamWriter(request.GetRequestStream()))
             {
-                // string json = "{\"login\":\"" + log + "\",password:\"\"" + pass + "\"}";
                 string json = "{\"login\":\"" + log + "\",\"password\":\"" + pass + "\"}";
                 streamWriter.Write(json);
             }
@@ -111,13 +111,11 @@ namespace KursAuth.ViewModels
                 {
                     StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
                 }
-                IsVisMainAuth = !IsVisMainAuth;
+                
             }
             catch (WebException e)
             {
-
                 Console.WriteLine(e.Message);
-
             }
         }
 
