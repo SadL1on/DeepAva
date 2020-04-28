@@ -13,12 +13,19 @@ using System.Collections;
 using System.Linq;
 using System.Net;
 using System.IO;
+using KursAuth.Models.Main;
 
 namespace KursAuth.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
     {
+        private UserMain user;
         private AutorizationVk vk;
+
+        //public MainWindowViewModel()
+        //{
+        //    ChangePage = ReactiveCommand.Create(() => ) 
+        //}
 
         private IEnumerable users;
 
@@ -82,41 +89,9 @@ namespace KursAuth.ViewModels
             { }
         }
 
-        WebRequest request;
-
         public void Login(string log, string pass, bool flag)
         {
-            if (flag)
-            {
-                request = WebRequest.Create("http://saber011-001-site1.htempurl.com/api/Account/login");
-            }
-            else
-            {
-                request = WebRequest.Create("http://saber011-001-site1.htempurl.com/api/Account/register");
-            }
-                        
-            request.ContentType = "application/json";
-            request.Method = "POST";
-
-            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
-            {
-                string json = "{\"login\":\"" + log + "\",\"password\":\"" + pass + "\"}";
-                streamWriter.Write(json);
-            }
-
-            try
-            {
-                HttpWebResponse response = request.GetResponse() as HttpWebResponse;
-                using (Stream responseStream = response.GetResponseStream())
-                {
-                    StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
-                }
-                
-            }
-            catch (WebException e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            user = new UserMain(log, pass, flag);
         }
 
     }
