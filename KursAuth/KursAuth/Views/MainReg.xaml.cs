@@ -3,6 +3,10 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using KursAuth.ViewModels;
+using ReactiveUI;
+using System;
+using System.Reactive.Disposables;
+using System.Reactive.Linq;
 
 namespace KursAuth.Views
 {
@@ -17,14 +21,23 @@ namespace KursAuth.Views
         public MainReg()
         {
             InitializeComponent();
-            _register.Click += _register_Click;
-            _back.Click += _back_Click;
+
+            this.WhenActivated(disposables =>
+            {
+             //   IObservable<string> par = Observable.Start(() => { return _regLog.Text; });
+                this.BindCommand(ViewModel, x => x.BackToAuth, x => x._back).DisposeWith(disposables);
+                this.BindCommand(ViewModel, x => x.Registration, x => x._register).DisposeWith(disposables);
+            });
+
+                _register.Click += _register_Click;
+          //  _back.Click += _back_Click;
         }
 
-        private void _back_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
-        {
-            ViewModel.IsVisMainReg = !(ViewModel.IsVisMainReg);
-        }
+
+        //private void _back_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        //{
+        //    ViewModel.IsVisMainReg = !(ViewModel.IsVisMainReg);
+        //}
 
         private void _register_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
         {

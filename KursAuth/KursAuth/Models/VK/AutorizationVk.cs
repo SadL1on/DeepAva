@@ -9,12 +9,13 @@ using VkNet.AudioBypassService.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using VkNet.Utils;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace KursAuth.Models
 {
     public class AutorizationVk
     {
-        public VkApi api;
+        private VkApi api;
         private string login;
         private string password;
 
@@ -43,9 +44,9 @@ namespace KursAuth.Models
         }
 
         /// <inheritdoc/> 
-        public VkCollection<User> GetFriends()
+        public async Task<VkCollection<User>> GetFriendsAsync()
         {
-            var users = api.Friends.Get(new FriendsGetParams
+            var users = await api.Friends.GetAsync(new FriendsGetParams
             {
                 UserId = api.UserId,
                 Count = 1000,
@@ -54,10 +55,10 @@ namespace KursAuth.Models
             return users;
         }
 
-        public MessageGetHistoryObject GetHistory(long userid)
+        public async Task<MessageGetHistoryObject> GetHistoryAsync(long userid)
         {
 
-            var getHistory = api.Messages.GetHistory(new MessagesGetHistoryParams
+            var getHistory = await api.Messages.GetHistoryAsync(new MessagesGetHistoryParams
             {
                 Count = 200,
                 UserId = userid
@@ -66,17 +67,16 @@ namespace KursAuth.Models
             return getHistory;
         }
 
-        public void SendMessage(long userid,string text)
+        public async Task SendMessageAsync(long userid,string text)
         {
 
-            api.Messages.Send(new MessagesSendParams
+            await api.Messages.SendAsync(new MessagesSendParams
             {
                 UserId = userid, //Id получателя
                 Message = text, //Сообщение
                 RandomId = new Random().Next(999999) //ужасный уникальный идентификатор
             });
         }
-
 
     }
 

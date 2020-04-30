@@ -14,21 +14,40 @@ using System.Linq;
 using System.Net;
 using System.IO;
 using KursAuth.Models.Main;
+using System.Reactive;
+using System.Windows.Input;
+using System.Threading.Tasks;
 
 namespace KursAuth.ViewModels
 {
+
     public class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
     {
         private UserMain user;
         private AutorizationVk vk;
 
-        //public MainWindowViewModel()
-        //{
-        //    ChangePage = ReactiveCommand.Create(() => ) 
-        //}
+        public ReactiveCommand<Unit, Unit> BackToAuth { get; }
+        public ReactiveCommand<string, Unit> Registration { get; }
+
+        public MainWindowViewModel()
+        {
+            BackToAuth = ReactiveCommand.Create(() => { ChangePageMeth(); });
+            Registration = ReactiveCommand.Create<string>(RegistrationMeth);
+
+        }
+
+
+        public void ChangePageMeth()
+        {            
+            IsVisMainReg = !IsVisMainReg;
+        }
+
+        public void RegistrationMeth(string arg)
+        {
+            
+        }
 
         private IEnumerable users;
-
         public IEnumerable Users
         {
             get => users;
@@ -68,22 +87,22 @@ namespace KursAuth.ViewModels
             vk = new AutorizationVk(login, password);           
         }
 
-        public void GetFriends()
+        public async Task GetFriends()
         {
-            Users = vk.GetFriends();
+            Users = await vk.GetFriendsAsync();
         }
 
         public Message[] GetHisVM(long userId)
         {
-            var mess = vk.GetHistory(userId).Messages.OrderBy(x => x.Date).ToArray();
+            var mess = vk.GetHistoryAsync(userId).Result.Messages.OrderBy(x => x.Date).ToArray();
             return mess;
         }
 
-        public void SendMessage(long userid, string text)
+        public async Task SendMessage(long userid, string text)
         {
             try
             {
-                vk.SendMessage(userid, text);
+                await vk.SendMessageAsync(userid, text);
             }
             catch
             { }
