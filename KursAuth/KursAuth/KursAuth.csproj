@@ -36,7 +36,9 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="ReactiveUI.Fody" Version="11.3.8" />
+    <PackageReference Include="StarkSoftProxy" Version="1.6.0" />
     <PackageReference Include="System.Reactive" Version="4.4.1" />
+    <PackageReference Include="TLSharp" Version="0.1.0.555" />
     <PackageReference Include="VkNet" Version="1.50.0" />
     <PackageReference Include="VkNet.AudioBypassService" Version="1.5.3" />
     <PackageReference Include="VkNet" Version="1.50.0" />

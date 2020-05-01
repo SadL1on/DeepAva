@@ -78,6 +78,16 @@ namespace KursAuth.Models
             });
         }
 
+        public async Task<User> GetUserInfo()
+        {
+            var infoaboutuser = api.Users.Get(new long[] { api.UserId.Value }).FirstOrDefault();
+            return infoaboutuser;
+
+        }
+
+
+
+
     }
 
 }
