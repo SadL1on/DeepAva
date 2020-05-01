@@ -46,12 +46,12 @@ namespace KursAuth.Views.Messengers
         }
 
 
-        private void Contacts_Tapped(object sender, RoutedEventArgs e)
+        private async void  Contacts_Tapped(object sender, RoutedEventArgs e)
         {
             user = (User)contacts.SelectedItem;
 
-            var messages = ViewModel.GetHisVM(user.Id);
-            messHist.Items = messages;
+            messHist.Items = await ViewModel.GetHisVMAsync(user.Id);
+            
             sendmessage.Click += Sendmessage_Click;
             
         }

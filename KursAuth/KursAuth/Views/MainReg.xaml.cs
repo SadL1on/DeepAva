@@ -24,7 +24,7 @@ namespace KursAuth.Views
 
             this.WhenActivated(disposables =>
             {
-             //   IObservable<string> par = Observable.Start(() => { return _regLog.Text; });
+                this.Bind(ViewModel, x => x.LoginR, x => x._regLog.Text).DisposeWith(disposables);
                 this.BindCommand(ViewModel, x => x.BackToAuth, x => x._back).DisposeWith(disposables);
                 this.BindCommand(ViewModel, x => x.Registration, x => x._register).DisposeWith(disposables);
             });

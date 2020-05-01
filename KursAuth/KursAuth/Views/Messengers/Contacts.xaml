@@ -50,7 +50,7 @@
                 Background="Bisque">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Text}" />
+                        <TextBlock Text="{Binding Text}"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

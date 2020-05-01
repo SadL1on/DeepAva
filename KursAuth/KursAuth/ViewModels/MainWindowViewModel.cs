@@ -17,6 +17,7 @@ using KursAuth.Models.Main;
 using System.Reactive;
 using System.Windows.Input;
 using System.Threading.Tasks;
+using ReactiveUI.Fody.Helpers;
 
 namespace KursAuth.ViewModels
 {
@@ -27,24 +28,32 @@ namespace KursAuth.ViewModels
         private AutorizationVk vk;
 
         public ReactiveCommand<Unit, Unit> BackToAuth { get; }
-        public ReactiveCommand<string, Unit> Registration { get; }
+        public ReactiveCommand<Unit, Unit> Registration { get; }
 
         public MainWindowViewModel()
         {
             BackToAuth = ReactiveCommand.Create(() => { ChangePageMeth(); });
-            Registration = ReactiveCommand.Create<string>(RegistrationMeth);
+            Registration = ReactiveCommand.Create(() => { RegistrationMeth(); });
 
         }
 
+        [Reactive] public string LoginR { get; set; }
+
+        private string _pass;
+        public string Pass
+        {
+            get => _pass;
+            set => this.RaiseAndSetIfChanged(ref _pass, value);
+        }
 
         public void ChangePageMeth()
         {            
             IsVisMainReg = !IsVisMainReg;
         }
 
-        public void RegistrationMeth(string arg)
+        public void RegistrationMeth()
         {
-            
+            var st = LoginR;
         }
 
         private IEnumerable users;
@@ -92,10 +101,10 @@ namespace KursAuth.ViewModels
             Users = await vk.GetFriendsAsync();
         }
 
-        public Message[] GetHisVM(long userId)
+        public async Task<Message[]> GetHisVMAsync(long userId)
         {
-            var mess = vk.GetHistoryAsync(userId).Result.Messages.OrderBy(x => x.Date).ToArray();
-            return mess;
+            var mess = await vk.GetHistoryAsync(userId); 
+            return mess.Messages.OrderBy(x => x.Date).ToArray();
         }
 
         public async Task SendMessage(long userid, string text)
