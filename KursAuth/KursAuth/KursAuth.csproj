@@ -17,6 +17,7 @@
     <AvaloniaResource Remove="Views\MainReg.xaml" />
     <AvaloniaResource Remove="Views\Messengers\Contacts.xaml" />
     <AvaloniaResource Remove="Views\Messengers\Messages.xaml" />
+    <AvaloniaResource Remove="Views\Messengers\TlAuth.xaml" />
     <AvaloniaResource Remove="Views\Messengers\VkAuth.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -24,6 +25,7 @@
     <None Remove="Views\MainReg.xaml" />
     <None Remove="Views\Messengers\Contacts.xaml" />
     <None Remove="Views\Messengers\Messages.xaml" />
+    <None Remove="Views\Messengers\TlAuth.xaml" />
     <None Remove="Views\Messengers\VkAuth.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -70,5 +72,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Messengers\TlAuth.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

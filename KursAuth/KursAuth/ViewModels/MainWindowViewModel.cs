@@ -29,14 +29,22 @@ namespace KursAuth.ViewModels
 
         public ReactiveCommand<Unit, Unit> BackToAuth { get; }
         public ReactiveCommand<Unit, Unit> Registration { get; }
+        public ReactiveCommand<Unit, Unit> TlOpen { get; }
+        public ReactiveCommand<string, Unit> VisPass { get; }
 
         public MainWindowViewModel()
         {
             BackToAuth = ReactiveCommand.Create(() => { ChangePageMeth(); });
             Registration = ReactiveCommand.Create(() => { RegistrationMeth(); });
+            TlOpen = ReactiveCommand.Create(() => { IsVisTlAuth = !(IsVisTlAuth); });
+            VisPass = ReactiveCommand.Create<string>((phone) => sendlogin(phone));
 
         }
-
+        public void sendlogin(string phone)
+        {
+        
+        
+        }
         [Reactive] public string LoginR { get; set; }
 
         private string _pass;
@@ -69,6 +77,13 @@ namespace KursAuth.ViewModels
             get => _isVisMainReg;
             set => this.RaiseAndSetIfChanged(ref _isVisMainReg, value);
         }
+
+
+        [Reactive]
+        public bool IsVisTlAuth { get; set; }
+      
+        [Reactive]
+        public bool IsVisPass { get; set; }
 
         private bool _isVisMainAuth = false;
         public bool IsVisMainAuth

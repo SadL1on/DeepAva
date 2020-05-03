@@ -63,6 +63,14 @@
                 Background="HotPink"
                 Content="VK"
                 DockPanel.Dock="Top" />
+          <Button
+               Name="TlOpen"
+               Width="40"
+               Height="30"
+               Margin="10"
+               Background="Blue"
+               Content="Tl"
+               DockPanel.Dock="Top" />
             <Grid />
         </DockPanel>
         <vv:Contacts
@@ -70,7 +78,8 @@
             IsVisible="{Binding IsVisConCtrl}"
             Items="{Binding Users}" />
         <vv:VkAuth Grid.Column="1" IsVisible="{Binding IsVisVkAuth}" />
-        <v:MainAuth Grid.Column="0" Grid.ColumnSpan="2"  IsVisible="{Binding !IsVisMainAuth}" />
+     <vv:TlAuth Grid.Column="1" IsVisible="{Binding IsVisTlAuth}"/>
+      <v:MainAuth Grid.Column="0" Grid.ColumnSpan="2"  IsVisible="{Binding !IsVisMainAuth}" />
       <v:MainReg Grid.Column="0" Grid.ColumnSpan="2"  IsVisible="{Binding IsVisMainReg}" />
     </Grid>
 
