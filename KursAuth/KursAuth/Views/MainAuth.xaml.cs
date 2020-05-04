@@ -3,49 +3,29 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using KursAuth.ViewModels;
+using ReactiveUI;
+using System.Reactive.Disposables;
 
 namespace KursAuth.Views
 {
     public class MainAuth : ReactiveUserControl<MainWindowViewModel>
     {
-        private Button _mainAuth;
-        private Button _mainAuthReg;
-        private TextBox _login;
-        private TextBox _password;
-        private TextBlock _alert;
-        private bool _flag;
+        private Button mainAuth => this.FindControl<Button>("MainAuth");
+        private Button mainAuthReg => this.FindControl<Button>("MainAuthReg");
+        private TextBox login => this.FindControl<TextBox>("Login");
+        private TextBox password => this.FindControl<TextBox>("Pass");
+        private TextBlock alert => this.FindControl<TextBlock>("Alert");
 
         public MainAuth()
         {
             InitializeComponent();
-            _mainAuth = this.FindControl<Button>("MainAuth");
-            _mainAuthReg = this.FindControl<Button>("MainAuthReg");
-            _login = this.FindControl<TextBox>("Login");
-            _password = this.FindControl<TextBox>("Pass");
-            _alert = this.FindControl<TextBlock>("Alert");
-            _mainAuth.Click += _mainAuth_Click;
-            _mainAuthReg.Click += _mainAuthReg_Click;
-        }
-
-        private void _mainAuthReg_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
-        {
-            ViewModel.IsVisMainReg = !(ViewModel.IsVisMainReg);
-        }
-
-        private void _mainAuth_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
-        {
-           // try
-          //  {
-                _flag = true;
-                ViewModel.Login(_login.Text, _password.Text, _flag);
-                ViewModel.IsVisMainAuth = !(ViewModel.IsVisMainAuth);
-            //}
-            //catch
-            //{
-                _login.Text = null;
-                _password.Text = null;
-                _alert.Text = "Неправильный логин или пароль";
-        //    }
+            this.WhenActivated(disposables =>
+            {
+                this.Bind(ViewModel, x => x.LoginMain, x => x.login.Text).DisposeWith(disposables);
+                this.Bind(ViewModel, x => x.PassMain, x => x.password.Text).DisposeWith(disposables);
+                this.BindCommand(ViewModel, x => x.ToMainAuthCmd, x => x.mainAuthReg).DisposeWith(disposables);
+                this.BindCommand(ViewModel, x => x.AuthorizationMainCmd, x => x.mainAuth).DisposeWith(disposables);
+            });
         }
 
         private void InitializeComponent()

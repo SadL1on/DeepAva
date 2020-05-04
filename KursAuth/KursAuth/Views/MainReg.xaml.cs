@@ -12,11 +12,10 @@ namespace KursAuth.Views
 {
     public class MainReg : ReactiveUserControl<MainWindowViewModel>
     {
-        private Button _register => this.FindControl<Button>("RegAcc");
-        private Button _back => this.FindControl<Button>("Back");
-        private TextBox _regLog => this.FindControl<TextBox>("LogReg");
-        private TextBox _regPass => this.FindControl<TextBox>("PassReg");
-        private bool _flag;
+        private Button register => this.FindControl<Button>("RegAcc");
+        private Button back => this.FindControl<Button>("Back");
+        private TextBox regLog => this.FindControl<TextBox>("LogReg");
+        private TextBox regPass => this.FindControl<TextBox>("PassReg");
 
         public MainReg()
         {
@@ -24,26 +23,11 @@ namespace KursAuth.Views
 
             this.WhenActivated(disposables =>
             {
-                this.Bind(ViewModel, x => x.LoginR, x => x._regLog.Text).DisposeWith(disposables);
-                this.BindCommand(ViewModel, x => x.BackToAuth, x => x._back).DisposeWith(disposables);
-                this.BindCommand(ViewModel, x => x.Registration, x => x._register).DisposeWith(disposables);
+                this.Bind(ViewModel, x => x.LoginMain, x => x.regLog.Text).DisposeWith(disposables);
+                this.Bind(ViewModel, x => x.PassMain, x => x.regPass.Text).DisposeWith(disposables);
+                this.BindCommand(ViewModel, x => x.ToMainAuthCmd, x => x.back).DisposeWith(disposables);
+                this.BindCommand(ViewModel, x => x.AuthorizationMainCmd, x => x.register).DisposeWith(disposables);
             });
-
-                _register.Click += _register_Click;
-          //  _back.Click += _back_Click;
-        }
-
-
-        //private void _back_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
-        //{
-        //    ViewModel.IsVisMainReg = !(ViewModel.IsVisMainReg);
-        //}
-
-        private void _register_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
-        {
-            _flag = false;
-            ViewModel.Login(_regLog.Text, _regPass.Text, _flag);
-            ViewModel.IsVisMainReg = !(ViewModel.IsVisMainReg);
         }
 
         private void InitializeComponent()

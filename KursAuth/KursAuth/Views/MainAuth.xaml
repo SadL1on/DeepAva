@@ -41,7 +41,8 @@
             Width="70"
             Height="30"
             Margin="300,0,0,0"
-            Content="Вход" />
+            Content="Вход"
+            CommandParameter="true"/>
         <Button
           Name="MainAuthReg"
               Width="130"

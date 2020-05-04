@@ -10,17 +10,18 @@ using Microsoft.Extensions.DependencyInjection;
 using VkNet.Utils;
 using System.Linq;
 using System.Threading.Tasks;
+using KursAuth.Utils;
 
 namespace KursAuth.Models
 {
-    public class AutorizationVk
+    public class VKModel : IMessengers
     {
         private VkApi api;
         private string login;
         private string password;
 
         /// <inheritdoc/> 
-        public AutorizationVk(string log, string pass)
+        public VKModel(string log, string pass)
         {
             login = log;
             password = pass;
@@ -44,7 +45,7 @@ namespace KursAuth.Models
         }
 
         /// <inheritdoc/> 
-        public async Task<VkCollection<User>> GetFriendsAsync()
+        public async Task<IEnumerable<object>> GetFriendsAsync()
         {
             var users = await api.Friends.GetAsync(new FriendsGetParams
             {

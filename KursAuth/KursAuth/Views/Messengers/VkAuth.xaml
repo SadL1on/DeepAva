@@ -9,7 +9,7 @@
     mc:Ignorable="d">
 
     <Grid Name="VkAuth" Background="DarkCyan">
-        <StackPanel IsVisible="{Binding IsVisAuth}">
+        <StackPanel>
             <TextBlock HorizontalAlignment="Center" FontSize="30">Авторизация</TextBlock>
             <TextBox
                 Name="Login"

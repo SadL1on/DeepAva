@@ -34,7 +34,6 @@
           PasswordChar="*" />
       <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
         <Button
-          Command="{Binding Registration}"
             Name="RegAcc"
             Width="130"
             Height="30"
@@ -44,8 +43,7 @@
           Name="Back"
               Width="70"
               Height="30"
-              Content="Назад"
-          Command="{Binding BackToAuth}"/>
+              Content="Назад" />
       </StackPanel>
     </StackPanel>
   </Grid>

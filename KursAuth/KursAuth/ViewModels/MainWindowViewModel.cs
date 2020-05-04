@@ -18,6 +18,7 @@ using System.Reactive;
 using System.Windows.Input;
 using System.Threading.Tasks;
 using ReactiveUI.Fody.Helpers;
+using KursAuth.Utils;
 
 namespace KursAuth.ViewModels
 {
@@ -25,75 +26,107 @@ namespace KursAuth.ViewModels
     public class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
     {
         private UserMain user;
-        private AutorizationVk vk;
 
-        public ReactiveCommand<Unit, Unit> BackToAuth { get; }
-        public ReactiveCommand<Unit, Unit> Registration { get; }
+        private VKModel vk;
+
+        private IMessengers _messenger;
+
+        /// <summary>
+        /// Команда перехода к форме авторизации
+        /// </summary>
+        public ReactiveCommand<Unit, Unit> ToMainAuthCmd { get; }
+
+        /// <summary>
+        /// Команда регистрации в приложении
+        /// </summary>
+        public ReactiveCommand<string, Unit> AuthorizationMainCmd { get; }
+
+        /// <summary>
+        /// Команда открытия окна ВК
+        /// </summary>
+        public ReactiveCommand<Unit, Unit> VkOpenCmd { get; }
+
+        public ReactiveCommand<long, Unit> GetMessHist { get; }
+
+        public ReactiveCommand<Unit, Unit> MessLogin { get; }
+
+        /// <summary>
+        /// Логин из формы рег/авт приложения
+        /// </summary>
+        [Reactive] 
+        public string LoginMain { get; set; }
+
+        /// <summary>
+        /// Пароль из формы рег/авт приложения
+        /// </summary>
+        [Reactive] 
+        public string PassMain { get; set; }
+
+        /// <summary>
+        /// Логин из формы рег/авт в мессенджере
+        /// </summary>
+        [Reactive]
+        public string LoginMess { get; set; }
+
+        /// <summary>
+        /// Пароль из формы рег/авт в мессенджере
+        /// </summary>
+        [Reactive]
+        public string PassMess { get; set; }
+
+        /// <summary>
+        /// Видимость формы регистрации в приложении
+        /// </summary>
+        [Reactive] 
+        public bool IsVisMainReg { get; set; }
+
+        /// <summary>
+        /// Видимость формы авторизации в приложении
+        /// </summary>
+        [Reactive] 
+        public bool IsVisMainAuth { get; set; }
+
+        /// <summary>
+        /// Видимость формы списка контактов
+        /// </summary>
+        [Reactive] 
+        public bool IsVisConCtrl { get; set; }
+
+        /// <summary>
+        /// Видимость формы авторизации ВК
+        /// </summary>
+        [Reactive] 
+        public bool IsVisVkAuth { get; set; }
+
+        /// <summary>
+        /// Список контактов
+        /// </summary>
+        [Reactive]
+        public IEnumerable Users { get; set; }
 
         public MainWindowViewModel()
         {
-            BackToAuth = ReactiveCommand.Create(() => { ChangePageMeth(); });
-            Registration = ReactiveCommand.Create(() => { RegistrationMeth(); });
-
+            ToMainAuthCmd = ReactiveCommand.Create(() => { IsVisMainReg = !IsVisMainReg; });
+            AuthorizationMainCmd = ReactiveCommand.Create<string>((flag) => { AuthorizationMainImpl(Convert.ToBoolean(flag)); });
+            VkOpenCmd = ReactiveCommand.Create(() => { IsVisVkAuth = !IsVisVkAuth; });
+            MessLogin = ReactiveCommand.Create(() => { AuthMessImpl(LoginMess, PassMess); });
+            GetMessHist = ReactiveCommand.Create<long>((userID) => { GetHisVMAsync(userID); });
         }
 
-        [Reactive] public string LoginR { get; set; }
-
-        private string _pass;
-        public string Pass
-        {
-            get => _pass;
-            set => this.RaiseAndSetIfChanged(ref _pass, value);
-        }
-
-        public void ChangePageMeth()
+        public void AuthorizationMainImpl(bool flag)
         {            
-            IsVisMainReg = !IsVisMainReg;
+            user = new UserMain(LoginMain, PassMain, flag);
+            if (!flag) { IsVisMainReg = !IsVisMainReg; }
+            else { IsVisMainAuth = !IsVisMainAuth; }
         }
 
-        public void RegistrationMeth()
+        public async Task AuthMessImpl(string login, string password)
         {
-            var st = LoginR;
-        }
-
-        private IEnumerable users;
-        public IEnumerable Users
-        {
-            get => users;
-            set => this.RaiseAndSetIfChanged(ref users, value);
-        }
-
-        private bool _isVisMainReg = false;
-        public bool IsVisMainReg
-        {
-            get => _isVisMainReg;
-            set => this.RaiseAndSetIfChanged(ref _isVisMainReg, value);
-        }
-
-        private bool _isVisMainAuth = false;
-        public bool IsVisMainAuth
-        {
-            get => _isVisMainAuth;
-            set => this.RaiseAndSetIfChanged(ref _isVisMainAuth, value);
-        }
-
-        private bool _isVisConCtrl = false;
-        public bool IsVisConCtrl
-        {
-            get => _isVisConCtrl;
-            set => this.RaiseAndSetIfChanged(ref _isVisConCtrl, value);
-        }
-
-        private bool _isVisVkAuth = false;
-        public bool IsVisVkAuth
-        {
-            get => _isVisVkAuth;
-            set => this.RaiseAndSetIfChanged(ref _isVisVkAuth, value);
-        }
-
-        public void Auth(string login, string password)
-        {
-            vk = new AutorizationVk(login, password);           
+            vk = new VKModel(login, password);
+            IsVisConCtrl = !IsVisConCtrl;
+            IsVisVkAuth = !IsVisVkAuth;
+            _messenger = vk;
+            await GetFriends();
         }
 
         public async Task GetFriends()
@@ -101,10 +134,13 @@ namespace KursAuth.ViewModels
             Users = await vk.GetFriendsAsync();
         }
 
-        public async Task<Message[]> GetHisVMAsync(long userId)
+        [Reactive]
+        public IEnumerable Messages { get; set; }
+
+        public async Task GetHisVMAsync(long userId)
         {
             var mess = await vk.GetHistoryAsync(userId); 
-            return mess.Messages.OrderBy(x => x.Date).ToArray();
+            Messages = mess.Messages.OrderBy(x => x.Date).ToArray();
         }
 
         public async Task SendMessage(long userid, string text)
@@ -116,11 +152,5 @@ namespace KursAuth.ViewModels
             catch
             { }
         }
-
-        public void Login(string log, string pass, bool flag)
-        {
-            user = new UserMain(log, pass, flag);
-        }
-
     }
 }

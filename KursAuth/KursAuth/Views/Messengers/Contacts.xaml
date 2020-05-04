@@ -21,7 +21,7 @@
             Name="Contacts"
             Grid.Row="1"
             Grid.Column="0"
-            Items="{Binding $parent[UserControl].Items}">
+            Items="{Binding Users}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="5">
@@ -40,10 +40,6 @@
             Text="Title"
             TextAlignment="Center" />
         <Grid Grid.Row="1" Grid.Column="1">
-            <!--<RowDefinitions>
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="40" />
-        </RowDefinitions>-->
             <ListBox
                 Name="MessHist"
                 Grid.Row="0"
@@ -67,9 +63,7 @@
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom">
                 Отправить
-            </Button>
-            <!--<TextBox Grid.Row="1" Name="SendMess" Background="DarkGreen" Width="10" Height="40" VerticalAlignment="Bottom"/>-->
+            </Button>        
         </Grid>
     </Grid>
-
 </UserControl>

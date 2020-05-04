@@ -8,12 +8,13 @@ using KursAuth.ViewModels;
 using System;
 using KursAuth.Views.Messengers;
 using ReactiveUI;
+using System.Reactive.Disposables;
 
 namespace KursAuth.Views
 {
     public class MainWindow : ReactiveWindow<MainWindowViewModel>
     {
-        public Button vkOpen;
+        public Button vkOpen => this.FindControl<Button>("VkOpen");
         private ListBox contacts;
 
         public MainWindow()
@@ -22,13 +23,10 @@ namespace KursAuth.Views
 #if DEBUG
             this.AttachDevTools();
 #endif
-            vkOpen = this.FindControl<Button>("VkOpen");
-            vkOpen.Click += VkOpen_Click;
-        }
-
-        private void VkOpen_Click(object sender, RoutedEventArgs e)
-        {
-            ViewModel.IsVisVkAuth = !(ViewModel.IsVisVkAuth);
+            this.WhenActivated((disposables => 
+            {
+                this.BindCommand(ViewModel, x => x.VkOpenCmd, x => x.vkOpen).DisposeWith(disposables);
+            }));
         }
 
         private void InitializeComponent()
