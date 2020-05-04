@@ -28,27 +28,8 @@ namespace KursAuth.ViewModels
     {
         private UserMain user;
         private Telegram tl;
-
         private VKModel vk;
-
-            TlOpen = ReactiveCommand.Create(() => { IsVisTlAuth = !(IsVisTlAuth); });
-            VisPass = ReactiveCommand.Create<string>(async (phone) => { await sendloginAsync(phone); });
-            AuthTl = ReactiveCommand.Create<string>(async (code) => { await AuthTelegram(code); });
-        public async Task AuthTelegram(string code)
-        {
-           
-                IsVisTlAuth = !IsVisTlAuth;
-            IsVisContactsTelegram = !IsVisContactsTelegram;
-                await tl.MakeAuth(code);
-            
-        }
-        public async Task sendloginAsync(string phone)
-        {
-            IsVisPass = !IsVisPass;
-            tl = new Telegram();
-            await tl.SendCodeToAuth(phone);
-        
-        }
+         
         private IMessengers _messenger;
 
         /// <summary>
@@ -69,6 +50,12 @@ namespace KursAuth.ViewModels
         public ReactiveCommand<long, Unit> GetMessHist { get; }
 
         public ReactiveCommand<Unit, Unit> MessLogin { get; }
+
+        public ReactiveCommand<Unit, Unit> TlOpen { get; }
+
+        public ReactiveCommand<string, Unit> VisPass { get; }
+
+        public ReactiveCommand<string, Unit> AuthTl { get; }
 
         /// <summary>
         /// Логин из формы рег/авт приложения
@@ -142,6 +129,22 @@ namespace KursAuth.ViewModels
             VkOpenCmd = ReactiveCommand.Create(() => { IsVisVkAuth = !IsVisVkAuth; });
             MessLogin = ReactiveCommand.Create(() => { AuthMessImpl(LoginMess, PassMess); });
             GetMessHist = ReactiveCommand.Create<long>((userID) => { GetHisVMAsync(userID); });
+            TlOpen = ReactiveCommand.Create(() => { IsVisTlAuth = !(IsVisTlAuth); });
+            VisPass = ReactiveCommand.Create<string>(async (phone) => { await sendloginAsync(phone); });
+            AuthTl = ReactiveCommand.Create<string>(async (code) => { await AuthTelegram(code); });
+        }
+
+        public async Task AuthTelegram(string code)
+        {
+            IsVisTlAuth = !IsVisTlAuth;
+            IsVisContactsTelegram = !IsVisContactsTelegram;
+            await tl.MakeAuth(code);
+        }
+        public async Task sendloginAsync(string phone)
+        {
+            IsVisPass = !IsVisPass;
+            tl = new Telegram();
+            await tl.SendCodeToAuth(phone);
         }
 
         public void AuthorizationMainImpl(bool flag)

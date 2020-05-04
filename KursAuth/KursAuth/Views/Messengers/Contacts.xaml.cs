@@ -53,19 +53,19 @@ namespace KursAuth.Views.Messengers
             //user = (User)contacts.SelectedItem;
             //await ViewModel.GetHisVMAsync(user.Id);
           //  SendMessage.Click += Sendmessage_Click;
-            while (true)
-            {
+            //while (true)
+            //{
                 
            
-            user = (User)contacts.SelectedItem;
+            //user = (User)contacts.SelectedItem;
 
-            messHist.Items = await ViewModel.GetHisVMAsync(user.Id);
+            //messHist.Items = await ViewModel.GetHisVMAsync(user.Id);
             
-            sendmessage.Click += Sendmessage_Click;
+            //sendmessage.Click += Sendmessage_Click;
                
                
-                Thread.Sleep(1000);
-            }
+            //    Thread.Sleep(1000);
+            //}
         }
 
         //private async void Sendmessage_Click(object sender, RoutedEventArgs e)
