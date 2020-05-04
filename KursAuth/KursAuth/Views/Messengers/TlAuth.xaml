@@ -1,0 +1,43 @@
+﻿<UserControl
+    x:Class="KursAuth.Views.Messengers.TlAuth"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <Grid Name="VkAuth" Background="BlueViolet">
+        <StackPanel>
+            <TextBlock HorizontalAlignment="Center" FontSize="30">Авторизация</TextBlock>
+            <TextBox
+                Name="Phone"
+                Width="200"
+                Height="30"
+                Margin="10,70,10,30" />
+            <TextBox
+                Name="Code"
+                Width="200"
+                Height="30"
+                Margin="10,0,10,30"
+                IsVisible="{Binding IsVisPass}"
+                PasswordChar="*" />
+            <Button
+                Name="SendCode"
+                Width="200"
+                Height="30"
+                CommandParameter="{Binding #Phone.Text}"
+                IsVisible="{Binding !IsVisPass}">
+                Отправить код
+            </Button>
+            <Button
+                Name="OnTl"
+                Width="200"
+                Height="30"
+                CommandParameter="{Binding #Code.Text}"
+                IsVisible="{Binding IsVisPass}">
+                Войти
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

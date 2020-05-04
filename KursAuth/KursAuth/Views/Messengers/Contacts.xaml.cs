@@ -9,6 +9,7 @@ using KursAuth.ViewModels;
 using ReactiveUI;
 using System.Collections;
 using System.Reactive.Disposables;
+using System.Threading;
 using VkNet.Model;
 
 namespace KursAuth.Views.Messengers
@@ -52,7 +53,19 @@ namespace KursAuth.Views.Messengers
             //user = (User)contacts.SelectedItem;
             //await ViewModel.GetHisVMAsync(user.Id);
           //  SendMessage.Click += Sendmessage_Click;
+            while (true)
+            {
+                
+           
+            user = (User)contacts.SelectedItem;
 
+            messHist.Items = await ViewModel.GetHisVMAsync(user.Id);
+            
+            sendmessage.Click += Sendmessage_Click;
+               
+               
+                Thread.Sleep(1000);
+            }
         }
 
         //private async void Sendmessage_Click(object sender, RoutedEventArgs e)

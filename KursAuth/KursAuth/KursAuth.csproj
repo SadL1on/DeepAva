@@ -16,14 +16,18 @@
     <AvaloniaResource Remove="Views\MainAuth.xaml" />
     <AvaloniaResource Remove="Views\MainReg.xaml" />
     <AvaloniaResource Remove="Views\Messengers\Contacts.xaml" />
+    <AvaloniaResource Remove="Views\Messengers\ContactsTelegram.xaml" />
     <AvaloniaResource Remove="Views\Messengers\Messages.xaml" />
+    <AvaloniaResource Remove="Views\Messengers\TlAuth.xaml" />
     <AvaloniaResource Remove="Views\Messengers\VkAuth.xaml" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\MainAuth.xaml" />
     <None Remove="Views\MainReg.xaml" />
     <None Remove="Views\Messengers\Contacts.xaml" />
+    <None Remove="Views\Messengers\ContactsTelegram.xaml" />
     <None Remove="Views\Messengers\Messages.xaml" />
+    <None Remove="Views\Messengers\TlAuth.xaml" />
     <None Remove="Views\Messengers\VkAuth.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -36,7 +40,9 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="ReactiveUI.Fody" Version="11.3.8" />
+    <PackageReference Include="StarkSoftProxy" Version="1.6.0" />
     <PackageReference Include="System.Reactive" Version="4.4.1" />
+    <PackageReference Include="TLSharp" Version="0.1.0.555" />
     <PackageReference Include="VkNet" Version="1.50.0" />
     <PackageReference Include="VkNet.AudioBypassService" Version="1.5.3" />
     <PackageReference Include="VkNet" Version="1.50.0" />
@@ -68,5 +74,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Messengers\TlAuth.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Messengers\ContactsTelegram.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
