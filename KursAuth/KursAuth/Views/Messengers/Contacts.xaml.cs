@@ -42,7 +42,7 @@ namespace KursAuth.Views.Messengers
             {
                 this.Bind(ViewModel, x => x.Messages, x => x.MessHist.Items).DisposeWith(disposables);
                 //Листбокс и команда не биндятся
-                this.BindCommand(ViewModel, x => x.GetMessHist, x => x.contacts.SelectedItem).DisposeWith(disposables);
+               // this.BindCommand(ViewModel, x => x.GetMessHist, x => x.contacts.SelectedItem).DisposeWith(disposables);
             });
              contacts.Tapped += Contacts_Tapped;          
         }
