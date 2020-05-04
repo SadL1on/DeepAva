@@ -18,6 +18,7 @@ using System.Reactive;
 using System.Windows.Input;
 using System.Threading.Tasks;
 using ReactiveUI.Fody.Helpers;
+using KursAuth.Models.Telegram;
 using KursAuth.Utils;
 
 namespace KursAuth.ViewModels
@@ -26,9 +27,28 @@ namespace KursAuth.ViewModels
     public class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
     {
         private UserMain user;
+        private Telegram tl;
 
         private VKModel vk;
 
+            TlOpen = ReactiveCommand.Create(() => { IsVisTlAuth = !(IsVisTlAuth); });
+            VisPass = ReactiveCommand.Create<string>(async (phone) => { await sendloginAsync(phone); });
+            AuthTl = ReactiveCommand.Create<string>(async (code) => { await AuthTelegram(code); });
+        public async Task AuthTelegram(string code)
+        {
+           
+                IsVisTlAuth = !IsVisTlAuth;
+            IsVisContactsTelegram = !IsVisContactsTelegram;
+                await tl.MakeAuth(code);
+            
+        }
+        public async Task sendloginAsync(string phone)
+        {
+            IsVisPass = !IsVisPass;
+            tl = new Telegram();
+            await tl.SendCodeToAuth(phone);
+        
+        }
         private IMessengers _messenger;
 
         /// <summary>
@@ -62,6 +82,17 @@ namespace KursAuth.ViewModels
         [Reactive] 
         public string PassMain { get; set; }
 
+        [Reactive]
+        public bool IsVisContactsTelegram { get; set; }
+        
+        [Reactive]
+        public bool IsVisMess { get; set; }
+
+        [Reactive]
+        public bool IsVisTlAuth { get; set; }
+      
+        [Reactive]
+        public bool IsVisPass { get; set; }
         /// <summary>
         /// Логин из формы рег/авт в мессенджере
         /// </summary>
