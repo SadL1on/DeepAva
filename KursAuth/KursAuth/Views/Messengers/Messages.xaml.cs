@@ -1,12 +1,14 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.ReactiveUI;
+using KursAuth.ViewModels;
 
-namespace KursAuth.Views
+namespace KursAuth.Views.Messengers
 {
-    public class RegControl : UserControl
+    public class Messages : ReactiveUserControl<MainWindowViewModel>
     {
-        public RegControl()
+        public Messages()
         {
             this.InitializeComponent();
         }

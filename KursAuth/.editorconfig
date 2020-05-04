@@ -1,0 +1,7 @@
+﻿[*.cs]
+
+# CA2007: Попробуйте вызвать ConfigureAwait для ожидаемой задачи
+dotnet_diagnostic.CA2007.severity = none
+
+# CA1305: Укажите IFormatProvider
+dotnet_diagnostic.CA1305.severity = none

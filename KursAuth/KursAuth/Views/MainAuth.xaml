@@ -1,0 +1,58 @@
+﻿<UserControl
+    x:Class="KursAuth.Views.MainAuth"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+  <Grid Name="mainAuth" Background="DarkGray">
+    <StackPanel>
+      <TextBlock
+          Margin="10"
+          HorizontalAlignment="Center"
+          VerticalAlignment="Top"
+          FontSize="30"
+          Text="Авторизация" />
+      <TextBlock
+          Margin="0,100,150,0"
+          HorizontalAlignment="Center"
+          FontSize="15"
+          Text="Логин" />
+      <TextBox
+          Name="Login"
+          Width="200"
+          Height="30"
+          Margin="0,0,0,0" />
+      <TextBlock
+          Margin="0,0,140,0"
+          HorizontalAlignment="Center"
+          FontSize="15"
+          Text="Пароль" />
+      <TextBox
+          Name="Pass"
+          Width="200"
+          Height="30"
+          PasswordChar="*" />
+      <StackPanel Margin="0,20,0,0" Orientation="Horizontal">
+        <Button
+            Name="MainAuth"
+            Width="70"
+            Height="30"
+            Margin="300,0,0,0"
+            Content="Вход"
+            CommandParameter="true"/>
+        <Button
+          Name="MainAuthReg"
+              Width="130"
+              Height="30"
+              Content="Регистрация" />
+      </StackPanel>
+      <TextBlock
+        Name="Alert"
+        Width="200"
+        Height="30"/>
+    </StackPanel>
+  </Grid>
+</UserControl>
