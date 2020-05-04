@@ -7,6 +7,7 @@ using Avalonia.ReactiveUI;
 using KursAuth.Models;
 using KursAuth.ViewModels;
 using System.Collections;
+using System.Threading;
 using VkNet.Model;
 
 namespace KursAuth.Views.Messengers
@@ -48,12 +49,19 @@ namespace KursAuth.Views.Messengers
 
         private async void  Contacts_Tapped(object sender, RoutedEventArgs e)
         {
+            while (true)
+            {
+                
+           
             user = (User)contacts.SelectedItem;
 
             messHist.Items = await ViewModel.GetHisVMAsync(user.Id);
             
             sendmessage.Click += Sendmessage_Click;
-            
+               
+               
+                Thread.Sleep(1000);
+            }
         }
 
         private void Sendmessage_Click(object sender, RoutedEventArgs e)

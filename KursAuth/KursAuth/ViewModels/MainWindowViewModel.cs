@@ -18,6 +18,7 @@ using System.Reactive;
 using System.Windows.Input;
 using System.Threading.Tasks;
 using ReactiveUI.Fody.Helpers;
+using KursAuth.Models.Telegram;
 
 namespace KursAuth.ViewModels
 {
@@ -26,23 +27,35 @@ namespace KursAuth.ViewModels
     {
         private UserMain user;
         private AutorizationVk vk;
+        private Telegram tl;
 
         public ReactiveCommand<Unit, Unit> BackToAuth { get; }
         public ReactiveCommand<Unit, Unit> Registration { get; }
         public ReactiveCommand<Unit, Unit> TlOpen { get; }
         public ReactiveCommand<string, Unit> VisPass { get; }
+        public ReactiveCommand<string, Unit> AuthTl { get; }
 
         public MainWindowViewModel()
         {
             BackToAuth = ReactiveCommand.Create(() => { ChangePageMeth(); });
             Registration = ReactiveCommand.Create(() => { RegistrationMeth(); });
             TlOpen = ReactiveCommand.Create(() => { IsVisTlAuth = !(IsVisTlAuth); });
-            VisPass = ReactiveCommand.Create<string>((phone) => sendlogin(phone));
-
+            VisPass = ReactiveCommand.Create<string>(async (phone) => { await sendloginAsync(phone); });
+            AuthTl = ReactiveCommand.Create<string>(async (code) => { await AuthTelegram(code); });
+           
         }
-        public void sendlogin(string phone)
+        public async Task AuthTelegram(string code)
         {
-        
+           
+                IsVisTlAuth = !IsVisTlAuth;
+                await tl.MakeAuth(code);
+            
+        }
+        public async Task sendloginAsync(string phone)
+        {
+            IsVisPass = !IsVisPass;
+            tl = new Telegram();
+            await tl.SendCodeToAuth(phone);
         
         }
         [Reactive] public string LoginR { get; set; }
@@ -78,6 +91,8 @@ namespace KursAuth.ViewModels
             set => this.RaiseAndSetIfChanged(ref _isVisMainReg, value);
         }
 
+        [Reactive]
+        public bool IsVisMess { get; set; }
 
         [Reactive]
         public bool IsVisTlAuth { get; set; }

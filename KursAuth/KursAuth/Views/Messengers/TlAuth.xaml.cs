@@ -10,17 +10,21 @@ namespace KursAuth.Views.Messengers
 {
     public class TlAuth : ReactiveUserControl <MainWindowViewModel>
     {
-        private TextBox password => this.FindControl<TextBox>("PasswordTl");
-        private Button sendpass => this.FindControl<Button>("OnTl");
+        private Button sendcode => this.FindControl<Button>("SendCode");
+        private TextBox phone => this.FindControl<TextBox>("Phone");
+        private Button ontl => this.FindControl<Button>("OnTl");
+        private TextBox code => this.FindControl<TextBox>("Code");
+
+      
         
         public TlAuth()
         {
             this.InitializeComponent();
 
-
             this.WhenActivated((disposables =>
-            { this.BindCommand(ViewModel, x => x.VisPass, x => x.sendpass).DisposeWith(disposables); }));
-
+            { this.BindCommand(ViewModel, x => x.VisPass, x => x.sendcode, phone.Text).DisposeWith(disposables); }));
+            this.WhenActivated((disposable =>
+            { this.BindCommand(ViewModel, x => x.AuthTl, x => x.ontl, code.Text).DisposeWith(disposable); }));
         }
 
         private void InitializeComponent()
