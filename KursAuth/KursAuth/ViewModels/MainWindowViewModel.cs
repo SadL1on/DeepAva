@@ -34,6 +34,7 @@ namespace KursAuth.ViewModels
         public ReactiveCommand<Unit, Unit> TlOpen { get; }
         public ReactiveCommand<string, Unit> VisPass { get; }
         public ReactiveCommand<string, Unit> AuthTl { get; }
+        public ReactiveCommand<Unit,Unit> ContactsTelegram { get; }
 
         public MainWindowViewModel()
         {
@@ -42,12 +43,14 @@ namespace KursAuth.ViewModels
             TlOpen = ReactiveCommand.Create(() => { IsVisTlAuth = !(IsVisTlAuth); });
             VisPass = ReactiveCommand.Create<string>(async (phone) => { await sendloginAsync(phone); });
             AuthTl = ReactiveCommand.Create<string>(async (code) => { await AuthTelegram(code); });
+  
            
         }
         public async Task AuthTelegram(string code)
         {
            
                 IsVisTlAuth = !IsVisTlAuth;
+            IsVisContactsTelegram = !IsVisContactsTelegram;
                 await tl.MakeAuth(code);
             
         }
@@ -91,6 +94,10 @@ namespace KursAuth.ViewModels
             set => this.RaiseAndSetIfChanged(ref _isVisMainReg, value);
         }
 
+
+        [Reactive]
+        public bool IsVisContactsTelegram { get; set; }
+        
         [Reactive]
         public bool IsVisMess { get; set; }
 

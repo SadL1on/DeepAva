@@ -21,6 +21,8 @@ namespace KursAuth.Views.Messengers
         {
             this.InitializeComponent();
 
+
+           
             this.WhenActivated((disposables =>
             { this.BindCommand(ViewModel, x => x.VisPass, x => x.sendcode, phone.Text).DisposeWith(disposables); }));
             this.WhenActivated((disposable =>

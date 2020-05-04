@@ -77,6 +77,10 @@
             Grid.Column="1"
             IsVisible="{Binding IsVisConCtrl}"
             Items="{Binding Users}" />
+      <vv:ContactsTelegram
+            Grid.Column="1"
+            IsVisible="{Binding IsVisContactsTelegram}"
+            />
         <vv:VkAuth Grid.Column="1" IsVisible="{Binding IsVisVkAuth}" />
      <vv:TlAuth Grid.Column="1" IsVisible="{Binding IsVisTlAuth}"/>
       <v:MainAuth Grid.Column="0" Grid.ColumnSpan="2"  IsVisible="{Binding !IsVisMainAuth}" />
