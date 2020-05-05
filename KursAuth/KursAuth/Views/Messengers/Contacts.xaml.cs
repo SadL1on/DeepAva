@@ -54,15 +54,7 @@ namespace KursAuth.Views.Messengers
         {
             user = (User)contacts.SelectedItem;
             await ViewModel.GetHisVMAsync(user.Id);
-           // while (true)
-           // {
-                user = (User)contacts.SelectedItem;
-
-                sendmessage.Click += Sendmessage_Click;
-
-
-                Thread.Sleep(1000);
-           // }
+            sendmessage.Click += Sendmessage_Click;
         }
 
         private async void Sendmessage_Click(object sender, RoutedEventArgs e)
