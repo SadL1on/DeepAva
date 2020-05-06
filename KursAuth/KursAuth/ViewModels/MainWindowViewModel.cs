@@ -20,6 +20,8 @@ using System.Threading.Tasks;
 using ReactiveUI.Fody.Helpers;
 using KursAuth.Models.Telegram;
 using KursAuth.Utils;
+using TeleSharp.TL.Messages;
+using TeleSharp.TL;
 
 namespace KursAuth.ViewModels
 {
@@ -121,7 +123,7 @@ namespace KursAuth.ViewModels
         /// </summary>
         [Reactive]
         public IEnumerable Users { get; set; }
-
+        public IEnumerable TelegramDialogs { get; set; }
         public MainWindowViewModel()
         {
             ToMainAuthCmd = ReactiveCommand.Create(() => { IsVisMainReg = !IsVisMainReg; });
@@ -166,6 +168,21 @@ namespace KursAuth.ViewModels
         public async Task GetFriends()
         {
             Users = await vk.GetFriendsAsync();
+        }
+
+        public async Task GetFriendsTelegram()
+        {
+           TelegramDialogs = await tl.GetFriendsAsync();
+
+
+            //foreach (var element in TelegramDialogs.Users)
+            //{
+            //    if (element is TLUser)
+            //    {
+            //        TLUser chat = element as TLUser;
+            //        Console.WriteLine(chat.FirstName);
+            //    }
+            //}
         }
 
         [Reactive]

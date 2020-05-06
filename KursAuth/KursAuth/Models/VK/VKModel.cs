@@ -20,6 +20,9 @@ namespace KursAuth.Models
         private string login;
         private string password;
 
+        /// <summary>
+        /// Метод авторизации Вконтакте
+        /// </summary>
         /// <inheritdoc/> 
         public VKModel(string log, string pass)
         {
@@ -43,7 +46,9 @@ namespace KursAuth.Models
             });
 
         }
-
+        /// <summary>
+        /// Метод возвращает список друзей авторизовавшегося пользователя
+        /// </summary>
         /// <inheritdoc/> 
         public async Task<IEnumerable<object>> GetFriendsAsync()
         {
@@ -56,6 +61,9 @@ namespace KursAuth.Models
             return users;
         }
 
+        /// <summary>
+        /// Метод возвращает историю диалога 
+        /// </summary>
         public async Task<MessageGetHistoryObject> GetHistoryAsync(long userid)
         {
 
@@ -67,7 +75,9 @@ namespace KursAuth.Models
             });
             return getHistory;
         }
-
+        /// <summary>
+        /// Метод отправляет сообщение пользователю
+        /// </summary>
         public async Task SendMessageAsync(long userid,string text)
         {
 
@@ -78,7 +88,9 @@ namespace KursAuth.Models
                 RandomId = new Random().Next(999999) //ужасный уникальный идентификатор
             });
         }
-
+        /// <summary>
+        /// Метод возвращает информацию об авторизовавшемся пользователе
+        /// </summary>
         public async Task<User> GetUserInfo()
         {
             var infoaboutuser = api.Users.Get(new long[] { api.UserId.Value }).FirstOrDefault();
