@@ -66,7 +66,7 @@ namespace KursAuth.Models.Telegram
            
             var dialogs = (TLDialogs)await client.GetUserDialogsAsync();
 
-            var users = dialogs.Users;
+            var users = dialogs.Users.ToArray();
 
             return users;
            

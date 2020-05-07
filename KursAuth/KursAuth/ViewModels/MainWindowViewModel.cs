@@ -31,7 +31,7 @@ namespace KursAuth.ViewModels
         private UserMain user;
         private Telegram tl;
         private VKModel vk;
-         
+
         private IMessengers _messenger;
 
         /// <summary>
@@ -62,24 +62,24 @@ namespace KursAuth.ViewModels
         /// <summary>
         /// Логин из формы рег/авт приложения
         /// </summary>
-        [Reactive] 
+        [Reactive]
         public string LoginMain { get; set; }
 
         /// <summary>
         /// Пароль из формы рег/авт приложения
         /// </summary>
-        [Reactive] 
+        [Reactive]
         public string PassMain { get; set; }
 
         [Reactive]
         public bool IsVisContactsTelegram { get; set; }
-        
+
         [Reactive]
         public bool IsVisMess { get; set; }
 
         [Reactive]
         public bool IsVisTlAuth { get; set; }
-      
+
         [Reactive]
         public bool IsVisPass { get; set; }
         /// <summary>
@@ -97,25 +97,25 @@ namespace KursAuth.ViewModels
         /// <summary>
         /// Видимость формы регистрации в приложении
         /// </summary>
-        [Reactive] 
+        [Reactive]
         public bool IsVisMainReg { get; set; }
 
         /// <summary>
         /// Видимость формы авторизации в приложении
         /// </summary>
-        [Reactive] 
+        [Reactive]
         public bool IsVisMainAuth { get; set; }
 
         /// <summary>
         /// Видимость формы списка контактов
         /// </summary>
-        [Reactive] 
+        [Reactive]
         public bool IsVisConCtrl { get; set; }
 
         /// <summary>
         /// Видимость формы авторизации ВК
         /// </summary>
-        [Reactive] 
+        [Reactive]
         public bool IsVisVkAuth { get; set; }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace KursAuth.ViewModels
         /// </summary>
         [Reactive]
         public IEnumerable Users { get; set; }
-        public IEnumerable TelegramDialogs { get; set; }
+        public IEnumerable TelegramDialogs { get;set;}
         public MainWindowViewModel()
         {
             ToMainAuthCmd = ReactiveCommand.Create(() => { IsVisMainReg = !IsVisMainReg; });
@@ -138,9 +138,11 @@ namespace KursAuth.ViewModels
 
         public async Task AuthTelegram(string code)
         {
+           
+            await tl.MakeAuth(code);
             IsVisTlAuth = !IsVisTlAuth;
             IsVisContactsTelegram = !IsVisContactsTelegram;
-            await tl.MakeAuth(code);
+            await GetFriendsTelegram();
         }
         public async Task sendloginAsync(string phone)
         {
