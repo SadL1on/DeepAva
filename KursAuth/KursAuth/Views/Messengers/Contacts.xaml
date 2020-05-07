@@ -37,6 +37,7 @@
             Grid.Column="0"
             Grid.ColumnSpan="2"
             Background="Aqua"
+            Name="Title"
             Text="Title"
             TextAlignment="Center" />
         <Grid Grid.Row="1" Grid.Column="1">

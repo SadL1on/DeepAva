@@ -64,6 +64,13 @@ namespace KursAuth.ViewModels
         /// </summary>
         [Reactive]
         public string LoginMain { get; set; }
+       
+
+        /// <summary>
+        /// Имя авторизовавшегося пользователя ВК
+        /// </summary>
+        [Reactive]
+        public string NameVk { get; set; }
 
         /// <summary>
         /// Пароль из формы рег/авт приложения
@@ -165,11 +172,23 @@ namespace KursAuth.ViewModels
             IsVisVkAuth = !IsVisVkAuth;
             _messenger = vk;
             await GetFriends();
+            await GetUserInfo();
         }
 
         public async Task GetFriends()
         {
             Users = await vk.GetFriendsAsync();
+        }
+
+        public async Task GetUserInfo()
+        {
+          var  UserInfo = await vk.GetUserInfo();
+
+            string firstname = UserInfo.FirstName;
+            string lastname = UserInfo.LastName;
+
+            NameVk = firstname + " " + lastname;
+             
         }
 
         public async Task GetFriendsTelegram()
