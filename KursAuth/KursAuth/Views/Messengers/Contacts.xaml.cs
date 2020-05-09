@@ -49,23 +49,23 @@ namespace KursAuth.Views.Messengers
                 //Листбокс и команда не биндятся
                 //  this.BindCommand(ViewModel, x => x.GetMessHist, x => x.contacts.).DisposeWith(disposables);
             });
-            contacts.Tapped += Contacts_Tapped;
+           // contacts.Tapped += Contacts_Tapped;
         }
 
-        private async void  Contacts_Tapped(object sender, RoutedEventArgs e)
-        {
-            user = (User)contacts.SelectedItem;
-            await ViewModel.GetHisVMAsync(user.Id);
-            sendmessage.Click += Sendmessage_Click;
-        }
+        //private async void  Contacts_Tapped(object sender, RoutedEventArgs e)
+        //{
+        //    user = (User)contacts.SelectedItem;
+        //    await ViewModel.GetHisVMAsync(user.Id);
+        //    sendmessage.Click += Sendmessage_Click;
+        //}
 
-        private async void Sendmessage_Click(object sender, RoutedEventArgs e)
-        {
-            await ViewModel.SendMessage(user.Id, MessageText.Text);
-            MessageText.Text = null;
-            ViewModel.IsVisConCtrl = !(ViewModel.IsVisConCtrl);
-            ViewModel.IsVisConCtrl = !(ViewModel.IsVisConCtrl);
-        }
+        //private async void Sendmessage_Click(object sender, RoutedEventArgs e)
+        //{
+        //    await ViewModel.SendMessage(user.Id, MessageText.Text);
+        //    MessageText.Text = null;
+        //    ViewModel.IsVisConCtrl = !(ViewModel.IsVisConCtrl);
+        //    ViewModel.IsVisConCtrl = !(ViewModel.IsVisConCtrl);
+        //}
 
         private void InitializeComponent()
         {
