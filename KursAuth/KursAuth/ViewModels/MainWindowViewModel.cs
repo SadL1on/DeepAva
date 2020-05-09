@@ -143,6 +143,10 @@ namespace KursAuth.ViewModels
             AuthTl = ReactiveCommand.Create<string>(async (code) => { await AuthTelegram(code); });
         }
 
+
+        /// <summary>
+        /// Авторизация в телеграмме
+        /// </summary>
         public async Task AuthTelegram(string code)
         {
            
@@ -151,6 +155,11 @@ namespace KursAuth.ViewModels
             IsVisContactsTelegram = !IsVisContactsTelegram;
             await GetFriendsTelegram();
         }
+
+
+        /// <summary>
+        /// Отправление кода для авторизации в телеграмме
+        /// </summary>
         public async Task sendloginAsync(string phone)
         {
             IsVisPass = !IsVisPass;
@@ -173,13 +182,21 @@ namespace KursAuth.ViewModels
             _messenger = vk;
             await GetFriends();
             await GetUserInfo();
+            
         }
 
+        /// <summary>
+        /// Список друзей ВКонтакте
+        /// </summary>
         public async Task GetFriends()
         {
-            Users = await vk.GetFriendsAsync();
+           Users = await vk.GetDialogsAsync();
+           
         }
 
+        /// <summary>
+        /// Информация об авторизовавшемся пользователе ВКонтакте
+        /// </summary>
         public async Task GetUserInfo()
         {
           var  UserInfo = await vk.GetUserInfo();
@@ -191,10 +208,14 @@ namespace KursAuth.ViewModels
              
         }
 
+
+        /// <summary>
+        /// Список друзей в телеграмме
+        /// </summary>
         public async Task GetFriendsTelegram()
         {
            TelegramDialogs = await tl.GetFriendsAsync();
-
+           
 
             //foreach (var element in TelegramDialogs.Users)
             //{
@@ -206,6 +227,10 @@ namespace KursAuth.ViewModels
             //}
         }
 
+
+        /// <summary>
+        /// История сообщений ВКонтакте
+        /// </summary>
         [Reactive]
         public IEnumerable Messages { get; set; }
 
@@ -215,6 +240,10 @@ namespace KursAuth.ViewModels
             Messages = mess.Messages.OrderBy(x => x.Date).ToArray();
         }
 
+
+        /// <summary>
+        /// Отправка сообщений ВКонтакте
+        /// </summary>
         public async Task SendMessage(long userid, string text)
         {
             try

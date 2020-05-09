@@ -61,6 +61,19 @@ namespace KursAuth.Models
             return users;
         }
 
+
+        public async Task<IEnumerable<object>> GetDialogsAsync()
+        {
+            var dialogs = await api.Messages.GetConversationsAsync(new GetConversationsParams
+            {
+                Count = 200
+
+
+            }); ;
+
+            return dialogs.Items;
+        }
+
         /// <summary>
         /// Метод возвращает историю диалога 
         /// </summary>

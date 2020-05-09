@@ -25,8 +25,8 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="5">
-                        <TextBlock FontSize="16" Text="{Binding FirstName}" />
-                        <TextBlock FontSize="16" Text="{Binding LastName}" />
+                        <TextBlock FontSize="16" Text="{Binding LastMessage.Text}" />
+                        <TextBlock FontSize="16" Text="{Binding PeerId}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
