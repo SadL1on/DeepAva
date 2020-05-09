@@ -162,9 +162,17 @@ namespace KursAuth.ViewModels
         /// </summary>
         public async Task sendloginAsync(string phone)
         {
-            IsVisPass = !IsVisPass;
-            tl = new Telegram();
-            await tl.SendCodeToAuth(phone);
+            try
+            {
+                IsVisPass = !IsVisPass;
+                tl = new Telegram();
+                await tl.SendCodeToAuth(phone);
+            }
+            catch
+            { 
+            
+
+            }
         }
 
         public void AuthorizationMainImpl(bool flag)
