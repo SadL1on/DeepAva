@@ -4,9 +4,9 @@ using System.Text;
 
 namespace KursAuth.Models.Main
 {
-    class JsonResp
+    class Content
     {
-        public Content content { get; set; }
-        public ResponseInfo responseInfo { get; set; }
+        public string access_token { get; set; }
+        public string username { get; set; }
     }
 }

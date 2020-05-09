@@ -49,7 +49,7 @@ namespace KursAuth.ViewModels
 
         public ReactiveCommand<long, Unit> GetMessHist { get; }
 
-        public ReactiveCommand<Unit, Unit> MessLogin { get; }
+        public ReactiveCommand<Unit, Task> MessLogin { get; }
 
         public ReactiveCommand<Unit, Unit> TlOpen { get; }
 
@@ -122,41 +122,56 @@ namespace KursAuth.ViewModels
         [Reactive]
         public IEnumerable Users { get; set; }
 
+        [Reactive]
+        public IEnumerable Messages { get; set; }
+
+        [Reactive]
+        public bool IsVisAlertValid { get; set; }
+
         public MainWindowViewModel()
         {
             ToMainAuthCmd = ReactiveCommand.Create(() => { IsVisMainReg = !IsVisMainReg; });
-            AuthorizationMainCmd = ReactiveCommand.Create<string>((flag) => { AuthorizationMainImpl(Convert.ToBoolean(flag)); });
+            AuthorizationMainCmd = ReactiveCommand.Create<string>(async (flag) => { await AuthorizationMainImpl(Convert.ToBoolean(flag)); });
             VkOpenCmd = ReactiveCommand.Create(() => { IsVisVkAuth = !IsVisVkAuth; });
-            MessLogin = ReactiveCommand.Create(() => { AuthMessImpl(LoginMess, PassMess); });
-            GetMessHist = ReactiveCommand.Create<long>((userID) => { GetHisVMAsync(userID); });
+            MessLogin = ReactiveCommand.Create(async () => { await AuthMessImpl(LoginMess, PassMess); });
+            GetMessHist = ReactiveCommand.Create<long>(async (userID) => { await GetHisVMAsync(userID); });
             TlOpen = ReactiveCommand.Create(() => { IsVisTlAuth = !(IsVisTlAuth); });
-            VisPass = ReactiveCommand.Create<string>(async (phone) => { await sendloginAsync(phone); });
-            AuthTl = ReactiveCommand.Create<string>(async (code) => { await AuthTelegram(code); });
+            VisPass = ReactiveCommand.Create<string>(async (phone) => { await SendloginAsyncImpl(phone); });
+            AuthTl = ReactiveCommand.Create<string>(async (code) => { await AuthTelegramImpl(code); });
         }
 
-        public async Task AuthTelegram(string code)
+        public async Task AuthTelegramImpl(string code)
         {
             IsVisTlAuth = !IsVisTlAuth;
             IsVisContactsTelegram = !IsVisContactsTelegram;
             await tl.MakeAuth(code);
         }
-        public async Task sendloginAsync(string phone)
+        public async Task SendloginAsyncImpl(string phone)
         {
             IsVisPass = !IsVisPass;
             tl = new Telegram();
             await tl.SendCodeToAuth(phone);
         }
 
-        public void AuthorizationMainImpl(bool flag)
+        public async Task AuthorizationMainImpl(bool flag)
         {            
-            user = new UserMain(LoginMain, PassMain, flag);
-            if (!flag) { IsVisMainReg = !IsVisMainReg; }
-            else { IsVisMainAuth = !IsVisMainAuth; }
+            user = new UserMain();
+            var code = await user.MainAuthAsync(LoginMain, PassMain, flag);
+            if (code != 0)
+            {
+                IsVisAlertValid = !IsVisAlertValid;
+            }
+            else
+            {
+                if (!flag) { IsVisMainReg = !IsVisMainReg; }
+                else { IsVisMainAuth = !IsVisMainAuth; }
+            }
         }
 
         public async Task AuthMessImpl(string login, string password)
         {
-            vk = new VKModel(login, password);
+            vk = new VKModel();
+            await vk.VkAuthAsync(login, password);
             IsVisConCtrl = !IsVisConCtrl;
             IsVisVkAuth = !IsVisVkAuth;
             _messenger = vk;
@@ -166,10 +181,7 @@ namespace KursAuth.ViewModels
         public async Task GetFriends()
         {
             Users = await vk.GetFriendsAsync();
-        }
-
-        [Reactive]
-        public IEnumerable Messages { get; set; }
+        }        
 
         public async Task GetHisVMAsync(long userId)
         {

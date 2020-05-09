@@ -17,7 +17,6 @@
     <AvaloniaResource Remove="Views\MainReg.xaml" />
     <AvaloniaResource Remove="Views\Messengers\Contacts.xaml" />
     <AvaloniaResource Remove="Views\Messengers\ContactsTelegram.xaml" />
-    <AvaloniaResource Remove="Views\Messengers\Messages.xaml" />
     <AvaloniaResource Remove="Views\Messengers\TlAuth.xaml" />
     <AvaloniaResource Remove="Views\Messengers\VkAuth.xaml" />
   </ItemGroup>
@@ -26,34 +25,28 @@
     <None Remove="Views\MainReg.xaml" />
     <None Remove="Views\Messengers\Contacts.xaml" />
     <None Remove="Views\Messengers\ContactsTelegram.xaml" />
-    <None Remove="Views\Messengers\Messages.xaml" />
     <None Remove="Views\Messengers\TlAuth.xaml" />
     <None Remove="Views\Messengers\VkAuth.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.9.0" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.9.0" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.0" />
+    <PackageReference Include="Avalonia" Version="0.9.10" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.9.10" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.10" />
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="ReactiveUI.Fody" Version="11.3.8" />
+    <PackageReference Include="ReactiveUI.Fody" Version="11.4.1" />
     <PackageReference Include="StarkSoftProxy" Version="1.6.0" />
     <PackageReference Include="System.Reactive" Version="4.4.1" />
     <PackageReference Include="TLSharp" Version="0.1.0.555" />
     <PackageReference Include="VkNet" Version="1.50.0" />
     <PackageReference Include="VkNet.AudioBypassService" Version="1.5.3" />
-    <PackageReference Include="VkNet" Version="1.50.0" />
+    <PackageReference Include="VkNet" Version="1.52.0" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Messengers\Contacts.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\Messengers\Messages.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>

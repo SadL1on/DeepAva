@@ -23,9 +23,11 @@ namespace KursAuth.Views
             {
                 this.Bind(ViewModel, x => x.LoginMain, x => x.login.Text).DisposeWith(disposables);
                 this.Bind(ViewModel, x => x.PassMain, x => x.password.Text).DisposeWith(disposables);
+              //  this.Bind(ViewModel, x => x.IsVisAlertValid, x => x.alert.Text).DisposeWith(disposables);
                 this.BindCommand(ViewModel, x => x.ToMainAuthCmd, x => x.mainAuthReg).DisposeWith(disposables);
                 this.BindCommand(ViewModel, x => x.AuthorizationMainCmd, x => x.mainAuth).DisposeWith(disposables);
             });
+            alert.Text = "Неверный логин или пароль";
         }
 
         private void InitializeComponent()
