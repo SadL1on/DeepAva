@@ -35,6 +35,7 @@ namespace KursAuth.Views.Messengers
         private Avalonia.Controls.Button SendMessage => this.FindControl<Avalonia.Controls.Button>("SendMessage");
         private TextBlock title => this.FindControl<TextBlock>("Title");
         private TextBox MessageText => this.FindControl<TextBox>("MessageText");
+        private Avalonia.Controls.Button sendmessage => this.FindControl<Avalonia.Controls.Button>("SendMessage");
         private User user;
 
         public Contacts()
@@ -44,36 +45,23 @@ namespace KursAuth.Views.Messengers
             {
                 this.Bind(ViewModel, x => x.NameVk, x => x.title.Text);
                 this.Bind(ViewModel, x => x.Messages, x => x.MessHist.Items).DisposeWith(disposables);
+                
                 //Листбокс и команда не биндятся
-               // this.BindCommand(ViewModel, x => x.GetMessHist, x => x.contacts.SelectedItem).DisposeWith(disposables);
+                //  this.BindCommand(ViewModel, x => x.GetMessHist, x => x.contacts.).DisposeWith(disposables);
             });
-             contacts.Tapped += Contacts_Tapped;          
+            contacts.Tapped += Contacts_Tapped;
         }
 
         private async void  Contacts_Tapped(object sender, RoutedEventArgs e)
         {
-            //user = (User)contacts.SelectedItem;
-            //await ViewModel.GetHisVMAsync(user.Id);
-            //SendMessage.Click += Sendmessage_Click;
-            //while (true)
-            //{
-
-
-            //    user = (User)contacts.SelectedItem;
-
-            //    MessHist.Items = await ViewModel.GetHisVMAsync(user.Id);
-
-            //    SendMessage.Click += Sendmessage_Click;
-
-
-            //    Thread.Sleep(1000);
-            //}
+            user = (User)contacts.SelectedItem;
+            await ViewModel.GetHisVMAsync(user.Id);
+            sendmessage.Click += Sendmessage_Click;
         }
 
         private async void Sendmessage_Click(object sender, RoutedEventArgs e)
         {
-            string text = MessageText.Text;
-            await ViewModel.SendMessage(user.Id, text);
+            await ViewModel.SendMessage(user.Id, MessageText.Text);
             MessageText.Text = null;
             ViewModel.IsVisConCtrl = !(ViewModel.IsVisConCtrl);
             ViewModel.IsVisConCtrl = !(ViewModel.IsVisConCtrl);

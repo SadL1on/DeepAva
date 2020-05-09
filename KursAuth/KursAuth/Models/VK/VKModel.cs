@@ -24,7 +24,7 @@ namespace KursAuth.Models
         /// Метод авторизации Вконтакте
         /// </summary>
         /// <inheritdoc/> 
-        public VKModel(string log, string pass)
+        public async Task VkAuthAsync(string log, string pass)
         {
             login = log;
             password = pass;
@@ -33,7 +33,7 @@ namespace KursAuth.Models
             services.AddAudioBypass();
             api = new VkApi(services);
 
-            api.Authorize(new ApiAuthParams
+            await api.AuthorizeAsync(new ApiAuthParams
             {
                 ApplicationId = 7062393,
                 Login = login,
