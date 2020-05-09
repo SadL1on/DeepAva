@@ -15,7 +15,7 @@ namespace KursAuth.Models.Main
         private WebRequest _request;
         private string _token;
 
-        public async Task MainAuthAsync(string log, string pass, bool flag)
+        public async Task<int> MainAuthAsync(string log, string pass, bool flag)
         {
             if (flag)
             {
@@ -35,14 +35,23 @@ namespace KursAuth.Models.Main
                 await streamWriter.WriteAsync(json);
             }
 
-            HttpWebResponse response = await _request.GetResponseAsync() as HttpWebResponse;
+            HttpWebResponse response = _request.GetResponse() as HttpWebResponse;
             string resp;
             using (Stream responseStream = response.GetResponseStream())
             {
                 StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
-                resp = reader.ReadToEnd();
+                resp = await reader.ReadToEndAsync();
             }
+
             JsonResp jResp = JsonConvert.DeserializeObject<JsonResp>(resp);
+            var code = jResp.responseInfo.status;
+            if (code == 0)
+            {
+                UserName = jResp.content.username;
+                _token = jResp.content.access_token;
+                return code;
+            }
+            else { return code; }
         }
     }
 }

@@ -62,7 +62,9 @@
       <TextBlock
         Name="Alert"
         Width="200"
-        Height="30"/>
+        Height="30"
+        Margin="20, 20, 0, 0"
+        IsVisible="{Binding IsVisAlertValid}"/>
     </StackPanel>
   </Grid>
 </UserControl>

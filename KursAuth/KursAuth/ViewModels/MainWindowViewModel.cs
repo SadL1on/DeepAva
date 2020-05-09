@@ -122,6 +122,12 @@ namespace KursAuth.ViewModels
         [Reactive]
         public IEnumerable Users { get; set; }
 
+        [Reactive]
+        public IEnumerable Messages { get; set; }
+
+        [Reactive]
+        public bool IsVisAlertValid { get; set; }
+
         public MainWindowViewModel()
         {
             ToMainAuthCmd = ReactiveCommand.Create(() => { IsVisMainReg = !IsVisMainReg; });
@@ -150,9 +156,16 @@ namespace KursAuth.ViewModels
         public async Task AuthorizationMainImpl(bool flag)
         {            
             user = new UserMain();
-            await user.MainAuthAsync(LoginMain, PassMain, flag);
-            if (!flag) { IsVisMainReg = !IsVisMainReg; }
-            else { IsVisMainAuth = !IsVisMainAuth; }
+            var code = await user.MainAuthAsync(LoginMain, PassMain, flag);
+            if (code != 0)
+            {
+                IsVisAlertValid = !IsVisAlertValid;
+            }
+            else
+            {
+                if (!flag) { IsVisMainReg = !IsVisMainReg; }
+                else { IsVisMainAuth = !IsVisMainAuth; }
+            }
         }
 
         public async Task AuthMessImpl(string login, string password)
@@ -168,10 +181,7 @@ namespace KursAuth.ViewModels
         public async Task GetFriends()
         {
             Users = await vk.GetFriendsAsync();
-        }
-
-        [Reactive]
-        public IEnumerable Messages { get; set; }
+        }        
 
         public async Task GetHisVMAsync(long userId)
         {
