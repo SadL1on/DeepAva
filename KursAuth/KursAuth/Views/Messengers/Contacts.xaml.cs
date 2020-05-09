@@ -33,6 +33,7 @@ namespace KursAuth.Views.Messengers
         private ListBox contacts => this.FindControl<ListBox>("Contacts");
         private ListBox MessHist => this.FindControl<ListBox>("MessHist");
         private Avalonia.Controls.Button SendMessage => this.FindControl<Avalonia.Controls.Button>("SendMessage");
+        private TextBlock title => this.FindControl<TextBlock>("Title");
         private TextBox MessageText => this.FindControl<TextBox>("MessageText");
         private Avalonia.Controls.Button sendmessage => this.FindControl<Avalonia.Controls.Button>("SendMessage");
         private User user;
@@ -42,6 +43,7 @@ namespace KursAuth.Views.Messengers
             this.InitializeComponent();
             this.WhenActivated(disposables =>
             {
+                this.Bind(ViewModel, x => x.NameVk, x => x.title.Text);
                 this.Bind(ViewModel, x => x.Messages, x => x.MessHist.Items).DisposeWith(disposables);
                 
                 //Листбокс и команда не биндятся

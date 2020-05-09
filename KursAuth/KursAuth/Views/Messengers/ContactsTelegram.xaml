@@ -16,7 +16,20 @@
             <RowDefinition Height="50" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBlock FontSize="14">Авторизация прошла успешно</TextBlock>
+        <ListBox
+            Name="ContactsTelegram"
+            Grid.Row="1"
+            Grid.Column="0"
+            Items="{Binding TelegramDialogs}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5">
+                        <TextBlock FontSize="16" Text="{Binding FirstName}" />
+                        <TextBlock FontSize="16" Text="{Binding LastName}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
     </Grid>
 </UserControl>

@@ -28,8 +28,8 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="5">
-                        <TextBlock FontSize="16" Text="{Binding FirstName}" />
-                        <TextBlock FontSize="16" Text="{Binding LastName}" />
+                        <TextBlock FontSize="16" Text="{Binding LastMessage.Text}" />
+                        <TextBlock FontSize="16" Text="{Binding PeerId}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -40,6 +40,7 @@
             Grid.Column="0"
             Grid.ColumnSpan="3"
             Background="Aqua"
+            Name="Title"
             Text="Title"
             TextAlignment="Center" />
         <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using TeleSharp.TL.Messages;
 using TLSharp;
 using TLSharp.Core;
 
@@ -57,6 +58,20 @@ namespace KursAuth.Models.Telegram
 
             //send message
             await client.SendMessageAsync(new TLInputPeerUser() { UserId = user1.Id }, message);
+
+
+        }
+        public async Task<IEnumerable<object>> GetFriendsAsync()
+        {
+           
+            var dialogs = (TLDialogs)await client.GetUserDialogsAsync();
+
+            var users = dialogs.Users.ToArray();
+            
+            return users;
+           
+
+
 
 
         }
