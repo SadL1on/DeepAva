@@ -19,6 +19,7 @@
     <AvaloniaResource Remove="Views\Messengers\ContactsTelegram.xaml" />
     <AvaloniaResource Remove="Views\Messengers\TlAuth.xaml" />
     <AvaloniaResource Remove="Views\Messengers\VkAuth.xaml" />
+    <AvaloniaResource Remove="Views\TestView.xaml" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\MainAuth.xaml" />
@@ -27,6 +28,7 @@
     <None Remove="Views\Messengers\ContactsTelegram.xaml" />
     <None Remove="Views\Messengers\TlAuth.xaml" />
     <None Remove="Views\Messengers\VkAuth.xaml" />
+    <None Remove="Views\TestView.xaml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.9.10" />
@@ -75,6 +77,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\Messengers\ContactsTelegram.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\TestView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>

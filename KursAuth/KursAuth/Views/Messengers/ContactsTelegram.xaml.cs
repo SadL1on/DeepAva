@@ -12,13 +12,14 @@ namespace KursAuth.Views.Messengers
 
         private ListBox contacts => this.FindControl<ListBox>("ContactsTelegram");
         public ContactsTelegram()
+
         {
             this.InitializeComponent();
 
-            this.WhenActivated(disposables =>
-            {
-                this.Bind(ViewModel, x => x.TelegramDialogs, x => x.contacts.Items);
-            });
+            //this.WhenActivated(disposables =>
+            //{
+            //    this.Bind(ViewModel, x => x.TelegramDialogs, x => x.contacts.Items);
+            //});
         }
 
         private void InitializeComponent()

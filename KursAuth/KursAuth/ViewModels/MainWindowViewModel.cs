@@ -22,11 +22,14 @@ using KursAuth.Models.Telegram;
 using KursAuth.Utils;
 using TeleSharp.TL.Messages;
 using TeleSharp.TL;
+using System.Runtime.Serialization;
+using System.Reactive.Linq;
 
 namespace KursAuth.ViewModels
 {
 
-    public class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
+    [DataContract]
+    public class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged, IScreen
     {
         private UserMain user;
         private Telegram tl;
@@ -58,6 +61,10 @@ namespace KursAuth.ViewModels
         public ReactiveCommand<string, Unit> VisPass { get; }
 
         public ReactiveCommand<string, Unit> AuthTl { get; }
+
+        private readonly ReactiveCommand<Unit, Unit> _toTestView;
+
+        public ICommand ToTestView => _toTestView;
 
         /// <summary>
         /// Логин из формы рег/авт приложения
@@ -131,13 +138,23 @@ namespace KursAuth.ViewModels
         [Reactive]
         public IEnumerable Users { get; set; }
 
-        public IEnumerable TelegramDialogs { get;set;}
+        [Reactive]
+        public IEnumerable TelegramDialogs { get; set; }
 
         [Reactive]
         public IEnumerable Messages { get; set; }
 
         [Reactive]
         public bool IsVisAlertValid { get; set; }
+
+        private RoutingState _router = new RoutingState();
+
+        [DataMember]
+        public RoutingState Router
+        {
+            get => _router;
+            set => this.RaiseAndSetIfChanged(ref _router, value);
+        }
 
         public MainWindowViewModel()
         {
@@ -149,6 +166,9 @@ namespace KursAuth.ViewModels
             TlOpen = ReactiveCommand.Create(() => { IsVisTlAuth = !(IsVisTlAuth); });
             VisPass = ReactiveCommand.Create<string>(async (phone) => { await SendloginAsyncImpl(phone); });
             AuthTl = ReactiveCommand.Create<string>(async (code) => { await AuthTelegramImpl(code); });
+
+            var canMoveToTest = this.WhenAnyObservable(x => x.Router.CurrentViewModel).Select(current => !(current is TestVM));
+            _toTestView = ReactiveCommand.Create(() => { Router.Navigate.Execute(new TestVM()); }, canMoveToTest);
         }
 
         public async Task AuthTelegramImpl(string code)

@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:reactiveUi="http://reactiveui.net"
     xmlns:v="clr-namespace:KursAuth.Views;assembly=KursAuth"
     xmlns:vm="clr-namespace:KursAuth.ViewModels;assembly=KursAuth"
     xmlns:vv="clr-namespace:KursAuth.Views.Messengers;assembly=KursAuth"
@@ -20,10 +21,18 @@
     </Design.DataContext>
 
     <Grid Name="MainWin">
+      
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+      
+      <reactiveUi:RoutedViewHost Grid.Column="1" Router="{Binding Router}">
+        <reactiveUi:RoutedViewHost.DefaultContent>
+          <TextBlock Text="Default Content" />
+        </reactiveUi:RoutedViewHost.DefaultContent>
+      </reactiveUi:RoutedViewHost>
+      
         <DockPanel
             Grid.Row="0"
             Grid.RowSpan="2"
@@ -69,16 +78,26 @@
                 Background="Blue"
                 Content="Tl"
                 DockPanel.Dock="Top" />
+          <Button
+            Name="Test"
+                Width="40"
+                Height="30"
+                Margin="10"
+                Background="Gainsboro"
+                Content="test"
+                DockPanel.Dock="Top"
+                Command="{Binding ToTestView}" />
             <Image Source="/Assets/avalonia-logo.ico" />
             <Grid />
         </DockPanel>
+      
         <vv:Contacts Grid.Column="1" IsVisible="{Binding IsVisConCtrl}" />
         <vv:ContactsTelegram Grid.Column="1" IsVisible="{Binding IsVisContactsTelegram}" />
         <vv:VkAuth Grid.Column="1" IsVisible="{Binding IsVisVkAuth}" />
         <v:MainAuth
             Grid.Column="0"
             Grid.ColumnSpan="2"
-            IsVisible="{Binding !IsVisMainAuth}" />
+            IsVisible="{Binding IsVisMainAuth}" />
         <v:MainReg
             Grid.Column="0"
             Grid.ColumnSpan="2"
