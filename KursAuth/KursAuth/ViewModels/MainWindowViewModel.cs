@@ -24,12 +24,13 @@ using TeleSharp.TL.Messages;
 using TeleSharp.TL;
 using System.Runtime.Serialization;
 using System.Reactive.Linq;
+using KursAuth.ViewModels.Messengers;
 
 namespace KursAuth.ViewModels
 {
 
     [DataContract]
-    public class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged, IScreen
+    public class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged, IScreen, IRoutableViewModel
     {
         private UserMain user;
         private Telegram tl;
@@ -50,13 +51,13 @@ namespace KursAuth.ViewModels
         /// <summary>
         /// Команда открытия окна ВК
         /// </summary>
-        public ReactiveCommand<Unit, Unit> VkOpenCmd { get; }
+        private readonly ReactiveCommand<Unit, Unit> _vkOpenCmd;
 
         public ReactiveCommand<long, Unit> GetMessHist { get; }
 
         public ReactiveCommand<Unit, Task> MessLogin { get; }
 
-        public ReactiveCommand<Unit, Unit> TlOpen { get; }
+        public ReactiveCommand<Unit, Unit> _tlOpen { get; }
 
         public ReactiveCommand<string, Unit> VisPass { get; }
 
@@ -65,6 +66,8 @@ namespace KursAuth.ViewModels
         private readonly ReactiveCommand<Unit, Unit> _toTestView;
 
         public ICommand ToTestView => _toTestView;
+        public ICommand VkOpenCmd => _vkOpenCmd;
+        public ICommand TlOpen => _tlOpen;
 
         /// <summary>
         /// Логин из формы рег/авт приложения
@@ -155,17 +158,24 @@ namespace KursAuth.ViewModels
             get => _router;
             set => this.RaiseAndSetIfChanged(ref _router, value);
         }
+        
+        public string UrlPathSegment => "/main";
+
+        public IScreen HostScreen { get; }
 
         public MainWindowViewModel()
         {
             ToMainAuthCmd = ReactiveCommand.Create(() => { IsVisMainReg = !IsVisMainReg; });
-            AuthorizationMainCmd = ReactiveCommand.Create<string>(async (flag) => { await AuthorizationMainImpl(Convert.ToBoolean(flag)); });
-            VkOpenCmd = ReactiveCommand.Create(() => { IsVisVkAuth = !IsVisVkAuth; });
+            AuthorizationMainCmd = ReactiveCommand.Create<string>(async (flag) => { await AuthorizationMainImpl(Convert.ToBoolean(flag)); });           
             MessLogin = ReactiveCommand.Create(async () => { await AuthMessImpl(LoginMess, PassMess); });
             GetMessHist = ReactiveCommand.Create<long>(async (userID) => { await GetHisVMAsync(userID); });
-            TlOpen = ReactiveCommand.Create(() => { IsVisTlAuth = !(IsVisTlAuth); });
+          //  TlOpen = ReactiveCommand.Create(() => { IsVisTlAuth = !(IsVisTlAuth); });
             VisPass = ReactiveCommand.Create<string>(async (phone) => { await SendloginAsyncImpl(phone); });
             AuthTl = ReactiveCommand.Create<string>(async (code) => { await AuthTelegramImpl(code); });
+
+            
+            _vkOpenCmd = ReactiveCommand.Create(() => { Router.Navigate.Execute(new VkAuthVM()); });
+            _tlOpen = ReactiveCommand.Create(() => { Router.Navigate.Execute(new MainWindowViewModel()); });
 
             var canMoveToTest = this.WhenAnyObservable(x => x.Router.CurrentViewModel).Select(current => !(current is TestVM));
             _toTestView = ReactiveCommand.Create(() => { Router.Navigate.Execute(new TestVM()); }, canMoveToTest);

@@ -29,7 +29,7 @@
       
       <reactiveUi:RoutedViewHost Grid.Column="1" Router="{Binding Router}">
         <reactiveUi:RoutedViewHost.DefaultContent>
-          <TextBlock Text="Default Content" />
+          <TextBlock Text="Default Content" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </reactiveUi:RoutedViewHost.DefaultContent>
       </reactiveUi:RoutedViewHost>
       
@@ -93,15 +93,9 @@
       
         <vv:Contacts Grid.Column="1" IsVisible="{Binding IsVisConCtrl}" />
         <vv:ContactsTelegram Grid.Column="1" IsVisible="{Binding IsVisContactsTelegram}" />
-        <vv:VkAuth Grid.Column="1" IsVisible="{Binding IsVisVkAuth}" />
-        <v:MainAuth
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            IsVisible="{Binding IsVisMainAuth}" />
-        <v:MainReg
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            IsVisible="{Binding IsVisMainReg}" />
+        <!--<vv:VkAuth Grid.Column="1" IsVisible="{Binding IsVisVkAuth}" />-->
+        <v:MainAuth Grid.Column="0" Grid.ColumnSpan="2" IsVisible="{Binding IsVisMainAuth}" />
+        <v:MainReg Grid.Column="0" Grid.ColumnSpan="2" IsVisible="{Binding IsVisMainReg}" />
         <vv:TlAuth Grid.Column="1" IsVisible="{Binding IsVisTlAuth}" />
     </Grid>
 </Window>

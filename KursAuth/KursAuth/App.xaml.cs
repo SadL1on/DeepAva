@@ -2,6 +2,7 @@
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using KursAuth.ViewModels;
+using KursAuth.ViewModels.Messengers;
 using KursAuth.Views;
 using KursAuth.Views.Messengers;
 using ReactiveUI;
@@ -27,13 +28,14 @@ namespace KursAuth
 
                 
             }
-
+            
             Locator.CurrentMutable.RegisterConstant<IScreen>(new MainWindowViewModel());
             Locator.CurrentMutable.Register<IViewFor<TestVM>>(() => new TestView());
-           // Locator.CurrentMutable.Register<IViewFor<MainWindowViewModel>>(() => new LoginView());
+            Locator.CurrentMutable.Register<IViewFor<VkAuthVM>>(() => new VkAuth());
+            
 
             // Получаем корневую модель представления и инициализируем контекст данных.
-           // new MainWindow { DataContext = Locator.Current.GetService<IScreen>() }.Show();
+            // new MainWindow { DataContext = Locator.Current.GetService<IScreen>() }.Show();
 
             base.OnFrameworkInitializationCompleted();
         }
