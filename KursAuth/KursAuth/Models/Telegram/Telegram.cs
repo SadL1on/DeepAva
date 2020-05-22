@@ -88,5 +88,23 @@ namespace KursAuth.Models.Telegram
 
 
         }
+
+        public async Task<TLMessagesSlice> GetHistory(int userid)
+        {
+
+
+            var history = await client.SendRequestAsync<TLMessagesSlice>
+                    (new TLRequestGetHistory()
+                    {
+                        Peer = new TLInputPeerUser() { UserId = userid },
+                        Limit = 50,
+                        AddOffset = 1,
+                        OffsetId = 0
+                    });
+
+            return history;
+
+        }
+
     }
 }
