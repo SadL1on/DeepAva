@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="KursAuth.Views.Messengers.Contacts"
+    x:Class="KursAuth.Views.Messengers.VkContacts"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -28,8 +28,8 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="5">
+                      <TextBlock FontSize="16" Text="{Binding Conversation.Peer.Id}" />
                         <TextBlock FontSize="16" Text="{Binding LastMessage.Text}" />
-                        <TextBlock FontSize="16" Text="{Binding PeerId}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

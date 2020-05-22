@@ -11,12 +11,25 @@ using TLSharp.Core;
 
 namespace KursAuth.Models.Telegram
 {
-    class Telegram
+    public class Telegram
     {
 
         TelegramClient client;
         string hash;
         string phone;
+        public bool IsAuth { get => client.IsUserAuthorized(); }
+
+        private Telegram() { }
+
+        private static Telegram _instance;
+        public static Telegram GetInstance()
+        {
+            if (_instance == null)
+            {
+                _instance = new Telegram();
+            }
+            return _instance;
+        }
 
         static System.Net.Sockets.TcpClient TcpHandler(string address, int port)
         {

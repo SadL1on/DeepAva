@@ -13,20 +13,24 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
+    <AvaloniaResource Remove="Assets\Styles.xaml" />
     <AvaloniaResource Remove="Views\MainAuth.xaml" />
     <AvaloniaResource Remove="Views\MainReg.xaml" />
-    <AvaloniaResource Remove="Views\Messengers\Contacts.xaml" />
-    <AvaloniaResource Remove="Views\Messengers\ContactsTelegram.xaml" />
     <AvaloniaResource Remove="Views\Messengers\TlAuth.xaml" />
+    <AvaloniaResource Remove="Views\Messengers\TlContacts.xaml" />
     <AvaloniaResource Remove="Views\Messengers\VkAuth.xaml" />
+    <AvaloniaResource Remove="Views\Messengers\VkContacts.xaml" />
+    <AvaloniaResource Remove="Views\TestView.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Assets\Styles.xaml" />
     <None Remove="Views\MainAuth.xaml" />
     <None Remove="Views\MainReg.xaml" />
-    <None Remove="Views\Messengers\Contacts.xaml" />
-    <None Remove="Views\Messengers\ContactsTelegram.xaml" />
     <None Remove="Views\Messengers\TlAuth.xaml" />
+    <None Remove="Views\Messengers\TlContacts.xaml" />
     <None Remove="Views\Messengers\VkAuth.xaml" />
+    <None Remove="Views\Messengers\VkContacts.xaml" />
+    <None Remove="Views\TestView.xaml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.9.10" />
@@ -46,7 +50,7 @@
     <PackageReference Include="VkNet" Version="1.52.0" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\Messengers\Contacts.xaml">
+    <EmbeddedResource Include="Views\Messengers\VkContacts.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
@@ -74,8 +78,26 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\Messengers\ContactsTelegram.xaml">
+    <EmbeddedResource Include="Views\Messengers\TlContacts.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\TestView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Assets\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\Messengers\TlContacts.xaml.cs">
+      <DependentUpon>TlContacts.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Messengers\VkContacts.xaml.cs">
+      <DependentUpon>VkContacts.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

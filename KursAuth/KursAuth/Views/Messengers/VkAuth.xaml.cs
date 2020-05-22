@@ -4,12 +4,13 @@ using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using KursAuth.Models;
 using KursAuth.ViewModels;
+using KursAuth.ViewModels.Messengers;
 using ReactiveUI;
 using System.Reactive.Disposables;
 
 namespace KursAuth.Views.Messengers
 {
-    public class VkAuth : ReactiveUserControl<MainWindowViewModel>
+    public class VkAuth : ReactiveUserControl<VkAuthVM>
     {
         private TextBox login => this.FindControl<TextBox>("Login");
         private TextBox password => this.FindControl<TextBox>("Password");

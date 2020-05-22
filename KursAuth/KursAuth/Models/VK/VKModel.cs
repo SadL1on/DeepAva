@@ -16,9 +16,31 @@ namespace KursAuth.Models
 {
     public class VKModel : IMessengers
     {
+        private VKModel() { }
+
+        private static VKModel _instance;
+        public static VKModel GetInstance()
+        {
+            if (_instance == null)
+            {
+                _instance = new VKModel();
+            }
+            return _instance;
+        }
+
         private VkApi api;
         private string login;
         private string password;
+        public VkApi Api => api;
+
+        public IEnumerable<Message> GetMessagesByUserId(long peerid)
+        {
+            var mess = Api.Messages.GetHistory(new MessagesGetHistoryParams() { PeerId = peerid });
+           
+            return mess.Messages;
+        }
+
+        public bool IsAuth { get => api.IsAuthorized; }
 
         /// <summary>
         /// Метод авторизации Вконтакте

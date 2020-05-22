@@ -1,0 +1,843 @@
+﻿<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=netstandard"
+    
+    <Style>
+        <Style.Resources>
+            <FontFamily x:Key="MainFont">Arial</FontFamily>
+            <utils:WidthConverter x:Key="WidthConverter" />
+            <sys:Double x:Key="ScrollBarThickness">15</sys:Double>
+
+            <SolidColorBrush x:Key="ScrollBarControlMidBrush">#CDCDCD</SolidColorBrush>
+            <SolidColorBrush x:Key="ScrollBarControlHighBrush">#C8C8C8</SolidColorBrush>
+            <SolidColorBrush x:Key="ScrollBarControlHighBrushHover">#A8A8A8</SolidColorBrush>
+            <SolidColorBrush x:Key="ScrollBarControlHighBrushPressed">#888888</SolidColorBrush>
+            <SolidColorBrush x:Key="ScrollBarControlBackground">#F0F0F0</SolidColorBrush>
+            <SolidColorBrush x:Key="ScrollBarForegroundLowBrush">#8D8D8D</SolidColorBrush>
+
+            <SolidColorBrush x:Key="ButtonNormalBackgroundSimple">#E6E6E6</SolidColorBrush>
+            <SolidColorBrush x:Key="ButtonNormalBackgroundPointover">LightGray</SolidColorBrush>
+            <SolidColorBrush x:Key="ButtonNormalBackgroundPressed">#A3A3A3</SolidColorBrush>
+            <SolidColorBrush x:Key="ButtonBorderColorSimple">#B6BDC0</SolidColorBrush>
+            <SolidColorBrush x:Key="ButtonBorderColorPointover">#B3B3B3</SolidColorBrush>
+            <SolidColorBrush x:Key="ButtonBorderColorPressed">#838383</SolidColorBrush>
+
+            <LinearGradientBrush x:Key="ButtonGaspsGradientBrushSimple" StartPoint="0%,0%" EndPoint="0%,100%">
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Offset="0.0" Color="#FAFCFD" />
+                    <GradientStop Offset="1.0" Color="#DDE9F7" />
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="ButtonGaspsGradientBrushPressed" StartPoint="0%,0%" EndPoint="0%,100%">
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Offset="0.0" Color="#D3D3D3" />
+                    <GradientStop Offset="1.0" Color="#FAFAFA" />
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+            <SolidColorBrush x:Key="ButtonGaspsBorderBrushSimple" Color="#A0AFC3" />
+            <SolidColorBrush x:Key="ButtonGaspsBrushPointover" Color="#FAFCFD" />
+
+            <SolidColorBrush x:Key="RowGasps" Color="#E8E8E8" />
+            <SolidColorBrush x:Key="RowGaspsAlternative" Color="#F1F1F1" />
+            <SolidColorBrush x:Key="BorderActive" Color="#f0f0f0" />
+            <SolidColorBrush x:Key="BorderNonActive" Color="#B3BBC6" />
+            <SolidColorBrush x:Key="TabActive" Color="#F0F3F7" />
+            <SolidColorBrush x:Key="TabNonActive" Color="#B3BBC6" />
+            <SolidColorBrush x:Key="TabPointrover" Color="#CCD2D9" />
+
+            <LinearGradientBrush x:Key="TabShadow" StartPoint="0%,100%" EndPoint="100%,0%">
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Offset="0" Color="Transparent" />
+                    <GradientStop Offset="1" Color="#a0a0a0" />
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="TabRightShadow" StartPoint="100%,100%" EndPoint="0%,100%">
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Offset="0.0" Color="#a0a0a0" />
+                    <GradientStop Offset="1.0" Color="Transparent" />
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="TabPressedShadow" StartPoint="0%,0%" EndPoint="0%,100%">
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Offset="0" Color="#B3BBC6" />
+                    <GradientStop Offset="1" Color="#F0F3F7" />
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="TabTopShadow" StartPoint="0%,0%" EndPoint="0%,100%">
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Offset="0" Color="#a0a0a0" />
+                    <GradientStop Offset="1.0" Color="Transparent" />
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="TabControlShadow" StartPoint="0%,0%" EndPoint="0%,100%">
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Offset="0.0" Color="#F0F3F7" />
+                    <GradientStop Offset="0.85" Color="#FAFAFA" />
+                    <GradientStop Offset="1.0" Color="#A3A3A3" />
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="GradientShadow" StartPoint="0%,50%" EndPoint="0%,100%">
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Offset="0" Color="Transparent" />
+                    <GradientStop Offset="1" Color="#a9a9a9" />
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="oldGradientTabShadow" StartPoint="50%,0%" EndPoint="50%,100%">
+                <GradientStop Offset="0" Color="#FFFFFF" />
+                <GradientStop Offset="0.5" Color="#DBDBDB" />
+            </LinearGradientBrush>
+            <LinearGradientBrush x:Key="GradientTabShadow" StartPoint="50%,0%" EndPoint="50%,100%">
+                <LinearGradientBrush.GradientStops>
+                    <GradientStop Offset="0" Color="#f0f0f0" />
+                    <GradientStop Offset="0.5" Color="#a9a9a9" />
+                </LinearGradientBrush.GradientStops>
+            </LinearGradientBrush>
+            <RadialGradientBrush x:Key="RadialTabShadow" Center="0.25,0.75" Opacity="0.5">
+                <GradientStop Offset="0.0" Color="#a0a0a0" />
+                <GradientStop Offset="1.0" Color="Transparent" />
+            </RadialGradientBrush>
+            <SolidColorBrush x:Key="ShadowSample" Color="#111111" />
+            <SolidColorBrush x:Key="ShadowBroder" Color="#000000" />
+            <LinearGradientBrush x:Key="BorderNormalBackgroundSimple" StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Offset="0" Color="#F9F9F9" />
+                <GradientStop Offset="1" Color="#d4dbe1" />
+            </LinearGradientBrush>
+            <SolidColorBrush x:Key="BorderNormalBorder" Color="#b4bdc6" />
+            <SolidColorBrush x:Key="BorderLightBackground" Color="#f1f3f7" />
+            <SolidColorBrush x:Key="BorderLightBorder" Color="#d9dde2" />
+            <SolidColorBrush x:Key="BorderTopCantBrush" Color="#A7ADB2" />
+        </Style.Resources>
+    </Style>
+
+    <!--  Region Focus  -->
+    <Style Selector="Button:focus">
+        <Setter Property="BorderThickness" Value="1.5" />
+        <Setter Property="BorderBrush" Value="#2666ff" />
+    </Style>
+    <Style Selector="ComboBox:focus">
+        <Setter Property="BorderThickness" Value="1.5" />
+        <Setter Property="BorderBrush" Value="#2666ff" />
+    </Style>
+    <Style Selector="CheckBox:focus">
+        <Setter Property="BorderThickness" Value="1.5" />
+        <Setter Property="BorderBrush" Value="#2666ff" />
+    </Style>
+    <!--  ОБЯЗАТЕЛЬНО СОЗДАЁМ :focus - СТИЛИ ДЛЯ ВСЕХ КОНТРОЛОВ, ГДЕ НУЖЕН FOCUSADONER  -->
+    <Style Selector=":is(Control)">
+        <Setter Property="FocusAdorner">
+            <FocusAdornerTemplate>
+                <Rectangle IsVisible="False" />
+            </FocusAdornerTemplate>
+        </Setter>
+    </Style>
+
+    <!--  Endregion  -->
+
+    <Style Selector="DataGridColumnHeader">
+        <Setter Property="Background" Value="#F0F0F0" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="Black" />
+    </Style>
+    <Style Selector="DataGridColumnHeader Button">
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+
+    <Style Selector="Button#AddReq">
+        <Setter Property="Background" Value="{DynamicResource ButtonGaspsGradientBrushSimple}" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border
+                    Padding="0"
+                    BorderBrush="#666666"
+                    BorderThickness="1"
+                    CornerRadius="2">
+                    <ContentControl
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Background="{TemplateBinding Background}"
+                        Content="{TemplateBinding Content}" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    <Style Selector="Button#AddReq:pointerover">
+        <Setter Property="Background" Value="{DynamicResource ButtonGaspsBrushPointover}" />
+    </Style>
+    <Style Selector="Button#AddReq:pressed">
+        <Setter Property="Background" Value="{DynamicResource ButtonGaspsGradientBrushPressed}" />
+    </Style>
+    <Style Selector="Button#AddReq:disabled">
+        <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
+    </Style>
+
+    <!--  Region SettingsWindow styles  -->
+    <Style Selector="Rectangle.setting">
+        <Setter Property="Width" Value="990" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Stroke" Value="#AFB9BA" />
+        <Setter Property="Height" Value="1" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="StrokeDashArray" Value="2,5" />
+    </Style>
+    <Style Selector="Window&gt;Grid">
+        <Setter Property="Margin" Value="0,0,0,0" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+    </Style>
+    <Style Selector="StackPanel.setting">
+        <Setter Property="Orientation" Value="Horizontal" />
+        <Setter Property="Margin" Value="10 0" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Height" Value="60" />
+    </Style>
+    <Style Selector="StackPanel&gt;TextBox">
+        <Setter Property="Margin" Value="5 0" />
+        <Setter Property="Width" Value="527" />
+        <Setter Property="Height" Value="28" />
+    </Style>
+    <Style Selector="StackPanel&gt;local|RadTreeView">
+        <Setter Property="Margin" Value="5 0" />
+        <Setter Property="Width" Value="527" />
+        <Setter Property="Height" Value="28" />
+    </Style>
+    <Style Selector="StackPanel&gt;local|RadComboBox">
+        <Setter Property="Margin" Value="5 0" />
+        <Setter Property="Width" Value="527" />
+        <Setter Property="Height" Value="28" />
+    </Style>
+    <Style Selector="local|RadComboBox">
+        <Setter Property="FilterPath" Value="Value" />
+        <Setter Property="ItemTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <TextBlock
+                        Width="{Binding $parent[UserControl].Width, Converter={StaticResource WidthConverter}, ConverterParameter=20}"
+                        Text="{Binding Path=Value}"
+                        TextWrapping="Wrap" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontFamily" Value="{DynamicResource ComboBoxFont}" />
+    </Style>
+    <Style Selector="local|RadTreeView">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontFamily" Value="{DynamicResource MainFont}" />
+    </Style>
+    <Style Selector="StackPanel.setting&gt;TextBlock">
+        <Setter Property="Width" Value="116" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="FontFamily" Value="{DynamicResource MainFont}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Foreground" Value="#20272D" />
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="Margin" Value="0 0 10 0" />
+    </Style>
+    <Style Selector="StackPanel.setting&gt;StackPanel&gt;TextBlock">
+        <Setter Property="FontFamily" Value="{DynamicResource MainFont}" />
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="Foreground" Value="#20272D" />
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="Margin" Value="3,3,3,3" />
+    </Style>
+    <Style Selector="Button">
+        <Setter Property="Background" Value="White" />
+    </Style>
+
+    <!--  EndRegion  -->
+
+    <Style Selector="StackPanel.centered">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Orientation" Value="Horizontal" />
+    </Style>
+
+    <!--  Region TabControl styles  -->
+    <Style Selector="Border.tabshadow">
+        <Setter Property="Margin" Value="0,0,0,-10" />
+        <Setter Property="Padding" Value="-2,5,5,0" />
+        <Setter Property="Background" Value="{DynamicResource GradientTabShadow}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="CornerRadius" Value="5" />
+    </Style>
+    <Style Selector="Border.tabitem">
+        <Setter Property="Padding" Value="25,0,25,0" />
+        <Setter Property="BorderBrush" Value="#FFFFFF" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="3" />
+        <Setter Property="Background" Value="{DynamicResource TabPointrover}" />
+    </Style>
+    <Style Selector="Border.tabitem:pointerover">
+        <Setter Property="Background" Value="{DynamicResource TabPressedShadow}" />
+    </Style>
+    <Style Selector="TabItem:selected Border.tabitem">
+        <Setter Property="Background" Value="{DynamicResource TabActive}" />
+    </Style>
+    <Style Selector="Image.tabimage">
+        <Setter Property="MaxWidth" Value="15" />
+        <Setter Property="MaxHeight" Value="15" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="IsVisible" Value="{Binding HaveHeaderImage}" />
+    </Style>
+    <Style Selector="TextBlock.tablabel">
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="TextAlignment" Value="Center" />
+        <Setter Property="TextWrapping" Value="NoWrap" />
+    </Style>
+
+    <Style Selector="Button.tabclose">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="#000000" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Button.tabclose:Pointrover">
+        <Setter Property="Foreground" Value="#FFFFFF" />
+
+    </Style>
+    <Style Selector="Button.tabclose:pressed">
+        <Setter Property="Foreground" Value="#FFFFFF" />
+    </Style>
+
+    <Style Selector="TabControl">
+        <Setter Property="Background" Value="#F0F0F0" />
+    </Style>
+    <Style Selector="TabControl WrapPanel">
+        <Setter Property="Background" Value="{DynamicResource GradientShadow}" />
+    </Style>
+
+    <Style Selector="TabItem">
+        <Setter Property="Height" Value="30" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Name" Value="TabItemAlt" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Classes="tabshadow">
+                    <Border Classes="tabitem">
+                        <StackPanel Classes="centered">
+                            <Image Classes="tabimage" />
+                            <TextBlock
+                                Margin="5,1,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontWeight="{Binding HeaderFontWeight}"
+                                Foreground="#507595"
+                                IsVisible="{Binding HaveHeaderText}"
+                                Text="{Binding Header}" />
+                            <Button
+                                Name="DisposeTab"
+                                Margin="3,0,0,0"
+                                Classes="tabclose"
+                                Command="{Binding CloseTabCommand}"
+                                FontWeight="UltraBold"
+                                Foreground="#507595"
+                                IsVisible="{Binding NeedCloseCommand}">
+                                X
+                            </Button>
+                        </StackPanel>
+                    </Border>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    <Style Selector="TabItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource TabPressedShadow}" />
+    </Style>
+    <Style Selector="TabItem:focus">
+        <Setter Property="Foreground" Value="#000000" />
+    </Style>
+    <Style Selector="TabItem:focus /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource TabActive}" />
+    </Style>
+    <Style Selector="TabItem:selected">
+        <Setter Property="Foreground" Value="#000000" />
+        <Setter Property="Height" Value="35" />
+        <Setter Property="Margin" Value="1 0 -3 0" />
+    </Style>
+    <Style Selector="TabItem:selected /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource TabActive}" />
+    </Style>
+    <!--  EndRegion  -->
+
+    <!--  Region Template styles  -->
+    <Style Selector="ContentPresenter.temp">
+        <Setter Property="Padding" Value="{TemplateBinding Padding}" />
+        <Setter Property="HorizontalContentAlignment" Value="{TemplateBinding HorizontalContentAlignment}" />
+        <Setter Property="VerticalContentAlignment" Value="{TemplateBinding VerticalContentAlignment}" />
+        <Setter Property="Content" Value="{TemplateBinding Content}" />
+        <Setter Property="ContentTemplate" Value="{TemplateBinding ContentTemplate}" />
+        <Setter Property="BorderBrush" Value="{TemplateBinding BorderBrush}" />
+        <Setter Property="BorderThickness" Value="{TemplateBinding BorderThickness}" />
+        <Setter Property="CornerRadius" Value="{TemplateBinding CornerRadius}" />
+    </Style>
+
+    <Style Selector="Button.maintoolbar ContentPresenter.temp">
+        <Setter Property="Background" Value="{DynamicResource ButtonNormalBackgroundSimple}" />
+    </Style>
+    <Style Selector="Button.maintoolbar:pointerover ContentPresenter.temp">
+        <Setter Property="Background" Value="{DynamicResource ButtonNormalBackgroundPointover}" />
+    </Style>
+    <Style Selector="Button.maintoolbar:pressed ContentPresenter.temp">
+        <Setter Property="Background" Value="{DynamicResource ButtonNormalBackgroundPressed}" />
+    </Style>
+
+    <Style Selector="Button.gaspsbutton ContentPresenter.temp">
+        <Setter Property="Background" Value="{DynamicResource ButtonGaspsGradientBrushSimple}" />
+    </Style>
+    <Style Selector="Button.gaspsbutton:pointerover ContentPresenter.temp">
+        <Setter Property="Background" Value="{DynamicResource ButtonGaspsBrushPointover}" />
+    </Style>
+    <Style Selector="Button.gaspsbutton:pressed ContentPresenter.temp">
+        <Setter Property="Background" Value="{DynamicResource ButtonGaspsGradientBrushPressed}" />
+    </Style>
+
+    <Style Selector="Button.cardsmallbutton ContentPresenter.temp">
+        <Setter Property="Background" Value="{DynamicResource ButtonNormalBackgroundSimple}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderColorSimple}" />
+    </Style>
+    <Style Selector="Button.cardsmallbutton:pointerover ContentPresenter.temp">
+        <Setter Property="Background" Value="{DynamicResource ButtonNormalBackgroundPointover}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderColorPointover}" />
+    </Style>
+    <Style Selector="Button.cardsmallbutton:pressed ContentPresenter.temp">
+        <Setter Property="Background" Value="{DynamicResource ButtonNormalBackgroundPressed}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderColorPressed}" />
+        <Setter Property="BorderThickness" Value="2" />
+    </Style>
+
+    <Style Selector="Border.temp">
+        <Setter Property="BorderBrush" Value="{DynamicResource ButtonGaspsBorderBrushSimple}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="3" />
+    </Style>
+
+    <Style Selector="Button.cardsmallbutton Border.temp">
+        <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderColorSimple}" />
+    </Style>
+    <Style Selector="Button.cardsmallbutton:pointerover Border.temp">
+        <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderColorPointover}" />
+    </Style>
+    <Style Selector="Button.cardsmallbutton:pressed Border.temp">
+        <Setter Property="BorderBrush" Value="{DynamicResource ButtonBorderColorPressed}" />
+    </Style>
+
+    <Style Selector="Border.cardborder:pointerover">
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+    </Style>
+    <Style Selector="Border.cardborder:pointerover">
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="#70C0E7" />
+    </Style>
+    <Style Selector="Border.cardborder:selected /template/ ContentPresenter">
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="#26A0DA" />
+    </Style>
+    <!--  EndRegion  -->
+
+    <!--  Region Button styles  -->
+
+    <Style Selector="Button.maintoolbar">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Classes="temp">
+                    <ContentPresenter Classes="temp" TextBlock.Foreground="{TemplateBinding Foreground}" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    <Style Selector="Button.gaspsbutton">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Classes="temp">
+                    <ContentPresenter Classes="temp" TextBlock.Foreground="{TemplateBinding Foreground}" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    <Style Selector="Button.cardsmallbutton">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Classes="temp">
+                    <ContentPresenter Classes="temp" TextBlock.Foreground="{TemplateBinding Foreground}" />
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <!--  EndRegion  -->
+
+    <!--  Region DatePicker styles  -->
+
+    <Style Selector="DatePicker">
+        <Setter Property="CustomDateFormatString" Value="dd.MM.yyyy" />
+        <Setter Property="SelectedDateFormat" Value="Custom" />
+    </Style>
+
+    <!--  EndRegion  -->
+
+    <Style Selector="TabControl[TabStripPlacement=Top]">
+        <Setter Property="Padding" Value="0 0 0 0" />
+    </Style>
+    <Style Selector="ListBox.formViewListBox ListBoxItem:pointerover /template/ ContentPresenter">
+        <!--<Setter Property="Background" Value="AliceBlue" />-->
+    </Style>
+
+    <!--  Region CardView styles  -->
+    <!--  Стили для CardViewer'а - это обработанные стили АРМ 3.0; в них убраны некоторые поля вызывающие конфликты  -->
+    <!--  Необходимо провести чистку стилей по ВСЕМ контролам  -->
+
+    <Style Selector="TextBlock.CardTopicHeaderText">
+        <Setter Property="FontSize" Value="19" />
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="Width" Value="{Binding $parent.Width}" />
+        <Setter Property="MaxWidth" Value="1020" />
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="FontWeight" Value="700" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+    <Style Selector="StackPanel.TopicHeaderContainer">
+        <Setter Property="Margin" Value="10 15 0 0" />
+        <Setter Property="MinHeight" Value="30" />
+        <Setter Property="Background" Value="White" />
+    </Style>
+    <Style Selector="TextBlock.LabelFont">
+        <Setter Property="Foreground" Value="#666666" />
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+    <Style Selector="TextBlock.TopicHeaderText">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextBlock.Margin" Value="5" />
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="FontWeight" Value="700" />
+        <Setter Property="Foreground" Value="Black" />
+    </Style>
+
+    <Style Selector="StackPanel.RequisitConatiner">
+        <Setter Property="Orientation" Value="Horizontal" />
+        <Setter Property="Margin" Value="0 10 0 10" />
+        <Setter Property="MinHeight" Value="30" />
+        <Setter Property="Background" Value="White" />
+    </Style>
+    <Style Selector="cardControls|RequisitCaption">
+        <Setter Property="Foreground" Value="Black" />
+    </Style>
+    <Style Selector="TextBlock.RequisitNumber">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="600" />
+        <Setter Property="Margin" Value="10 5 0 0" />
+        <Setter Property="Width" Value="40" />
+        <Setter Property="Background" Value="White" />
+    </Style>
+    <Style Selector="TextBlock.RequisitName">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="400" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Margin" Value="20 5 0 0" />
+        <Setter Property="Width" Value="370" />
+        <Setter Property="Background" Value="White" />
+    </Style>
+    <Style Selector="Border.TopicHeaderBorder3">
+        <Setter Property="BorderThickness" Value="0 7 0 0" />
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+                    <GradientStop Offset="0" Color="#DBDBDB" />
+                    <GradientStop Offset="0.5" Color="#FFFFFF" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style Selector="Border.TopicHeaderBorder2">
+        <Setter Property="BorderThickness" Value="0 7 0 0" />
+        <Setter Property="BorderBrush">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+                    <GradientStop Offset="0" Color="#DBDBDB" />
+                    <GradientStop Offset="0.1" Color="#FFFFFF" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style Selector="Border.TopicHeaderBorder1">
+        <Setter Property="BorderThickness" Value="0 1 0 0" />
+        <Setter Property="BorderBrush" Value="#B3B3B3" />
+    </Style>
+
+    <Style Selector="Rectangle.dividingStripGroupEditor">
+        <Setter Property="Margin" Value="0 10 0 0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Stroke" Value="#AFB9BA" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="StrokeDashArray" Value="2,5" />
+        <Setter Property="Width" Value="1920" />
+    </Style>
+
+    <Style Selector="Rectangle.dividingStrip82">
+        <Setter Property="Margin" Value="0 10 0 0" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Stroke">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="50%,0%" EndPoint="50%,100%">
+                    <GradientStop Offset="0" Color="#DBDBDB" />
+                    <GradientStop Offset="0.1" Color="#FFFFFF" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="StrokeThickness" Value="2" />
+    </Style>
+
+    <!--  EndRegion  -->
+
+    <Style Selector="TextBlock.GridTextBlock1">
+        <Setter Property="FontFamily" Value="{DynamicResource MainFont}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="10 0 0 0" />
+    </Style>
+
+    <Style Selector="TextBlock.GridTextBlock2">
+        <Setter Property="FontFamily" Value="{DynamicResource MainFont}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="{StaticResource BorderTopCantBrush}" />
+    </Style>
+    <Style Selector="StackPanel.InnerRequisitConatiner">
+        <Setter Property="Orientation" Value="Horizontal" />
+        <Setter Property="Control.Margin" Value="0 10 0 10" />
+        <Setter Property="Control.MinHeight" Value="30" />
+    </Style>
+
+
+
+    <Style Selector="ScrollBar">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{DynamicResource ScrollBarControlMidBrush}">
+                    <Grid RowDefinitions="Auto,*,Auto">
+                        <RepeatButton
+                            Name="PART_LineUpButton"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Classes="repeat"
+                            Focusable="False">
+                            <Path
+                                Data="M 0,4 C0,4 0,6 0,6 0,6 3.5,2.5 3.5,2.5 3.5,2.5 7,6 7,6 7,6 7,4 7,4 7,4 3.5,0.5 3.5,0.5 3.5,0.5 0,4 0,4 z"
+                                Fill="{DynamicResource ScrollBarForegroundLowBrush}"
+                                Stretch="Uniform" />
+                        </RepeatButton>
+                        <Track
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Maximum="{TemplateBinding Maximum}"
+                            Minimum="{TemplateBinding Minimum}"
+                            Orientation="{TemplateBinding Orientation}"
+                            ViewportSize="{TemplateBinding ViewportSize}"
+                            Value="{TemplateBinding Value,
+                                                    Mode=TwoWay}">
+                            <Track.DecreaseButton>
+                                <RepeatButton
+                                    Name="PART_PageUpButton"
+                                    Classes="repeattrack"
+                                    Focusable="False" />
+                            </Track.DecreaseButton>
+                            <Track.IncreaseButton>
+                                <RepeatButton
+                                    Name="PART_PageDownButton"
+                                    Classes="repeattrack"
+                                    Focusable="False" />
+                            </Track.IncreaseButton>
+                            <Thumb Name="thumb" />
+                        </Track>
+                        <RepeatButton
+                            Name="PART_LineDownButton"
+                            Grid.Row="2"
+                            Grid.Column="2"
+                            Classes="repeat"
+                            Focusable="False">
+                            <Path
+                                Data="M 0,2.5 C0,2.5 0,0.5 0,0.5 0,0.5 3.5,4 3.5,4 3.5,4 7,0.5 7,0.5 7,0.5 7,2.5 7,2.5 7,2.5 3.5,6 3.5,6 3.5,6 0,2.5 0,2.5 z"
+                                Fill="{DynamicResource ScrollBarForegroundLowBrush}"
+                                Stretch="Uniform" />
+                        </RepeatButton>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    <Style Selector="ScrollBar:horizontal">
+        <Setter Property="Height" Value="{DynamicResource ScrollBarThickness}" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{DynamicResource ScrollBarControlMidBrush}">
+                    <Grid ColumnDefinitions="Auto,*,Auto">
+                        <RepeatButton
+                            Name="PART_LineUpButton"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Classes="repeat"
+                            Focusable="False">
+                            <Path
+                                Data="M 3.18,7 C3.18,7 5,7 5,7 5,7 1.81,3.5 1.81,3.5 1.81,3.5 5,0 5,0 5,0 3.18,0 3.18,0 3.18,0 0,3.5 0,3.5 0,3.5 3.18,7 3.18,7 z"
+                                Fill="{DynamicResource ScrollBarForegroundLowBrush}"
+                                Stretch="Uniform" />
+                        </RepeatButton>
+                        <Track
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Maximum="{TemplateBinding Maximum}"
+                            Minimum="{TemplateBinding Minimum}"
+                            Orientation="{TemplateBinding Orientation}"
+                            ViewportSize="{TemplateBinding ViewportSize}"
+                            Value="{TemplateBinding Value,
+                                                    Mode=TwoWay}">
+                            <Track.DecreaseButton>
+                                <RepeatButton
+                                    Name="PART_PageUpButton"
+                                    Classes="repeattrack"
+                                    Focusable="False" />
+                            </Track.DecreaseButton>
+                            <Track.IncreaseButton>
+                                <RepeatButton
+                                    Name="PART_PageDownButton"
+                                    Classes="repeattrack"
+                                    Focusable="False" />
+                            </Track.IncreaseButton>
+                            <Thumb Name="thumb" />
+                        </Track>
+                        <RepeatButton
+                            Name="PART_LineDownButton"
+                            Grid.Row="2"
+                            Grid.Column="2"
+                            Classes="repeat"
+                            Focusable="False">
+                            <Path
+                                Data="M 1.81,7 C1.81,7 0,7 0,7 0,7 3.18,3.5 3.18,3.5 3.18,3.5 0,0 0,0 0,0 1.81,0 1.81,0 1.81,0 5,3.5 5,3.5 5,3.5 1.81,7 1.81,7 z"
+                                Fill="{DynamicResource ScrollBarForegroundLowBrush}"
+                                Stretch="Uniform" />
+                        </RepeatButton>
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    <Style Selector="ScrollBar /template/ Thumb#thumb">
+        <Setter Property="Background" Value="{DynamicResource ScrollBarControlHighBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border Background="{TemplateBinding Background}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style Selector="ScrollBar:horizontal /template/ Thumb#thumb">
+        <Setter Property="MinWidth" Value="{DynamicResource ScrollBarThickness}" />
+    </Style>
+    <Style Selector="ScrollBar:vertical">
+        <Setter Property="Width" Value="{DynamicResource ScrollBarThickness}" />
+    </Style>
+    <Style Selector="ScrollBar:vertical /template/ Thumb#thumb">
+        <Setter Property="MinHeight" Value="{DynamicResource ScrollBarThickness}" />
+    </Style>
+    <Style Selector="ScrollBar /template/ RepeatButton.repeat">
+        <Setter Property="Background" Value="{DynamicResource ScrollBarControlBackground}" />
+        <Setter Property="Padding" Value="4" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+    <Style Selector="ScrollBar /template/ RepeatButton.repeattrack">
+        <Setter Property="Background" Value="{DynamicResource ScrollBarControlBackground}" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border Background="{TemplateBinding Background}" />
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+
+    <!--  Calendar Region  -->
+    <Style Selector="Calendar">
+        <Setter Property="IsTodayHighlighted" Value="True" />
+    </Style>
+
+    <Style Selector="CalendarDayButton">
+        <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush2}" />
+        <Setter Property="FontSize" Value="{DynamicResource FontSizeSmall}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="MinWidth" Value="5" />
+        <Setter Property="MinHeight" Value="5" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel Background="Transparent">
+                    <Rectangle
+                        Name="TodayBackground"
+                        Fill="Transparent"
+                        Stroke="{StaticResource ThemeAccentBrush}"
+                        StrokeThickness="1" />
+                    <Rectangle Name="SelectedBackground" Fill="{StaticResource ThemeAccentBrush}" />
+                    <Rectangle
+                        Name="Background"
+                        Fill="{TemplateBinding Background}"
+                        Opacity="0.5" />
+                    <ContentControl
+                        Name="Content"
+                        Margin="5,1,5,1"
+                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                        Content="{TemplateBinding Content}"
+                        ContentTemplate="{TemplateBinding ContentTemplate}"
+                        FontSize="{TemplateBinding FontSize}" />
+                    <Path
+                        Name="BlackoutVisual"
+                        Margin="3"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        Data="M8.1772461,11.029181 L10.433105,11.029181 L11.700684,12.801641 L12.973633,11.029181 L15.191895,11.029181 L12.844727,13.999395 L15.21875,17.060919 L12.962891,17.060919 L11.673828,15.256231 L10.352539,17.060919 L8.1396484,17.060919 L10.519043,14.042364 z"
+                        Fill="{DynamicResource ThemeForegroundBrush}"
+                        RenderTransformOrigin="0.5,0.5"
+                        Stretch="Fill" />
+                    <Rectangle
+                        Name="FocusVisual"
+                        IsHitTestVisible="False"
+                        Stroke="{DynamicResource HighlightBrush}" />
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="CalendarDayButton:today /template/ ContentControl#Content">
+        <Setter Property="Foreground" Value="{DynamicResource ThemeBorderHighBrush}" />
+    </Style>
+    <!--  EndRegion  -->
+
+    <!--  Region FsbLabel in RequisitCaption  -->
+    <Style Selector="TextBlock.fsbLabel">
+        <Setter Property="Margin" Value="90,12,0,0" />
+    </Style>
+
+    <Style Selector="TextBlock.fsbLabel.fsbExpanded">
+        <Setter Property="Margin" Value="90,35,0,0" />
+    </Style>
+    <!--  EndRegion  -->
+
+    <!--  Region NumericUpDown  -->
+    <Style Selector="NumericUpDown /template/ ButtonSpinner#PART_Spinner /template/ RepeatButton">
+        <Setter Property="Focusable" Value="False" />
+    </Style>
+    <!--  EndRegion  -->
+
+</Styles>
