@@ -55,6 +55,7 @@ namespace KursAuth.Models.Telegram
         {
            
             var user = await client.MakeAuthAsync(phone, hash, code);
+           var tok = user.AccessHash.Value;
 
         }
 
@@ -77,7 +78,7 @@ namespace KursAuth.Models.Telegram
         public async Task<IEnumerable<object>> GetFriendsAsync()
         {
            
-            var dialogs = (TLDialogs)await client.GetUserDialogsAsync();
+            var dialogs = (TLDialogs)client.GetUserDialogsAsync().Result;
 
             var users = dialogs.Users.ToArray();
             

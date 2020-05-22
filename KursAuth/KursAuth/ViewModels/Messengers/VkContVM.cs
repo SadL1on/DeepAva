@@ -53,7 +53,7 @@ namespace KursAuth.ViewModels.Messengers
             
             // var mess = await vk.GetHistoryAsync(selectedindex.);
             // Messages = mess.Messages.OrderBy(x => x.Date).ToArray();
-            Messages = vk.GetMessagesByUserId(selectedItem.Conversation.Peer.Id);
+            Messages = vk.GetMessagesByUserId(selectedItem.Conversation.Peer.Id).OrderBy(x=>x.Date);
         }
 
         /// <summary>
