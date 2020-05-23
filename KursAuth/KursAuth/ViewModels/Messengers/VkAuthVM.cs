@@ -6,6 +6,7 @@ using Splat;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reactive;
 using System.Runtime.Serialization;
@@ -55,14 +56,38 @@ namespace KursAuth.ViewModels.Messengers
 
         public VkAuthVM()
         {
-            vk = VKModel.GetInstance();
-            if (vk.IsAuth == true)
+            try
             {
-                MessageBus.Current.SendMessage(new RouteToVkContMessage());
+                string path = @"D:\SomeDir2";
+
+                vk = VKModel.GetInstance();
+                using (FileStream fstream = File.OpenRead($@"{path}\note.txt"))
+                {
+                    // преобразуем строку в байты
+                    byte[] array = new byte[fstream.Length];
+                    // считываем данные
+                    fstream.Read(array, 0, array.Length);
+                    // декодируем байты в строку
+                    string token = System.Text.Encoding.Default.GetString(array);
+                    vk.VkAuthTokenAsync(token);
+                    vk.IsAuth = true;
+                    MessageBus.Current.SendMessage(new RouteToVkContMessage());
+                }
             }
-            else
+            catch
             {
-                MessLogin = ReactiveCommand.Create(async () => { await AuthMessImpl(LoginMess, PassMess); });
+
+
+
+                vk = VKModel.GetInstance();
+                if (vk.IsAuth == true)
+                {
+                    MessageBus.Current.SendMessage(new RouteToVkContMessage());
+                }
+                else
+                {
+                    MessLogin = ReactiveCommand.Create(async () => { await AuthMessImpl(LoginMess, PassMess); });
+                }
             }
         }
 

@@ -43,6 +43,21 @@ namespace KursAuth.Models
 
         public bool IsAuth = false;
 
+
+        public async Task VkAuthTokenAsync(string token)
+        {
+
+            var services = new ServiceCollection();
+            services.AddAudioBypass();
+            api = new VkApi(services);
+            api.Authorize(new ApiAuthParams
+            {
+                AccessToken = token
+            });
+
+
+        }
+
         /// <summary>
         /// Метод авторизации Вконтакте
         /// </summary>
@@ -56,28 +71,6 @@ namespace KursAuth.Models
             var services = new ServiceCollection();
             services.AddAudioBypass();
             api = new VkApi(services);
-            //try
-            //{
-
-            //    using (FileStream fstream = File.OpenRead($@"{path}\note.txt"))
-            //    {
-            //        // преобразуем строку в байты
-            //        byte[] array = new byte[fstream.Length];
-            //        // считываем данные
-            //        fstream.Read(array, 0, array.Length);
-            //        // декодируем байты в строку
-            //        string token = System.Text.Encoding.Default.GetString(array);
-
-
-            //        api.Authorize(new ApiAuthParams
-            //        {
-            //            AccessToken = token
-            //        }); ;
-            //    }
-            //}
-            //catch
-            //{
-
                 await api.AuthorizeAsync(new ApiAuthParams
                 {
                     ApplicationId = 7062393,
@@ -89,7 +82,6 @@ namespace KursAuth.Models
                         throw new Exception("двухфакторка");
                     }
                 });
-
                 string token = api.Token;
                 // запись в файл
                 using (FileStream fstream = new FileStream($@"{path}\note.txt", FileMode.OpenOrCreate))
@@ -99,8 +91,6 @@ namespace KursAuth.Models
                     // запись массива байтов в файл
                     fstream.Write(array, 0, array.Length);
                 }
-
-            //}
         }
         /// <summary>
         /// Метод возвращает список друзей авторизовавшегося пользователя

@@ -42,7 +42,7 @@ namespace KursAuth.ViewModels.Messengers
         {
             vk = VKModel.GetInstance();
             GetFriends();
-            GetUserInfo();
+            //GetUserInfo();
             GetMessHist = ReactiveCommand.Create<ConversationAndLastMessage>(async (selectedItem) => { await GetHisVMAsync(selectedItem); });
         }
 
