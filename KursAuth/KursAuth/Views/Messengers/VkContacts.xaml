@@ -24,7 +24,7 @@
             Grid.Row="1"
             Grid.RowSpan="2"
             Grid.Column="0"
-            Items="{Binding Users}">
+            Items="{Binding Dialogs}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="5">
@@ -49,7 +49,7 @@
                 Background="Bisque">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Text}"/>
+                        <TextBlock Text="{Binding Text}" HorizontalAlignment="{Binding Alignment}"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

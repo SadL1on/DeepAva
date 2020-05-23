@@ -1,4 +1,5 @@
-﻿using KursAuth.Models;
+﻿using DynamicData;
+using KursAuth.Models;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
@@ -22,10 +23,12 @@ namespace KursAuth.ViewModels.Messengers
         private VKModel vk;
 
         /// <summary>
-        /// Список контактов
+        /// Список диалогов
         /// </summary>
         [Reactive]
-        public IEnumerable Users { get; set; }
+        public IEnumerable Dialogs { get; set; }
+        [Reactive]
+        public IEnumerable DialogsName { get; set; }
 
         [Reactive]
         public IEnumerable Messages { get; set; }
@@ -53,7 +56,27 @@ namespace KursAuth.ViewModels.Messengers
             
             // var mess = await vk.GetHistoryAsync(selectedindex.);
             // Messages = mess.Messages.OrderBy(x => x.Date).ToArray();
-            Messages = vk.GetMessagesByUserId(selectedItem.Conversation.Peer.Id).OrderBy(x=>x.Date);
+            var Messages1 = vk.GetMessagesByUserId(selectedItem.Conversation.Peer.Id).OrderBy(x=>x.Date).ToArray();
+            Models.VK.Message[] ms = new Models.VK.Message[Messages1.Length];
+            for (int i = 0; i < Messages1.Length; i++)
+            {
+                Models.VK.Message mes = new Models.VK.Message();
+                mes.Text = Messages1[i].Text;
+                if(Messages1[i].FromId == selectedItem.Conversation.Peer.Id)
+                {
+                    mes.Alignment = "Left";
+
+                }
+                else
+                {
+
+                    mes.Alignment = "Right";
+                }
+
+                ms[i] = mes; 
+            
+            }
+            Messages = ms;
         }
 
         /// <summary>
@@ -61,7 +84,25 @@ namespace KursAuth.ViewModels.Messengers
         /// </summary>
         public async Task GetFriends()
         {
-            Users = await vk.GetDialogsAsync();
+          var dialogs = await vk.GetDialogsAsync();
+            Dialogs = dialogs.Items.ToArray();
+            //string[] dname = new string[dialogs.Items.Count];            
+            //for (int i = 0; i<=10; i++)
+            //{
+            //    try
+            //    {
+            //        long id = dialogs.Items[i].Conversation.Peer.Id;
+            //        string name = vk.GetUserInfo(id);                   
+            //        dname[i] = name;
+            //    }
+            //    catch
+            //    {
+            //        dname[i] = "Беседа";
+
+            //    }
+
+            //}
+            //DialogsName = dname;
         }
 
         /// <summary>

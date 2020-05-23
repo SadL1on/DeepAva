@@ -101,7 +101,7 @@ namespace KursAuth.Models
         }
 
 
-        public async Task<IEnumerable<object>> GetDialogsAsync()
+        public async Task<GetConversationsResult> GetDialogsAsync()
         {
             var dialogs = await api.Messages.GetConversationsAsync(new GetConversationsParams
             {
@@ -110,7 +110,7 @@ namespace KursAuth.Models
 
             }); ;
 
-            return dialogs.Items;
+            return dialogs;
         }
 
         /// <summary>
@@ -147,6 +147,16 @@ namespace KursAuth.Models
         {
             var infoaboutuser = api.Users.Get(new long[] { api.UserId.Value }).FirstOrDefault();
             return infoaboutuser;
+
+        }
+
+        public string GetUserInfo(long id)
+        {
+            var infoaboutuser = api.Users.Get(new long[] { id }).FirstOrDefault();
+            string fn = infoaboutuser.FirstName;
+            string ln = infoaboutuser.LastName;
+            string name = fn + " " + ln;
+            return name;
 
         }
 
