@@ -27,6 +27,7 @@ namespace KursAuth.ViewModels.Messengers
         /// </summary>
         [Reactive]
         public IEnumerable Dialogs { get; set; }
+       
         [Reactive]
         public IEnumerable DialogsName { get; set; }
 
@@ -85,24 +86,9 @@ namespace KursAuth.ViewModels.Messengers
         public async Task GetFriends()
         {
           var dialogs = await vk.GetDialogsAsync();
-            Dialogs = dialogs.Items.ToArray();
-            //string[] dname = new string[dialogs.Items.Count];            
-            //for (int i = 0; i<=10; i++)
-            //{
-            //    try
-            //    {
-            //        long id = dialogs.Items[i].Conversation.Peer.Id;
-            //        string name = vk.GetUserInfo(id);                   
-            //        dname[i] = name;
-            //    }
-            //    catch
-            //    {
-            //        dname[i] = "Беседа";
-
-            //    }
-
-            //}
-            //DialogsName = dname;
+            Dialogs = dialogs.Items;
+            //DialogsName = dialogs.Profiles;
+        
         }
 
         /// <summary>

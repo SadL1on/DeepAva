@@ -105,10 +105,10 @@ namespace KursAuth.Models
         {
             var dialogs = await api.Messages.GetConversationsAsync(new GetConversationsParams
             {
-                Count = 200
+                Count = 200,
+                Extended = true
 
-
-            }); ;
+            });; ;
 
             return dialogs;
         }
