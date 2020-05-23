@@ -56,17 +56,21 @@ namespace KursAuth.ViewModels.Messengers
         public VkAuthVM()
         {
             vk = VKModel.GetInstance();
-            MessLogin = ReactiveCommand.Create(async () => { await AuthMessImpl(LoginMess, PassMess); });
-        }
-
-        public async Task AuthMessImpl(string login, string password)
-        {           
-            await vk.VkAuthAsync(login, password);                       
-            
-            if (vk.IsAuth)
+            if (vk.IsAuth == true)
             {
                 MessageBus.Current.SendMessage(new RouteToVkContMessage());
             }
+            else
+            {
+                MessLogin = ReactiveCommand.Create(async () => { await AuthMessImpl(LoginMess, PassMess); });
+            }
+        }
+
+        public async Task AuthMessImpl(string login, string password)
+        {
+                await vk.VkAuthAsync(login, password);
+                vk.IsAuth = true;
+            MessageBus.Current.SendMessage(new RouteToVkContMessage());
         }
     }
 }

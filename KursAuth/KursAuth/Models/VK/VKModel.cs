@@ -11,6 +11,7 @@ using VkNet.Utils;
 using System.Linq;
 using System.Threading.Tasks;
 using KursAuth.Utils;
+using System.IO;
 
 namespace KursAuth.Models
 {
@@ -40,7 +41,7 @@ namespace KursAuth.Models
             return mess.Messages;
         }
 
-        public bool IsAuth { get => api.IsAuthorized; }
+        public bool IsAuth = false;
 
         /// <summary>
         /// Метод авторизации Вконтакте
@@ -50,23 +51,56 @@ namespace KursAuth.Models
         {
             login = log;
             password = pass;
+            string path = @"D:\SomeDir2";
 
             var services = new ServiceCollection();
             services.AddAudioBypass();
             api = new VkApi(services);
+            //try
+            //{
 
-            await api.AuthorizeAsync(new ApiAuthParams
-            {
-                ApplicationId = 7062393,
-                Login = login,
-                Password = password,
-                Settings = Settings.All,
-                TwoFactorAuthorization = () =>
+            //    using (FileStream fstream = File.OpenRead($@"{path}\note.txt"))
+            //    {
+            //        // преобразуем строку в байты
+            //        byte[] array = new byte[fstream.Length];
+            //        // считываем данные
+            //        fstream.Read(array, 0, array.Length);
+            //        // декодируем байты в строку
+            //        string token = System.Text.Encoding.Default.GetString(array);
+
+
+            //        api.Authorize(new ApiAuthParams
+            //        {
+            //            AccessToken = token
+            //        }); ;
+            //    }
+            //}
+            //catch
+            //{
+
+                await api.AuthorizeAsync(new ApiAuthParams
                 {
-                    throw new Exception("двухфакторка");
-                }
-            });
+                    ApplicationId = 7062393,
+                    Login = login,
+                    Password = password,
+                    Settings = Settings.All,
+                    TwoFactorAuthorization = () =>
+                    {
+                        throw new Exception("двухфакторка");
+                    }
+                });
 
+                string token = api.Token;
+                // запись в файл
+                using (FileStream fstream = new FileStream($@"{path}\note.txt", FileMode.OpenOrCreate))
+                {
+                    // преобразуем строку в байты
+                    byte[] array = System.Text.Encoding.Default.GetBytes(token);
+                    // запись массива байтов в файл
+                    fstream.Write(array, 0, array.Length);
+                }
+
+            //}
         }
         /// <summary>
         /// Метод возвращает список друзей авторизовавшегося пользователя
