@@ -62,11 +62,11 @@ namespace KursAuth.Models
         /// Метод авторизации Вконтакте
         /// </summary>
         /// <inheritdoc/> 
-        public async Task VkAuthAsync(string log, string pass)
+        public async Task<string> VkAuthAsync(string log, string pass)
         {
             login = log;
             password = pass;
-            string path = @"D:\SomeDir2";
+         
 
             var services = new ServiceCollection();
             services.AddAudioBypass();
@@ -82,15 +82,8 @@ namespace KursAuth.Models
                         throw new Exception("двухфакторка");
                     }
                 });
-                string token = api.Token;
-                // запись в файл
-                using (FileStream fstream = new FileStream($@"{path}\note.txt", FileMode.OpenOrCreate))
-                {
-                    // преобразуем строку в байты
-                    byte[] array = System.Text.Encoding.Default.GetBytes(token);
-                    // запись массива байтов в файл
-                    fstream.Write(array, 0, array.Length);
-                }
+            return api.Token;
+         
         }
         /// <summary>
         /// Метод возвращает список друзей авторизовавшегося пользователя

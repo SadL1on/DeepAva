@@ -54,11 +54,12 @@ namespace KursAuth.ViewModels.Messengers
 
         private ReactiveCommand<Unit, Unit> toVkCont { get; }
 
+        string path = @"D:\Не токен";
         public VkAuthVM()
         {
             try
             {
-                string path = @"D:\SomeDir2";
+               
 
                 vk = VKModel.GetInstance();
                 using (FileStream fstream = File.OpenRead($@"{path}\note.txt"))
@@ -93,9 +94,31 @@ namespace KursAuth.ViewModels.Messengers
 
         public async Task AuthMessImpl(string login, string password)
         {
-                await vk.VkAuthAsync(login, password);
-                vk.IsAuth = true;
+           
+            string token = await vk.VkAuthAsync(login, password);
+            vk.IsAuth = true;
+            await Encode(token);
             MessageBus.Current.SendMessage(new RouteToVkContMessage());
+            
+        }
+
+        public async Task Encode(string token)
+        {
+           
+            DirectoryInfo dirInfo = new DirectoryInfo(path);
+            if (!dirInfo.Exists)
+            {
+                dirInfo.Create();
+            }
+            // запись в файл
+            using (FileStream fstream = new FileStream($@"{path}\note.txt", FileMode.OpenOrCreate))
+            {
+                // преобразуем строку в байты
+                byte[] array = System.Text.Encoding.Default.GetBytes(token);
+                // запись массива байтов в файл
+                fstream.Write(array, 0, array.Length);
+            }
+
         }
     }
 }
