@@ -43,7 +43,10 @@ namespace KursAuth.Models
 
         public bool IsAuth = false;
 
-
+        /// <summary>
+        /// Метод авторизации Вконтакте через токен
+        /// </summary>
+        /// <inheritdoc/> 
         public async Task VkAuthTokenAsync(string token)
         {
 

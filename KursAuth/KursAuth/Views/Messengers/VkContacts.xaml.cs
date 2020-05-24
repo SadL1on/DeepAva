@@ -29,7 +29,6 @@ namespace KursAuth.Views.Messengers
             {
                 this.WhenAnyValue(x => x.contacts.SelectedItem).InvokeCommand(ViewModel.GetMessHist);
                 this.Bind(ViewModel, x => x.Messages, x => x.messHist.Items).DisposeWith(disposables);
-                this.Bind(ViewModel, x => x.DialogsName, x => x.DialogsName.Text).DisposeWith(disposables);
             });
         }
 
