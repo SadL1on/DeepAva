@@ -75,18 +75,9 @@ namespace KursAuth.Models.Telegram
 
         }
         public async Task<IEnumerable<object>> GetFriendsAsync()
-        {
-           
-            var dialogs = (TLDialogs)await client.GetUserDialogsAsync();
-
-            var users = dialogs.Users.ToArray();
-            
-            return users;
-           
-
-
-
-
+        {          
+            var dialogs = (TLDialogs)client.GetUserDialogsAsync().Result;
+            return dialogs.Users.ToArray();
         }
     }
 }
