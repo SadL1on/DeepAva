@@ -1,5 +1,6 @@
 ﻿using DynamicData;
 using KursAuth.Models;
+using KursAuth.Models.VK;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
@@ -37,30 +38,30 @@ namespace KursAuth.ViewModels.Messengers
         [Reactive]
         public string NameVk { get; set; }
 
-        public ReactiveCommand<ConversationAndLastMessage, Unit> GetMessHist { get; }
+        public ReactiveCommand<Dialogs, Unit> GetMessHist { get; }
 
         public VkContVM()
         {
             vk = VKModel.GetInstance();
             GetFriends();
             //GetUserInfo();
-            GetMessHist = ReactiveCommand.Create<ConversationAndLastMessage>(async (selectedItem) => { await GetHisVMAsync(selectedItem); });
+            GetMessHist = ReactiveCommand.Create<Dialogs>(async (selectedItem) => { await GetHisVMAsync(selectedItem); });
         }
 
-        public async Task GetHisVMAsync(ConversationAndLastMessage selectedItem)
+        public async Task GetHisVMAsync(Dialogs selectedItem)
         {
             if (selectedItem == null)
                 return;
             
             // var mess = await vk.GetHistoryAsync(selectedindex.);
             // Messages = mess.Messages.OrderBy(x => x.Date).ToArray();
-            var Messages1 = vk.GetMessagesByUserId(selectedItem.Conversation.Peer.Id).OrderBy(x=>x.Date).ToArray();
+            var Messages1 = vk.GetMessagesByUserId(selectedItem.Id).OrderBy(x=>x.Date).ToArray();
             Models.VK.Message[] ms = new Models.VK.Message[Messages1.Length];
             for (int i = 0; i < Messages1.Length; i++)
             {
                 Models.VK.Message mes = new Models.VK.Message();
                 mes.Text = Messages1[i].Text;
-                if(Messages1[i].FromId == selectedItem.Conversation.Peer.Id)
+                if(Messages1[i].FromId == selectedItem.Id)
                 {
                     mes.Alignment = "Left";
 
