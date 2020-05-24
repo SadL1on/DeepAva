@@ -85,12 +85,17 @@ namespace KursAuth.ViewModels.Messengers
         {
           var dialogs = await vk.GetDialogsAsync();
 
-            Models.VK.Dialogs[] MyDialogs = new Models.VK.Dialogs[dialogs.Count];
+            Models.VK.Dialogs[] MyDialogs = new Models.VK.Dialogs[dialogs.Items.Count];
             for (int i = 0; i < dialogs.Items.Count; i++)
             {
                 Models.VK.Dialogs MyDialog = new Models.VK.Dialogs();
                 MyDialog.Id = dialogs.Items[i].Conversation.Peer.Id;
                 MyDialog.LastMessage = dialogs.Items[i].LastMessage.Text;
+
+                if (dialogs.Items[i].Conversation.ChatSettings != null)
+                {
+                    MyDialog.Title = dialogs.Items[i].Conversation.ChatSettings.Title;
+                }
 
                 for (int j = 0; j < dialogs.Profiles.Count; j++)
                 {
@@ -107,8 +112,9 @@ namespace KursAuth.ViewModels.Messengers
                         break;
 
                     }
-                    MyDialogs[i] = MyDialog;
+                   
                 }
+                MyDialogs[i] = MyDialog;
             }
 
 

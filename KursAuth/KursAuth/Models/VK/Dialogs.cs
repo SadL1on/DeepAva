@@ -8,6 +8,7 @@ namespace KursAuth.Models.VK
     {
         public long Id { get; set; }
         public string Name { get; set; }
+        public string Title { get; set; }
         public string LastMessage { get; set; }
 
     }

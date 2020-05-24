@@ -28,6 +28,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="5">
+                      <TextBlock FontStyle="Oblique" FontSize="16" Text="{Binding Title}" />
                         <TextBlock FontStyle="Oblique" FontSize="16" Text="{Binding Name}" />
                         <TextBlock FontSize="16" Text="{Binding LastMessage}" />
                     </StackPanel>
