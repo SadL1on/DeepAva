@@ -15,7 +15,7 @@ namespace KursAuth.Views
     public class MainWindow : ReactiveWindow<MainWindowViewModel>
     {
         public Button vkOpen => this.FindControl<Button>("VkOpen");
-        private ListBox contacts;
+        public Button tlOpen => this.FindControl<Button>("TlOpen");        
 
         public MainWindow()
         {
@@ -26,13 +26,13 @@ namespace KursAuth.Views
             this.WhenActivated((disposables => 
             {
                 this.BindCommand(ViewModel, x => x.VkOpenCmd, x => x.vkOpen).DisposeWith(disposables);
+                this.BindCommand(ViewModel, x => x.TlOpen, x => x.tlOpen).DisposeWith(disposables);
             }));
         }
 
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-            contacts = this.FindControl<ListBox>("contacts");
         }
 
     }

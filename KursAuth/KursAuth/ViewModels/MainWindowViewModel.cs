@@ -18,18 +18,23 @@ using System.Reactive;
 using System.Windows.Input;
 using System.Threading.Tasks;
 using ReactiveUI.Fody.Helpers;
+using KursAuth.Models.Telegram;
 using KursAuth.Utils;
+using TeleSharp.TL.Messages;
+using TeleSharp.TL;
+using System.Runtime.Serialization;
+using System.Reactive.Linq;
+using KursAuth.ViewModels.Messengers;
+using KursAuth.Views.Messengers;
+using KursAuth.Utils.Messages;
 
 namespace KursAuth.ViewModels
 {
 
-    public class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
+    [DataContract]
+    public class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged, IScreen, IRoutableViewModel
     {
         private UserMain user;
-
-        private VKModel vk;
-
-        private IMessengers _messenger;
 
         /// <summary>
         /// Команда перехода к форме авторизации
@@ -44,113 +49,87 @@ namespace KursAuth.ViewModels
         /// <summary>
         /// Команда открытия окна ВК
         /// </summary>
-        public ReactiveCommand<Unit, Unit> VkOpenCmd { get; }
+        private readonly ReactiveCommand<Unit, Unit> vkOpenCmd;
 
-        public ReactiveCommand<long, Unit> GetMessHist { get; }
+        private readonly ReactiveCommand<Unit, Unit> tlOpen;
 
-        public ReactiveCommand<Unit, Unit> MessLogin { get; }
+        private readonly ReactiveCommand<Unit, Unit> toTestView;
+
+        public ICommand ToTestView => toTestView;
+        public ICommand VkOpenCmd => vkOpenCmd;
+        public ICommand TlOpen => tlOpen;
 
         /// <summary>
         /// Логин из формы рег/авт приложения
         /// </summary>
-        [Reactive] 
+        [Reactive]
         public string LoginMain { get; set; }
-
+       
         /// <summary>
         /// Пароль из формы рег/авт приложения
         /// </summary>
-        [Reactive] 
+        [Reactive]
         public string PassMain { get; set; }
-
-        /// <summary>
-        /// Логин из формы рег/авт в мессенджере
-        /// </summary>
-        [Reactive]
-        public string LoginMess { get; set; }
-
-        /// <summary>
-        /// Пароль из формы рег/авт в мессенджере
-        /// </summary>
-        [Reactive]
-        public string PassMess { get; set; }
 
         /// <summary>
         /// Видимость формы регистрации в приложении
         /// </summary>
-        [Reactive] 
+        [Reactive]
         public bool IsVisMainReg { get; set; }
 
         /// <summary>
         /// Видимость формы авторизации в приложении
         /// </summary>
-        [Reactive] 
+        [Reactive]
         public bool IsVisMainAuth { get; set; }
 
-        /// <summary>
-        /// Видимость формы списка контактов
-        /// </summary>
-        [Reactive] 
-        public bool IsVisConCtrl { get; set; }
-
-        /// <summary>
-        /// Видимость формы авторизации ВК
-        /// </summary>
-        [Reactive] 
-        public bool IsVisVkAuth { get; set; }
-
-        /// <summary>
-        /// Список контактов
-        /// </summary>
         [Reactive]
-        public IEnumerable Users { get; set; }
+        public bool IsVisAlertValid { get; set; }
+
+        private RoutingState _router = new RoutingState();
+
+        [DataMember]
+        public RoutingState Router
+        {
+            get => _router;
+            set => this.RaiseAndSetIfChanged(ref _router, value);
+        }
+        
+        public string UrlPathSegment => "/main";
+
+        public IScreen HostScreen { get; }
 
         public MainWindowViewModel()
         {
             ToMainAuthCmd = ReactiveCommand.Create(() => { IsVisMainReg = !IsVisMainReg; });
-            AuthorizationMainCmd = ReactiveCommand.Create<string>((flag) => { AuthorizationMainImpl(Convert.ToBoolean(flag)); });
-            VkOpenCmd = ReactiveCommand.Create(() => { IsVisVkAuth = !IsVisVkAuth; });
-            MessLogin = ReactiveCommand.Create(() => { AuthMessImpl(LoginMess, PassMess); });
-            GetMessHist = ReactiveCommand.Create<long>((userID) => { GetHisVMAsync(userID); });
+            AuthorizationMainCmd = ReactiveCommand.Create<string>(async (flag) => { await AuthorizationMainImpl(Convert.ToBoolean(flag)); });           
+
+            var canMoveToVkOpen = this.WhenAnyObservable(x => x.Router.CurrentViewModel).Select(current => !(current is VkAuthVM || current is VkContVM));
+            vkOpenCmd = ReactiveCommand.Create(() => { Router.Navigate.Execute(new VkAuthVM()); }, canMoveToVkOpen);
+
+            var canMoveToTlOpen = this.WhenAnyObservable(x => x.Router.CurrentViewModel).Select(current => !(current is TlAuthVM));
+            tlOpen = ReactiveCommand.Create(() => { Router.Navigate.Execute(new TlAuthVM()); }, canMoveToTlOpen);
+
+            var canMoveToTest = this.WhenAnyObservable(x => x.Router.CurrentViewModel).Select(current => !(current is TestVM));
+            toTestView = ReactiveCommand.Create(() => { Router.Navigate.Execute(new TestVM()); }, canMoveToTest);
+
+            MessageBus.Current.Listen<RouteToVkContMessage>().Subscribe(Observer.Create<RouteToVkContMessage>((e) => { Router.Navigate.Execute(new VkContVM()); }));
+            MessageBus.Current.Listen<RouteToTlContMessage>().Subscribe(Observer.Create<RouteToTlContMessage>((e) => { Router.Navigate.Execute(new TlContVM()); }));
         }
 
-        public void AuthorizationMainImpl(bool flag)
+        public async Task AuthorizationMainImpl(bool flag)
         {            
-            user = new UserMain(LoginMain, PassMain, flag);
-            if (!flag) { IsVisMainReg = !IsVisMainReg; }
-            else { IsVisMainAuth = !IsVisMainAuth; }
-        }
-
-        public async Task AuthMessImpl(string login, string password)
-        {
-            vk = new VKModel(login, password);
-            IsVisConCtrl = !IsVisConCtrl;
-            IsVisVkAuth = !IsVisVkAuth;
-            _messenger = vk;
-            await GetFriends();
-        }
-
-        public async Task GetFriends()
-        {
-            Users = await vk.GetFriendsAsync();
-        }
-
-        [Reactive]
-        public IEnumerable Messages { get; set; }
-
-        public async Task GetHisVMAsync(long userId)
-        {
-            var mess = await vk.GetHistoryAsync(userId); 
-            Messages = mess.Messages.OrderBy(x => x.Date).ToArray();
-        }
-
-        public async Task SendMessage(long userid, string text)
-        {
-            try
+            user = new UserMain();
+            var code = await user.MainAuthAsync(LoginMain, PassMain, flag);
+            if (code != 0)
             {
-                await vk.SendMessageAsync(userid, text);
+                IsVisAlertValid = !IsVisAlertValid;
             }
-            catch
-            { }
+            else
+            {
+                if (!flag) { IsVisMainReg = !IsVisMainReg; }
+                else { IsVisMainAuth = !IsVisMainAuth; }
+            }
         }
     }
 }

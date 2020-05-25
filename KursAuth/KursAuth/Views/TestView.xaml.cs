@@ -4,11 +4,11 @@ using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using KursAuth.ViewModels;
 
-namespace KursAuth.Views.Messengers
+namespace KursAuth.Views
 {
-    public class Messages : ReactiveUserControl<MainWindowViewModel>
+    public class TestView : ReactiveUserControl<TestVM>
     {
-        public Messages()
+        public TestView()
         {
             this.InitializeComponent();
         }

@@ -16,12 +16,37 @@ namespace KursAuth.Models
 {
     public class VKModel : IMessengers
     {
+        private VKModel() { }
+
+        private static VKModel _instance;
+        public static VKModel GetInstance()
+        {
+            if (_instance == null)
+            {
+                _instance = new VKModel();
+            }
+            return _instance;
+        }
+
         private VkApi api;
         private string login;
         private string password;
+        public VkApi Api => api;
 
+        public IEnumerable<Message> GetMessagesByUserId(long peerid)
+        {
+            var mess = Api.Messages.GetHistory(new MessagesGetHistoryParams() { PeerId = peerid });
+           
+            return mess.Messages;
+        }
+
+        public bool IsAuth { get => api.IsAuthorized; }
+
+        /// <summary>
+        /// Метод авторизации Вконтакте
+        /// </summary>
         /// <inheritdoc/> 
-        public VKModel(string log, string pass)
+        public async Task VkAuthAsync(string log, string pass)
         {
             login = log;
             password = pass;
@@ -30,7 +55,7 @@ namespace KursAuth.Models
             services.AddAudioBypass();
             api = new VkApi(services);
 
-            api.Authorize(new ApiAuthParams
+            await api.AuthorizeAsync(new ApiAuthParams
             {
                 ApplicationId = 7062393,
                 Login = login,
@@ -43,7 +68,9 @@ namespace KursAuth.Models
             });
 
         }
-
+        /// <summary>
+        /// Метод возвращает список друзей авторизовавшегося пользователя
+        /// </summary>
         /// <inheritdoc/> 
         public async Task<IEnumerable<object>> GetFriendsAsync()
         {
@@ -56,6 +83,22 @@ namespace KursAuth.Models
             return users;
         }
 
+
+        public async Task<IEnumerable<object>> GetDialogsAsync()
+        {
+            var dialogs = await api.Messages.GetConversationsAsync(new GetConversationsParams
+            {
+                Count = 200
+
+
+            }); ;
+
+            return dialogs.Items;
+        }
+
+        /// <summary>
+        /// Метод возвращает историю диалога 
+        /// </summary>
         public async Task<MessageGetHistoryObject> GetHistoryAsync(long userid)
         {
 
@@ -67,7 +110,9 @@ namespace KursAuth.Models
             });
             return getHistory;
         }
-
+        /// <summary>
+        /// Метод отправляет сообщение пользователю
+        /// </summary>
         public async Task SendMessageAsync(long userid,string text)
         {
 
@@ -78,6 +123,18 @@ namespace KursAuth.Models
                 RandomId = new Random().Next(999999) //ужасный уникальный идентификатор
             });
         }
+        /// <summary>
+        /// Метод возвращает информацию об авторизовавшемся пользователе
+        /// </summary>
+        public async Task<User> GetUserInfo()
+        {
+            var infoaboutuser = api.Users.Get(new long[] { api.UserId.Value }).FirstOrDefault();
+            return infoaboutuser;
+
+        }
+
+
+
 
     }
 

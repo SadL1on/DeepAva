@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="KursAuth.Views.Messengers.Contacts"
+    x:Class="KursAuth.Views.Messengers.VkContacts"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -11,22 +11,25 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="130" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
 
         <ListBox
             Name="Contacts"
             Grid.Row="1"
+            Grid.RowSpan="2"
             Grid.Column="0"
             Items="{Binding Users}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="5">
-                        <TextBlock FontSize="16" Text="{Binding FirstName}" />
-                        <TextBlock FontSize="16" Text="{Binding LastName}" />
+                      <TextBlock FontSize="16" Text="{Binding Conversation.Peer.Id}" />
+                        <TextBlock FontSize="16" Text="{Binding LastMessage.Text}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -35,14 +38,14 @@
         <TextBlock
             Grid.Row="0"
             Grid.Column="0"
-            Grid.ColumnSpan="2"
+            Grid.ColumnSpan="3"
             Background="Aqua"
+            Name="Title"
             Text="Title"
             TextAlignment="Center" />
-        <Grid Grid.Row="1" Grid.Column="1">
+        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
             <ListBox
                 Name="MessHist"
-                Grid.Row="0"
                 Background="Bisque">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -50,20 +53,24 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <TextBox
-                Name="MessageText"
-                Width="471"
-                Height="40"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Bottom" />
-            <Button
-                Name="SendMessage"
-                Width="130"
-                Height="40"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom">
-                Отправить
-            </Button>        
+                 
         </Grid>
+      <Grid Grid.Row="2" Grid.Column="1">
+        <TextBox
+            Name="MessageText"
+            Height="30"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Bottom" />
+      </Grid>
+      <Grid Grid.Row="2" Grid.Column="3">
+        <Button
+            Name="SendMessage"
+            Width="130"
+            Height="30"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom">
+          Отправить
+        </Button>
+      </Grid>
     </Grid>
 </UserControl>
