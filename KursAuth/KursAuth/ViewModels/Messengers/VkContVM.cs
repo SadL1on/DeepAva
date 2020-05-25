@@ -1,4 +1,9 @@
-﻿using KursAuth.Models;
+﻿using Avalonia;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
+using DynamicData;
+using KursAuth.Models;
+using KursAuth.Models.VK;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
@@ -22,10 +27,12 @@ namespace KursAuth.ViewModels.Messengers
         private VKModel vk;
 
         /// <summary>
-        /// Список контактов
+        /// Список диалогов
         /// </summary>
         [Reactive]
-        public IEnumerable Users { get; set; }
+        public IEnumerable Dialogs { get; set; }
+        [Reactive]
+        Dialogs UserInDialog { get; set; }
 
         [Reactive]
         public IEnumerable Messages { get; set; }
@@ -35,25 +42,52 @@ namespace KursAuth.ViewModels.Messengers
         /// </summary>
         [Reactive]
         public string NameVk { get; set; }
+        [Reactive]
+        public string MessageText { get; set; }
 
-        public ReactiveCommand<ConversationAndLastMessage, Unit> GetMessHist { get; }
+
+        public ReactiveCommand<Dialogs, Unit> GetMessHist { get; }
+        public ReactiveCommand<Unit, Task> SendMessage { get; }
 
         public VkContVM()
         {
             vk = VKModel.GetInstance();
             GetFriends();
-            GetUserInfo();
-            GetMessHist = ReactiveCommand.Create<ConversationAndLastMessage>(async (selectedItem) => { await GetHisVMAsync(selectedItem); });
-        }
+            //GetUserInfo();
+            GetMessHist = ReactiveCommand.Create<Dialogs>(async (selectedItem) => { await GetHisVMAsync(selectedItem); });
+            SendMessage = ReactiveCommand.Create(async () => { await SendMessageAsync(); });
 
-        public async Task GetHisVMAsync(ConversationAndLastMessage selectedItem)
+        }
+        
+        public async Task GetHisVMAsync(Dialogs selectedItem)
         {
+            UserInDialog = selectedItem;
             if (selectedItem == null)
                 return;
             
             // var mess = await vk.GetHistoryAsync(selectedindex.);
             // Messages = mess.Messages.OrderBy(x => x.Date).ToArray();
-            Messages = vk.GetMessagesByUserId(selectedItem.Conversation.Peer.Id);
+            var MessagesHistory = vk.GetMessagesByUserId(selectedItem.Id).OrderBy(x=>x.Date).ToArray();
+            Models.VK.Message[] ms = new Models.VK.Message[MessagesHistory.Length];
+            for (int i = 0; i < MessagesHistory.Length; i++)
+            {
+                Models.VK.Message mes = new Models.VK.Message();
+                mes.Text = MessagesHistory[i].Text;
+                if(MessagesHistory[i].FromId == selectedItem.Id)
+                {
+                    mes.Alignment = "Left";
+
+                }
+                else
+                {
+
+                    mes.Alignment = "Right";
+                }
+
+                ms[i] = mes; 
+            
+            }
+            Messages = ms;
         }
 
         /// <summary>
@@ -61,7 +95,50 @@ namespace KursAuth.ViewModels.Messengers
         /// </summary>
         public async Task GetFriends()
         {
-            Users = await vk.GetDialogsAsync();
+          var dialogs = await vk.GetDialogsAsync();
+
+            Models.VK.Dialogs[] MyDialogs = new Models.VK.Dialogs[dialogs.Items.Count];
+            for (int i = 0; i < dialogs.Items.Count; i++)
+            {
+                Models.VK.Dialogs MyDialog = new Models.VK.Dialogs();
+                MyDialog.Id = dialogs.Items[i].Conversation.Peer.Id;
+                MyDialog.LastMessage = dialogs.Items[i].LastMessage.Text;
+                
+
+                if (dialogs.Items[i].Conversation.ChatSettings != null)
+                {
+                    MyDialog.Title = dialogs.Items[i].Conversation.ChatSettings.Title;
+                }
+
+                for (int j = 0; j < dialogs.Profiles.Count; j++)
+                {
+                    if (MyDialog.Id == dialogs.Profiles[j].Id)
+                    {
+                        string FirstName = dialogs.Profiles[j].FirstName;
+                        string LastName = dialogs.Profiles[j].LastName;
+                        MyDialog.Name = FirstName + " " + LastName;
+                  
+                    //    MyDialog.photo = new Bitmap(AvaloniaLocator.Current.GetService<IAssetLoader>()
+                    //.Open(new Uri($" avares://ASSEMBLYNAME/relative/project/path/{dialogs.Profiles[i].Photo100}.ico")));
+                    }
+
+                    if (MyDialog.Name != null)
+                    {
+
+                        break;
+
+                    }
+                   
+                }
+                MyDialogs[i] = MyDialog;
+            }
+
+
+
+
+            Dialogs = MyDialogs;
+
+
         }
 
         /// <summary>
@@ -80,11 +157,16 @@ namespace KursAuth.ViewModels.Messengers
         /// <summary>
         /// Отправка сообщений ВКонтакте
         /// </summary>
-        public async Task SendMessage(long userid, string text)
+        public async Task SendMessageAsync()
         {
+            var dialog = UserInDialog;
             try
             {
-                await vk.SendMessageAsync(userid, text);
+                await vk.SendMessageAsync(UserInDialog.Id, MessageText);
+                MessageText = null;
+                await GetFriends();
+                await GetHisVMAsync(UserInDialog);
+                UserInDialog = dialog;
             }
             catch
             { }

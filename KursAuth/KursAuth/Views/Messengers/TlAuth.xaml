@@ -69,15 +69,22 @@
                 IsVisible="{Binding !IsVisPass}">
                 Send code
             </Button>
-            <Button
-                Name="OnTl"
-                Width="200"
-                Height="30"
-                Margin="10"
-                CommandParameter="{Binding #Code.Text}"
-                IsVisible="{Binding IsVisPass}">
-                Log in
-            </Button>
+          <Button
+          Name="SendCodeAgain"
+          Width="200"
+          Height="30"
+          CommandParameter="{Binding #Phone.Text}"
+          IsVisible="{Binding IsVisPass}">
+            Отправить код повторно
+          </Button>
+          <Button
+              Name="OnTl"
+              Width="200"
+              Height="30"
+              CommandParameter="{Binding #Code.Text}"
+              IsVisible="{Binding IsVisPass}">
+            Войти
+          </Button>
         </StackPanel>
       </Border>
     </Grid>

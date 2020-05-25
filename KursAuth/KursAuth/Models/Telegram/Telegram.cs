@@ -48,13 +48,14 @@ namespace KursAuth.Models.Telegram
             await client.ConnectAsync();
             hash = await client.SendCodeRequestAsync(phone);
             this.phone = phone;
-
+          var token =  client.Session.SessionUserId;
         }
 
         public async Task MakeAuth(string code)
         {
            
             var user = await client.MakeAuthAsync(phone, hash, code);
+           
 
         }
 
@@ -79,5 +80,23 @@ namespace KursAuth.Models.Telegram
             var dialogs = (TLDialogs)client.GetUserDialogsAsync().Result;
             return dialogs.Users.ToArray();
         }
+
+        public async Task<TLMessagesSlice> GetHistory(int userid)
+        {
+
+
+            var history = await client.SendRequestAsync<TLMessagesSlice>
+                    (new TLRequestGetHistory()
+                    {
+                        Peer = new TLInputPeerUser() { UserId = userid },
+                        Limit = 50,
+                        AddOffset = 1,
+                        OffsetId = 0
+                    });
+
+            return history;
+
+        }
+
     }
 }
