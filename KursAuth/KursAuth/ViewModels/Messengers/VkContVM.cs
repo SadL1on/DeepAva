@@ -1,4 +1,7 @@
-﻿using DynamicData;
+﻿using Avalonia;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
+using DynamicData;
 using KursAuth.Models;
 using KursAuth.Models.VK;
 using ReactiveUI;
@@ -28,6 +31,8 @@ namespace KursAuth.ViewModels.Messengers
         /// </summary>
         [Reactive]
         public IEnumerable Dialogs { get; set; }
+        [Reactive]
+        Dialogs UserInDialog { get; set; }
 
         [Reactive]
         public IEnumerable Messages { get; set; }
@@ -37,8 +42,12 @@ namespace KursAuth.ViewModels.Messengers
         /// </summary>
         [Reactive]
         public string NameVk { get; set; }
+        [Reactive]
+        public string MessageText { get; set; }
+
 
         public ReactiveCommand<Dialogs, Unit> GetMessHist { get; }
+        public ReactiveCommand<Unit, Task> SendMessage { get; }
 
         public VkContVM()
         {
@@ -46,22 +55,25 @@ namespace KursAuth.ViewModels.Messengers
             GetFriends();
             //GetUserInfo();
             GetMessHist = ReactiveCommand.Create<Dialogs>(async (selectedItem) => { await GetHisVMAsync(selectedItem); });
-        }
+            SendMessage = ReactiveCommand.Create(async () => { await SendMessageAsync(); });
 
+        }
+        
         public async Task GetHisVMAsync(Dialogs selectedItem)
         {
+            UserInDialog = selectedItem;
             if (selectedItem == null)
                 return;
             
             // var mess = await vk.GetHistoryAsync(selectedindex.);
             // Messages = mess.Messages.OrderBy(x => x.Date).ToArray();
-            var Messages1 = vk.GetMessagesByUserId(selectedItem.Id).OrderBy(x=>x.Date).ToArray();
-            Models.VK.Message[] ms = new Models.VK.Message[Messages1.Length];
-            for (int i = 0; i < Messages1.Length; i++)
+            var MessagesHistory = vk.GetMessagesByUserId(selectedItem.Id).OrderBy(x=>x.Date).ToArray();
+            Models.VK.Message[] ms = new Models.VK.Message[MessagesHistory.Length];
+            for (int i = 0; i < MessagesHistory.Length; i++)
             {
                 Models.VK.Message mes = new Models.VK.Message();
-                mes.Text = Messages1[i].Text;
-                if(Messages1[i].FromId == selectedItem.Id)
+                mes.Text = MessagesHistory[i].Text;
+                if(MessagesHistory[i].FromId == selectedItem.Id)
                 {
                     mes.Alignment = "Left";
 
@@ -91,6 +103,7 @@ namespace KursAuth.ViewModels.Messengers
                 Models.VK.Dialogs MyDialog = new Models.VK.Dialogs();
                 MyDialog.Id = dialogs.Items[i].Conversation.Peer.Id;
                 MyDialog.LastMessage = dialogs.Items[i].LastMessage.Text;
+                
 
                 if (dialogs.Items[i].Conversation.ChatSettings != null)
                 {
@@ -104,6 +117,9 @@ namespace KursAuth.ViewModels.Messengers
                         string FirstName = dialogs.Profiles[j].FirstName;
                         string LastName = dialogs.Profiles[j].LastName;
                         MyDialog.Name = FirstName + " " + LastName;
+                  
+                    //    MyDialog.photo = new Bitmap(AvaloniaLocator.Current.GetService<IAssetLoader>()
+                    //.Open(new Uri($" avares://ASSEMBLYNAME/relative/project/path/{dialogs.Profiles[i].Photo100}.ico")));
                     }
 
                     if (MyDialog.Name != null)
@@ -141,11 +157,16 @@ namespace KursAuth.ViewModels.Messengers
         /// <summary>
         /// Отправка сообщений ВКонтакте
         /// </summary>
-        public async Task SendMessage(long userid, string text)
+        public async Task SendMessageAsync()
         {
+            var dialog = UserInDialog;
             try
             {
-                await vk.SendMessageAsync(userid, text);
+                await vk.SendMessageAsync(UserInDialog.Id, MessageText);
+                MessageText = null;
+                await GetFriends();
+                await GetHisVMAsync(UserInDialog);
+                UserInDialog = dialog;
             }
             catch
             { }
