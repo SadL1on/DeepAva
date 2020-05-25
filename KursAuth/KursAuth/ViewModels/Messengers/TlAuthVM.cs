@@ -47,7 +47,7 @@ namespace KursAuth.ViewModels.Messengers
             {
                 if (!String.IsNullOrWhiteSpace(phone))
                 {
-                    IsVisPass = !IsVisPass;
+                    IsVisPass = true;
                     await tl.SendCodeToAuth(phone);
                 }
                 else { throw new Exception() ; }

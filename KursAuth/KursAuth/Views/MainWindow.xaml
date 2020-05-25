@@ -86,7 +86,7 @@
                 Content="test"
                 DockPanel.Dock="Top"
                 Command="{Binding ToTestView}" />
-            <Image Source="/Assets/avalonia-logo.ico" />
+            <Image Source="/Assets/logo.png" />
             <Grid />
         </DockPanel>
       

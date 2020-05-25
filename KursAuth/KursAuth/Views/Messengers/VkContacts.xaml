@@ -16,7 +16,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
 
         <ListBox
@@ -24,53 +24,56 @@
             Grid.Row="1"
             Grid.RowSpan="2"
             Grid.Column="0"
-            Items="{Binding Users}">
+            Items="{Binding Dialogs}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin="5">
-                      <TextBlock FontSize="16" Text="{Binding Conversation.Peer.Id}" />
-                        <TextBlock FontSize="16" Text="{Binding LastMessage.Text}" />
+                      <Image Source="{Binding photo}"/>
+                      <TextBlock FontStyle="Oblique" FontSize="16" Text="{Binding Title}" />
+                        <TextBlock FontStyle="Oblique" FontSize="16" Text="{Binding Name}" />
+                        <TextBlock FontSize="16" Text="{Binding LastMessage}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
         <TextBlock
+            Name="Title"
             Grid.Row="0"
             Grid.Column="0"
             Grid.ColumnSpan="3"
             Background="Aqua"
-            Name="Title"
             Text="Title"
             TextAlignment="Center" />
-        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
-            <ListBox
-                Name="MessHist"
-                Background="Bisque">
+        <Grid
+            Grid.Row="1"
+            Grid.Column="1"
+            Grid.ColumnSpan="2">
+            <ListBox Name="MessHist" Background="Bisque">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Text}"/>
+                        <TextBlock HorizontalAlignment="{Binding Alignment}" Text="{Binding Text}" />
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-                 
+
         </Grid>
-      <Grid Grid.Row="2" Grid.Column="1">
-        <TextBox
-            Name="MessageText"
-            Height="30"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Bottom" />
-      </Grid>
-      <Grid Grid.Row="2" Grid.Column="3">
-        <Button
-            Name="SendMessage"
-            Width="130"
-            Height="30"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Bottom">
-          Отправить
-        </Button>
-      </Grid>
+        <Grid Grid.Row="2" Grid.Column="1">
+            <TextBox
+                Name="MessageText"
+                Height="30"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom" />
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="3">
+            <Button
+                Name="SendMessage"
+                Width="130"
+                Height="30"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom">
+                Отправить
+            </Button>
+        </Grid>
     </Grid>
 </UserControl>

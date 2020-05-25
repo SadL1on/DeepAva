@@ -11,6 +11,7 @@ using VkNet.Utils;
 using System.Linq;
 using System.Threading.Tasks;
 using KursAuth.Utils;
+using System.IO;
 
 namespace KursAuth.Models
 {
@@ -40,33 +41,52 @@ namespace KursAuth.Models
             return mess.Messages;
         }
 
-        public bool IsAuth { get => api.IsAuthorized; }
+        public bool IsAuth = false;
+
+        /// <summary>
+        /// Метод авторизации Вконтакте через токен
+        /// </summary>
+        /// <inheritdoc/> 
+        public async Task VkAuthTokenAsync(string token)
+        {
+
+            var services = new ServiceCollection();
+            services.AddAudioBypass();
+            api = new VkApi(services);
+            api.Authorize(new ApiAuthParams
+            {
+                AccessToken = token
+            });
+
+
+        }
 
         /// <summary>
         /// Метод авторизации Вконтакте
         /// </summary>
         /// <inheritdoc/> 
-        public async Task VkAuthAsync(string log, string pass)
+        public async Task<string> VkAuthAsync(string log, string pass)
         {
             login = log;
             password = pass;
+         
 
             var services = new ServiceCollection();
             services.AddAudioBypass();
             api = new VkApi(services);
-
-            await api.AuthorizeAsync(new ApiAuthParams
-            {
-                ApplicationId = 7062393,
-                Login = login,
-                Password = password,
-                Settings = Settings.All,
-                TwoFactorAuthorization = () =>
+                await api.AuthorizeAsync(new ApiAuthParams
                 {
-                    throw new Exception("двухфакторка");
-                }
-            });
-
+                    ApplicationId = 7062393,
+                    Login = login,
+                    Password = password,
+                    Settings = Settings.All,
+                    TwoFactorAuthorization = () =>
+                    {
+                        throw new Exception("двухфакторка");
+                    }
+                });
+            return api.Token;
+         
         }
         /// <summary>
         /// Метод возвращает список друзей авторизовавшегося пользователя
@@ -84,16 +104,16 @@ namespace KursAuth.Models
         }
 
 
-        public async Task<IEnumerable<object>> GetDialogsAsync()
+        public async Task<GetConversationsResult> GetDialogsAsync()
         {
             var dialogs = await api.Messages.GetConversationsAsync(new GetConversationsParams
             {
-                Count = 200
+                Count = 200,
+                Extended = true
 
+            });; ;
 
-            }); ;
-
-            return dialogs.Items;
+            return dialogs;
         }
 
         /// <summary>
@@ -130,6 +150,16 @@ namespace KursAuth.Models
         {
             var infoaboutuser = api.Users.Get(new long[] { api.UserId.Value }).FirstOrDefault();
             return infoaboutuser;
+
+        }
+
+        public string GetUserInfo(long id)
+        {
+            var infoaboutuser = api.Users.Get(new long[] { id }).FirstOrDefault();
+            string fn = infoaboutuser.FirstName;
+            string ln = infoaboutuser.LastName;
+            string name = fn + " " + ln;
+            return name;
 
         }
 

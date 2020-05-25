@@ -39,15 +39,23 @@
                   Text="Title"
                   TextAlignment="Center" />
       <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
-        <ListBox
-            Name="MessHist"
-            Background="Bisque">
-          <ListBox.ItemTemplate>
-            <DataTemplate>
-              <TextBlock Text="{Binding Text}"/>
-            </DataTemplate>
-          </ListBox.ItemTemplate>
-        </ListBox>
+        <Grid
+             Grid.Row="1"
+             Grid.Column="1"
+             Grid.ColumnSpan="2">
+          <ListBox Name="MessHist" Background="Bisque">
+            <ListBox.ItemTemplate>
+              <DataTemplate>
+                <StackPanel Margin="5">
+                  <TextBlock Name="FIOFrom" Text="{Binding FirstName}" />
+                  <TextBlock Text="{Binding Message}" />
+                  <TextBlock Text="{Binding}" />
+                </StackPanel>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+
+        </Grid>
 
       </Grid>
       <Grid Grid.Row="2" Grid.Column="1">

@@ -4,6 +4,7 @@ using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,11 +39,9 @@ namespace KursAuth.ViewModels.Messengers
         {
             if (selectedItem == null)
                 return;
-            
-            // var mess = await vk.GetHistoryAsync(selectedindex.);
-            // Messages = mess.Messages.OrderBy(x => x.Date).ToArray();
 
-            //Messages = vk.GetMessagesByUserId(selectedItem.Conversation.Peer.Id);
+            var hist = await tl.GetHistory(selectedItem.Id);
+            Messages = hist.Messages.ToArray();
         }
 
         /// <summary>

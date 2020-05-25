@@ -12,6 +12,7 @@ namespace KursAuth.Views.Messengers
     public class TlAuth : ReactiveUserControl <TlAuthVM>
     {
         private Button sendcode => this.FindControl<Button>("SendCode");
+        private Button sendcodeagain => this.FindControl<Button>("SendCodeAgain");
         private TextBox phone => this.FindControl<TextBox>("Phone");
         private Button ontl => this.FindControl<Button>("OnTl");
         private TextBox code => this.FindControl<TextBox>("Code");
@@ -23,7 +24,8 @@ namespace KursAuth.Views.Messengers
             this.WhenActivated((disposables =>
             { 
               this.BindCommand(ViewModel, x => x.VisPass, x => x.sendcode, phone.Text).DisposeWith(disposables); 
-              this.BindCommand(ViewModel, x => x.AuthTl, x => x.ontl, code.Text).DisposeWith(disposables); 
+              this.BindCommand(ViewModel, x => x.AuthTl, x => x.ontl, code.Text).DisposeWith(disposables);
+              this.BindCommand(ViewModel, x => x.VisPass, x => x.sendcodeagain, phone.Text).DisposeWith(disposables);
             }));
         }
 
