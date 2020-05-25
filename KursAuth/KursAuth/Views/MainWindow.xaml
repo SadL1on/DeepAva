@@ -9,8 +9,8 @@
     xmlns:vm="clr-namespace:KursAuth.ViewModels;assembly=KursAuth"
     xmlns:vv="clr-namespace:KursAuth.Views.Messengers;assembly=KursAuth"
     Title="MultiMess"
-    Width="800"
-    Height="400"
+    Width="1000"
+    Height="600"
     d:DesignHeight="450"
     d:DesignWidth="800"
     Icon="/Assets/avalonia-logo.ico"
@@ -19,6 +19,10 @@
     <Design.DataContext>
         <vm:MainWindowViewModel />
     </Design.DataContext>
+
+    
+
+
   
     <Grid Name="MainWin">      
         <Grid.ColumnDefinitions>
@@ -28,7 +32,7 @@
       
       <reactiveUi:RoutedViewHost Grid.Column="1" Router="{Binding Router}">
         <reactiveUi:RoutedViewHost.DefaultContent>
-          <TextBlock Text="Default Content" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+          
         </reactiveUi:RoutedViewHost.DefaultContent>
       </reactiveUi:RoutedViewHost>
       
@@ -36,16 +40,17 @@
             Grid.Row="0"
             Grid.RowSpan="2"
             Grid.Column="0"
-            Background="Aquamarine">
+            Background="#25181e">
             <!--  TODO Create binding for all buttons  -->
-            <Button
-                Name="Settings"
-                Width="40"
-                Height="30"
-                Margin="10"
-                Background="Crimson"
-                Content="Set"
-                DockPanel.Dock="Bottom" />
+          <Button
+              Name="Settings"
+              Width="40"
+              Height="30"
+              Margin="10"
+              Background="Crimson"
+              Content="Set"
+              DockPanel.Dock="Bottom">           
+          </Button>
             <Button
                 Name="AddMes"
                 Width="40"
@@ -61,22 +66,28 @@
                 Background="Gold"
                 Content="Notify"
                 DockPanel.Dock="Bottom" />
-            <Button
-                Name="VkOpen"
-                Width="40"
-                Height="30"
-                Margin="10"
-                Background="HotPink"
-                Content="VK"
-                DockPanel.Dock="Top" />
-            <Button
-                Name="TlOpen"
-                Width="40"
-                Height="30"
-                Margin="10"
-                Background="Blue"
-                Content="Tl"
-                DockPanel.Dock="Top" />
+          <Button
+              Name="VkOpen"
+              Width="50"
+              Height="50"
+              Margin="10"
+              BorderThickness="0"
+              DockPanel.Dock="Top">
+            <Button.Background>
+              <ImageBrush Source="/Assets/vkontakte_PNG19.png"/>
+            </Button.Background>
+          </Button>
+          <Button
+              Name="TlOpen"
+              Width="50"
+              Height="50"
+              Margin="10"
+              BorderThickness="0"
+              DockPanel.Dock="Top">
+            <Button.Background>
+              <ImageBrush Source="/Assets/avalonia-logo.ico" />
+            </Button.Background>
+          </Button>
           <Button
             Name="Test"
                 Width="40"

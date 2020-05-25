@@ -7,18 +7,57 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <Grid Name="VkAuth" Background="BlueViolet">
+
+  <UserControl.Styles>
+    <Style Selector="Button /template/ ContentPresenter">
+      <Setter Property="CornerRadius" Value="6"/>
+    </Style>
+    <Style Selector="Button">
+      <Setter Property="Background" Value="#2D2F34"/>
+      <Setter Property="FontSize" Value="14"/>
+      <Setter Property="Foreground" Value="#C0C0C0" />
+      <Setter Property="BorderBrush" Value="#808080"/>
+    </Style>
+    
+    <Style Selector="TextBox">
+      <Setter Property="Background" Value="#383B40"/>
+      <Setter Property="Foreground" Value="#C0C0C0" />
+      <Setter Property="BorderBrush" Value="#808080"/>
+    </Style>
+    <Style Selector="TextBox /template/ Border">
+      <Setter Property="CornerRadius" Value="5" />
+    </Style>    
+  </UserControl.Styles>
+  
+    <Grid Name="TlAuth" Background="#27292D">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="300" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+        <RowDefinition Height="350" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+      <Border CornerRadius="10" Background="#1F2023" Grid.Column="1" Grid.Row="1">
         <StackPanel>
-            <TextBlock HorizontalAlignment="Center" FontSize="30">Авторизация</TextBlock>
+            <TextBlock 
+              Margin="30"
+              HorizontalAlignment="Center" 
+              FontSize="30"
+              Foreground="#D3D3D3">Authorization</TextBlock>
             <TextBox
                 Name="Phone"
                 Width="200"
                 Height="30"
-                Margin="10,70,10,30" />
+                Watermark="Enter your phone"
+                Margin="10,30,10,30" />
             <TextBox
                 Name="Code"
                 Width="200"
                 Height="30"
+                Watermark="Enter the code"
                 Margin="10,0,10,30"
                 IsVisible="{Binding IsVisPass}"
                 PasswordChar="*" />
@@ -28,7 +67,7 @@
                 Height="30"
                 CommandParameter="{Binding #Phone.Text}"
                 IsVisible="{Binding !IsVisPass}">
-                Отправить код
+                Send code
             </Button>
           <Button
           Name="SendCodeAgain"
@@ -47,5 +86,6 @@
             Войти
           </Button>
         </StackPanel>
+      </Border>
     </Grid>
 </UserControl>

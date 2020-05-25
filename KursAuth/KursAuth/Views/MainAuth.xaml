@@ -9,79 +9,84 @@
     mc:Ignorable="d">
 
   <UserControl.Styles>
-      <!--<ControlTemplate x:Key="AuthBtn">
-        <Border CornerRadius="20" BorderThickness="2"/>
-      </ControlTemplate>-->
     <Style Selector="Button /template/ ContentPresenter">
-      <Setter Property="CornerRadius" Value="10"/>
-      <Setter Property="BorderThickness" Value="4"/>
-      <Setter Property="BorderBrush" Value="Black"/>
+      <Setter Property="CornerRadius" Value="6"/>
     </Style>
     <Style Selector="Button">
-      <Setter Property="BorderThickness" Value="1"/>
-      <Setter Property="BorderBrush" Value="Black"/>
+      <Setter Property="Background" Value="#693650" />
+      <Setter Property="BorderBrush" Value="#693650" />
+      <Setter Property="Foreground" Value="#FFC0CB" />
+      <Setter Property="FontSize" Value="14"/>
+    </Style>
+
+    <Style Selector="TextBox /template/ Border">
+      <Setter Property="CornerRadius" Value="5" />
+    </Style>
+    <Style Selector="TextBox">
+      <Setter Property="Background" Value="#693650" />
+      <Setter Property="BorderBrush" Value="#693650" />
+      <Setter Property="Foreground" Value="#FFC0CB" />
+      <Setter Property="FontFamily" Value="Roboto" />
+    </Style>
+    
+    <Style Selector="TextBlock">
+      <Setter Property="Foreground" Value="#FFC0CB" />
     </Style>
   </UserControl.Styles>
-  
-  <Grid Name="mainAuth" Background="DarkGray">
+
+  <Grid Name="mainAuth" Background="#1d1015">
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="*" />
-      <ColumnDefinition Width="200" />
+      <ColumnDefinition Width="300" />
       <ColumnDefinition Width="*" />
     </Grid.ColumnDefinitions>
     <Grid.RowDefinitions>
       <RowDefinition Height="*" />
+      <RowDefinition Height="350" />
       <RowDefinition Height="*" />
-      <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
-    <Grid Grid.Row="0" Grid.Column="1">
-      <TextBlock
-         Margin="10"
-         HorizontalAlignment="Center"
-         VerticalAlignment="Top"
-         FontSize="30"
-         Text="Авторизация" />
-    </Grid>
-    <StackPanel Grid.Row="1" Grid.Column="1">    
-      <TextBlock
-          Margin="0,0,150,0"
+    <Border CornerRadius="10" Background="#25181e" Grid.Column="1" Grid.Row="1">
+      <StackPanel>
+        <TextBlock
           HorizontalAlignment="Center"
-          FontSize="15"
-          Text="Логин" />
-      <TextBox
-          Name="Login"
-          Width="200"
-          Height="30"/>
-      <TextBlock
-          Margin="0,0,140,0"
-          HorizontalAlignment="Center"
-          FontSize="15"
-          Text="Пароль" />
-      <TextBox
-          Name="Pass"
-          Width="200"
-          Height="30"
-          PasswordChar="*" />
-      <StackPanel Margin="0,20,0,0" Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
-        <Button          
+          FontSize="30"
+          Margin="30">
+          Authorization
+        </TextBlock>
+        <TextBox
+            Name="Login"
+            Width="200"
+            Height="30"
+            Watermark="Login"
+            Margin="10,30,10,30" />
+        <TextBox
+            Name="Password"
+            Width="200"
+            Height="30"
+            Watermark="Password"
+            Margin="10,0,10,30"
+            PasswordChar="*" />
+        <StackPanel Margin="50, 0,0,0" Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
+          <Button
             Name="MainAuth"
             Width="70"
             Height="30"
-            Content="Вход"
-            
+            Content="Log in"
             CommandParameter="true"/>
-        <Button
-          Name="MainAuthReg"
-              Width="130"
-              Height="30"
-              Content="Регистрация" />
+          <Button
+            Name="MainAuthReg"
+            Width="125"
+            Height="30"
+            Margin="5, 0, 0, 0"
+            Content="Registration" />
+        </StackPanel>
+        <TextBlock
+          Name="Alert"
+          Width="200"
+          Height="30"
+          Margin="20, 20, 0, 0"
+          IsVisible="{Binding IsVisAlertValid}"/>
       </StackPanel>
-      <TextBlock
-        Name="Alert"
-        Width="200"
-        Height="30"
-        Margin="20, 20, 0, 0"
-        IsVisible="{Binding IsVisAlertValid}"/>
-    </StackPanel>
+    </Border>
   </Grid>
 </UserControl>
