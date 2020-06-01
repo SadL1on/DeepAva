@@ -138,7 +138,7 @@ namespace KursAuth.Models
 
             await api.Messages.SendAsync(new MessagesSendParams
             {
-                UserId = userid, //Id получателя
+                PeerId = userid, //Id получателя
                 Message = text, //Сообщение
                 RandomId = new Random().Next(999999) //ужасный уникальный идентификатор
             });
