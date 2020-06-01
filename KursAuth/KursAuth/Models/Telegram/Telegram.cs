@@ -14,7 +14,7 @@ namespace KursAuth.Models.Telegram
     public class Telegram
     {
 
-        TelegramClient client;
+       public TelegramClient client;
         string hash;
         string phone;
         public bool IsAuth = false;

@@ -40,11 +40,31 @@ namespace KursAuth.ViewModels.Messengers
         {
             if (selectedItem == null)
                 return;
-
             var hist = await tl.GetHistory(selectedItem.Id);
-             Messages = hist.Messages.ToArray();
-           
-
+            var meshist = hist.Messages.ToArray();
+            Message[] History = new Message[hist.Messages.Count];
+            //foreach (var msg in Messages)
+            for (int i=0;i<hist.Messages.Count; i++)
+            {
+                if (hist.Messages[i] is TLMessage)
+                {
+                    Message mes = new Message();
+                    TLMessage sms = hist.Messages[i] as TLMessage;
+                    mes.Text = sms.Message;
+                    if (sms.FromId.Value != tl.client.Session.TLUser.Id)
+                    {
+                        mes.Alignment = "Left";
+                    }
+                    else
+                    {
+                        mes.Alignment = "Right";
+                    }
+                    History[i] = mes;
+                }
+                if (hist.Messages[i] is TLMessageService)
+                    continue;
+            }
+            Messages = History;
 
         }
 

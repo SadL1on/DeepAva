@@ -30,50 +30,51 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-      <TextBlock
-                  Grid.Row="0"
-                  Grid.Column="0"
-                  Grid.ColumnSpan="3"
-                  Background="Aqua"
-                  Name="Title"
-                  Text="Title"
-                  TextAlignment="Center" />
-      <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+        <TextBlock
+            Name="Title"
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Background="Aqua"
+            Text="Title"
+            TextAlignment="Center" />
         <Grid
-             Grid.Row="1"
-             Grid.Column="1"
-             Grid.ColumnSpan="2">
-          <ListBox Name="MessHist" Background="Bisque">
-            <ListBox.ItemTemplate>
-              <DataTemplate>
-                <StackPanel Margin="5">
-                  <TextBlock Name="FIOFrom" Text="{Binding FirstName}" />
-                  <TextBlock Text="{Binding Message}" />
-                  <TextBlock Text="{Binding}" />
-                </StackPanel>
-              </DataTemplate>
-            </ListBox.ItemTemplate>
-          </ListBox>
+            Grid.Row="1"
+            Grid.Column="1"
+            Grid.ColumnSpan="2">
+            <Grid
+                Grid.Row="1"
+                Grid.Column="1"
+                Grid.ColumnSpan="2">
+                <ListBox Name="MessHist" Background="Bisque">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="5">
+                                <TextBlock HorizontalAlignment="{Binding Alignment}" Text="{Binding Text}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+            </Grid>
 
         </Grid>
-
-      </Grid>
-      <Grid Grid.Row="2" Grid.Column="1">
-        <TextBox
-            Name="MessageText"
-            Height="30"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Bottom" />
-      </Grid>
-      <Grid Grid.Row="2" Grid.Column="3">
-        <Button
-            Name="SendMessage"
-            Width="130"
-            Height="30"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Bottom">
-          Отправить
-        </Button>
-      </Grid>
+        <Grid Grid.Row="2" Grid.Column="1">
+            <TextBox
+                Name="MessageText"
+                Height="30"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Bottom" />
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="3">
+            <Button
+                Name="SendMessage"
+                Width="130"
+                Height="30"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom">
+                Отправить
+            </Button>
+        </Grid>
     </Grid>
 </UserControl>
