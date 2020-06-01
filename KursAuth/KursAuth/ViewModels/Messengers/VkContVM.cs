@@ -42,9 +42,15 @@ namespace KursAuth.ViewModels.Messengers
         /// </summary>
         [Reactive]
         public string NameVk { get; set; }
+
         [Reactive]
         public string MessageText { get; set; }
 
+        [Reactive]
+        public bool IsVisRecip { get; set; }
+
+        [Reactive]
+        public string RecipTitle { get; set; }
 
         public ReactiveCommand<Dialogs, Unit> GetMessHist { get; }
         public ReactiveCommand<Unit, Task> SendMessage { get; }
@@ -53,7 +59,6 @@ namespace KursAuth.ViewModels.Messengers
         {
             vk = VKModel.GetInstance();
             GetFriends();
-            //GetUserInfo();
             GetMessHist = ReactiveCommand.Create<Dialogs>(async (selectedItem) => { await GetHisVMAsync(selectedItem); });
             SendMessage = ReactiveCommand.Create(async () => { await SendMessageAsync(); });
 
@@ -64,7 +69,8 @@ namespace KursAuth.ViewModels.Messengers
             UserInDialog = selectedItem;
             if (selectedItem == null)
                 return;
-            
+            IsVisRecip = true;
+            RecipTitle = selectedItem.Name;
             // var mess = await vk.GetHistoryAsync(selectedindex.);
             // Messages = mess.Messages.OrderBy(x => x.Date).ToArray();
             var MessagesHistory = vk.GetMessagesByUserId(selectedItem.Id).OrderBy(x=>x.Date).ToArray();
@@ -76,18 +82,15 @@ namespace KursAuth.ViewModels.Messengers
                 if(MessagesHistory[i].FromId == selectedItem.Id)
                 {
                     mes.Alignment = "Left";
-
                 }
                 else
                 {
-
                     mes.Alignment = "Right";
                 }
-
-                ms[i] = mes; 
-            
+                ms[i] = mes;             
             }
             Messages = ms;
+            
         }
 
         /// <summary>
@@ -104,7 +107,6 @@ namespace KursAuth.ViewModels.Messengers
                 MyDialog.Id = dialogs.Items[i].Conversation.Peer.Id;
                 MyDialog.LastMessage = dialogs.Items[i].LastMessage.Text;
                 
-
                 if (dialogs.Items[i].Conversation.ChatSettings != null)
                 {
                     MyDialog.Title = dialogs.Items[i].Conversation.ChatSettings.Title;
@@ -117,28 +119,16 @@ namespace KursAuth.ViewModels.Messengers
                         string FirstName = dialogs.Profiles[j].FirstName;
                         string LastName = dialogs.Profiles[j].LastName;
                         MyDialog.Name = FirstName + " " + LastName;
-                  
+
                     //    MyDialog.photo = new Bitmap(AvaloniaLocator.Current.GetService<IAssetLoader>()
                     //.Open(new Uri($" avares://ASSEMBLYNAME/relative/project/path/{dialogs.Profiles[i].Photo100}.ico")));
                     }
 
-                    if (MyDialog.Name != null)
-                    {
-
-                        break;
-
-                    }
-                   
+                    if (MyDialog.Name != null) { break; }                   
                 }
                 MyDialogs[i] = MyDialog;
             }
-
-
-
-
             Dialogs = MyDialogs;
-
-
         }
 
         /// <summary>

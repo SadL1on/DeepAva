@@ -20,9 +20,50 @@
         <vm:MainWindowViewModel />
     </Design.DataContext>
 
-    
+  <Window.Styles>
+    <!--<Style Selector="Button:pressed">
+      <Setter Property="BorderThickness" Value="1.5" />
+      <Setter Property="BorderBrush" Value="#2666ff" />
+      <Setter Property="Background" Value="Red" />
+    </Style>-->
 
+    <!--<Style Selector="Button /template/ ContentPresenter">
+      <Setter Property="CornerRadius" Value="50"/>
+    </Style>-->
+    <Style Selector="Button:pressed /template/ ContentPresenter">
+      <Setter Property="Opacity" Value="0"/>
+    </Style>
 
+    <Style Selector="Button:pressed.h1">
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border>
+            <Border.Background>
+              <ImageBrush BitmapInterpolationMode="HighQuality" Source="/Assets/vkontakte_PNG19.png"/>
+            </Border.Background>
+          </Border>
+        </ControlTemplate>
+        </Setter>
+    </Style>
+    <Style Selector="Button:pressed.h2">
+      <Setter Property="Template">
+        <ControlTemplate>
+          <Border>
+            <Border.Background>
+              <ImageBrush BitmapInterpolationMode="HighQuality" Source="/Assets/tllogo.png"/>
+            </Border.Background>
+          </Border>
+        </ControlTemplate>
+      </Setter>
+    </Style>
+    <!--<Style Selector="Button">
+      <Setter Property="FocusAdorner">
+        <FocusAdornerTemplate>
+          <Rectangle IsVisible="False" />
+        </FocusAdornerTemplate>
+      </Setter>
+    </Style>-->
+  </Window.Styles>
   
     <Grid Name="MainWin">      
         <Grid.ColumnDefinitions>
@@ -68,24 +109,26 @@
                 DockPanel.Dock="Bottom" />
           <Button
               Name="VkOpen"
-              Width="50"
-              Height="50"
+              Width="40"
+              Height="40"
               Margin="10"
               BorderThickness="0"
+              Classes="h1"
               DockPanel.Dock="Top">
             <Button.Background>
-              <ImageBrush Source="/Assets/vkontakte_PNG19.png"/>
+              <ImageBrush BitmapInterpolationMode="HighQuality" Source="/Assets/vkontakte_PNG19.png"/>
             </Button.Background>
           </Button>
           <Button
               Name="TlOpen"
-              Width="50"
-              Height="50"
+              Width="40"
+              Height="40"
               Margin="10"
               BorderThickness="0"
+              Classes="h2"
               DockPanel.Dock="Top">
             <Button.Background>
-              <ImageBrush Source="/Assets/avalonia-logo.ico" />
+              <ImageBrush BitmapInterpolationMode="HighQuality" Source="/Assets/tllogo.png"/>
             </Button.Background>
           </Button>
           <Button
@@ -97,7 +140,8 @@
                 Content="test"
                 DockPanel.Dock="Top"
                 Command="{Binding ToTestView}" />
-            <Image Source="/Assets/logo.png" />
+            
+          <Image Source="/Assets/69uv2tx1nb121.png"/>
             <Grid />
         </DockPanel>
       
