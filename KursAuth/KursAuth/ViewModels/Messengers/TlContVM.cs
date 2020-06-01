@@ -9,6 +9,7 @@ using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
+using TeleSharp.TL.Messages;
 
 namespace KursAuth.ViewModels.Messengers
 {
@@ -41,7 +42,10 @@ namespace KursAuth.ViewModels.Messengers
                 return;
 
             var hist = await tl.GetHistory(selectedItem.Id);
-            Messages = hist.Messages.ToArray();
+             Messages = hist.Messages.ToArray();
+           
+
+
         }
 
         /// <summary>
