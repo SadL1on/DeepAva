@@ -26,18 +26,24 @@ namespace KursAuth.ViewModels.Messengers
 
         [Reactive]
         public IEnumerable Messages { get; set; }
+        TLUser UserInDialog { get; set; }
 
+        [Reactive]
+        public string MessageText { get; set; }
         public ReactiveCommand<TLUser, Unit> GetMessHist { get; }
+        public ReactiveCommand<Unit,Task> SendMessage { get; }
 
         public TlContVM()
         {
             tl = Telegram.GetInstance();
             GetFriendsTelegram();
             GetMessHist = ReactiveCommand.Create<TLUser>(async (selectedItem) => { await GetHisVMAsync(selectedItem); });
+            SendMessage = ReactiveCommand.Create(async () => { await SendMessageAsync(); });
         }
 
         public async Task GetHisVMAsync(TLUser selectedItem)
         {
+            UserInDialog = selectedItem;
             if (selectedItem == null)
                 return;
             var hist = await tl.GetHistory(selectedItem.Id);
@@ -74,6 +80,12 @@ namespace KursAuth.ViewModels.Messengers
         public async Task GetFriendsTelegram()
         {
             TelegramDialogs = await tl.GetFriendsAsync();
+        }
+
+        public async Task SendMessageAsync()
+        {
+            tl.SendMessage(MessageText, UserInDialog.Phone);
+
         }
     }
 }

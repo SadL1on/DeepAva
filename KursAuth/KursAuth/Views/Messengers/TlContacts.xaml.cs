@@ -13,6 +13,8 @@ namespace KursAuth.Views.Messengers
     {
         private ListBox messHist => this.FindControl<ListBox>("MessHist");
         private ListBox сontactsTelegram => this.FindControl<ListBox>("ContactsTelegram");
+        private TextBox MessageText => this.FindControl<TextBox>("MessageText");
+        private Button SendMessage => this.FindControl<Button>("SendMessage");
 
         public TlContacts()
         {
@@ -22,6 +24,8 @@ namespace KursAuth.Views.Messengers
             {
                 this.WhenAnyValue(x => x.сontactsTelegram.SelectedItem).InvokeCommand(ViewModel.GetMessHist);
                 this.Bind(ViewModel, x => x.Messages, x => x.messHist.Items).DisposeWith(disposables);
+                this.Bind(ViewModel, x => x.MessageText, x => x.MessageText.Text).DisposeWith(disposables);
+                this.BindCommand(ViewModel, x => x.SendMessage, x => x.SendMessage).DisposeWith(disposables);
             });
         }
 
