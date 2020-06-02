@@ -47,10 +47,16 @@ namespace KursAuth.ViewModels.Messengers
         public string MessageText { get; set; }
 
         [Reactive]
+        public Models.VK.Message SelItem { get; set; }
+
+        [Reactive]
         public bool IsVisRecip { get; set; }
 
         [Reactive]
         public string RecipTitle { get; set; }
+
+        [Reactive]
+        public bool IsVisSendMess { get; set; }
 
         public ReactiveCommand<Dialogs, Unit> GetMessHist { get; }
         public ReactiveCommand<Unit, Task> SendMessage { get; }
@@ -90,7 +96,8 @@ namespace KursAuth.ViewModels.Messengers
                 ms[i] = mes;             
             }
             Messages = ms;
-            
+            IsVisSendMess = true;
+            SelItem = ms[ms.Length - 1];
         }
 
         /// <summary>
@@ -100,7 +107,7 @@ namespace KursAuth.ViewModels.Messengers
         {
           var dialogs = await vk.GetDialogsAsync();
 
-            Models.VK.Dialogs[] MyDialogs = new Models.VK.Dialogs[dialogs.Items.Count];
+            Dialogs[] MyDialogs = new Dialogs[dialogs.Items.Count];
             for (int i = 0; i < dialogs.Items.Count; i++)
             {
                 Models.VK.Dialogs MyDialog = new Models.VK.Dialogs();

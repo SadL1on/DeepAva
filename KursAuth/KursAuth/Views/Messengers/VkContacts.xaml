@@ -25,88 +25,102 @@
       <Setter Property="BorderThickness" Value="5" />
       <Setter Property="BorderBrush" Value="#6a5ca9" />
     </Style>
-    <!--<Style Selector="TextBox :pointerover /template/ ContentPresenter">
-      <Setter Property="BorderBrush" Value="#6a5ca9" />
-    </Style>
     <Style Selector="TextBox :focus /template/ ContentPresenter">
+      <!--<Setter Property="BorderBrush" Value="#6a5ca9" />-->
+      <Setter Property="BorderThickness" Value="0" />
+    </Style>
+
+    <Style Selector="Button">
+      <Setter Property="Background" Value="#958bc2"/>
+      <Setter Property="BorderBrush" Value="#5C4E99" />
+    </Style>
+    <Style Selector="Button /template/ ContentPresenter">
+      <Setter Property="CornerRadius" Value="35"/>
+    </Style>
+    <!--<Style Selector="TextBox :focus /template/ ContentPresenter">
       <Setter Property="BorderBrush" Value="#6a5ca9" />
     </Style>-->
   </UserControl.Styles>
-  
-    <Grid Background="#5C4E99">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="130" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="40" />
-        </Grid.RowDefinitions>
 
-      <Grid Grid.Column="0" Grid.Row="0" Background="#6a5ca9">
+  <Grid Background="#5C4E99">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="200" />
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="130" />
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="50" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="40" />
+    </Grid.RowDefinitions>
+
+    <Grid Grid.Column="0" Grid.Row="0" Background="#6a5ca9">
       <TextBlock
-            Name="Search"            
+            Name="Search"
             Text="Title"
             TextAlignment="Center"
             VerticalAlignment="Center" />
-      </Grid>
-      
-      <Grid Margin="2, 0, 0, 0" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Background="#6a5ca9" IsVisible="{Binding IsVisRecip}">
+    </Grid>
+
+    <Grid Margin="2, 0, 0, 0" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2" Background="#6a5ca9" IsVisible="{Binding IsVisRecip}">
       <TextBlock
-        Name="RecipientMess"        
-        Text="{Binding RecipTitle}"        
+        Name="RecipientMess"
+        Text="{Binding RecipTitle}"
         TextAlignment="Left"
         VerticalAlignment="Center"/>
-      </Grid>
+    </Grid>
 
-      <ListBox
-          Name="Contacts"
-          Grid.Row="1"
-          Grid.RowSpan="2"
-          Grid.Column="0"
-          Items="{Binding Dialogs}">
+    <ListBox
+        Name="Contacts"
+        Grid.Row="1"
+        Grid.RowSpan="2"
+        Grid.Column="0"
+        Items="{Binding Dialogs}">
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <StackPanel Margin="5">
+            <Image Source="{Binding photo}"/>
+            <TextBlock FontStyle="Oblique" FontSize="16" Text="{Binding Title}" />
+            <TextBlock FontStyle="Oblique" FontSize="16" Text="{Binding Name}" />
+            <TextBlock FontSize="16" Text="{Binding LastMessage}" />
+          </StackPanel>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+
+    <Grid
+        Grid.Row="1"
+        Grid.Column="1"
+        Grid.ColumnSpan="2">
+      <ListBox HorizontalAlignment="Stretch" Background="Transparent" Name="MessHist">
         <ListBox.ItemTemplate>
           <DataTemplate>
-            <StackPanel Margin="5">
-              <Image Source="{Binding photo}"/>
-              <TextBlock FontStyle="Oblique" FontSize="16" Text="{Binding Title}" />
-              <TextBlock FontStyle="Oblique" FontSize="16" Text="{Binding Name}" />
-              <TextBlock FontSize="16" Text="{Binding LastMessage}" />
-            </StackPanel>
+            <TextBlock HorizontalAlignment="{Binding Alignment}" Text="{Binding Text}" />
           </DataTemplate>
         </ListBox.ItemTemplate>
       </ListBox>
-        
-        <Grid
-            Grid.Row="1"
-            Grid.Column="1"
-            Grid.ColumnSpan="2">
-            <ListBox HorizontalAlignment="Stretch" Background="Transparent" Name="MessHist">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock HorizontalAlignment="{Binding Alignment}" Text="{Binding Text}" />
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-
-        </Grid>
-        <Grid Margin="2, 0, 0, 0" Grid.Row="2" Grid.Column="1">
-            <TextBox
-                Name="MessageText"                
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Bottom" />
-        </Grid>
-        <Grid Grid.Row="2" Grid.Column="3">
-            <Button
-                Name="SendMessage"
-                Width="130"
-                Height="35"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom">
-                Отправить
-            </Button>
-        </Grid>
     </Grid>
+    <Grid Margin="2, 0, 0, 0" Background="#6a5ca9" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" IsVisible="{Binding IsVisSendMess}">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="35" />
+        </Grid.ColumnDefinitions>
+      
+        <TextBox
+          Grid.Column="0"
+            Name="MessageText"   
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Bottom" />
+
+        <Button 
+          Grid.Column="1"
+            Name="SendMessage"
+            Width="35"
+            Height="35">
+          <Button.Background>
+            <!--<ImageBrush BitmapInterpolationMode="HighQuality" Source=""/>-->
+          </Button.Background>
+        </Button>
+    </Grid>
+  </Grid>
 </UserControl>

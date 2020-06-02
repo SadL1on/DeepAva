@@ -13,6 +13,7 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
+    <AvaloniaResource Remove="Assets\arrow.png" />
     <AvaloniaResource Remove="Assets\Styles.xaml" />
     <AvaloniaResource Remove="Views\MainAuth.xaml" />
     <AvaloniaResource Remove="Views\MainReg.xaml" />
@@ -23,6 +24,7 @@
     <AvaloniaResource Remove="Views\TestView.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Assets\arrow.png" />
     <None Remove="Assets\Styles.xaml" />
     <None Remove="Views\MainAuth.xaml" />
     <None Remove="Views\MainReg.xaml" />
@@ -31,6 +33,9 @@
     <None Remove="Views\Messengers\VkAuth.xaml" />
     <None Remove="Views\Messengers\VkContacts.xaml" />
     <None Remove="Views\TestView.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\arrow.png" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.9.10" />

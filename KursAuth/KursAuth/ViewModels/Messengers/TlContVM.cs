@@ -28,6 +28,9 @@ namespace KursAuth.ViewModels.Messengers
 
         public ReactiveCommand<TLUser, Unit> GetMessHist { get; }
 
+        [Reactive]
+        public bool IsVisSendMess { get; set; }
+
         public TlContVM()
         {
             tl = Telegram.GetInstance();
@@ -42,6 +45,7 @@ namespace KursAuth.ViewModels.Messengers
 
             var hist = await tl.GetHistory(selectedItem.Id);
             Messages = hist.Messages.ToArray();
+            IsVisSendMess = true;
         }
 
         /// <summary>
