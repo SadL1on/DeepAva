@@ -8,7 +8,7 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
 
-  <UserControl.Styles>
+    <UserControl.Styles>
     <Style Selector="ListBox">
       <Setter Property="Background" Value="#6a5ca9" />
       <Setter Property="BorderThickness" Value="0" />
@@ -22,24 +22,22 @@
 
     <Style Selector="TextBox">
       <Setter Property="Background" Value="#6a5ca9" />
-      <Setter Property="BorderThickness" Value="5" />
+      <Setter Property="BorderThickness" Value="0" />
       <Setter Property="BorderBrush" Value="#6a5ca9" />
     </Style>
-    <Style Selector="TextBox :focus /template/ ContentPresenter">
-      <!--<Setter Property="BorderBrush" Value="#6a5ca9" />-->
-      <Setter Property="BorderThickness" Value="0" />
-    </Style>
+    <!--<Style Selector="Border :focus /template/ ContentPresenter">
+      --><!--<Setter Property="BorderBrush" Value="#6a5ca9" />--><!--
+      <Setter Property="BorderBrush" Value="#6a5ca9" />
+    </Style>-->
 
     <Style Selector="Button">
       <Setter Property="Background" Value="#958bc2"/>
       <Setter Property="BorderBrush" Value="#5C4E99" />
     </Style>
     <Style Selector="Button /template/ ContentPresenter">
-      <Setter Property="CornerRadius" Value="35"/>
+      <Setter Property="CornerRadius" Value="5"/>
     </Style>
-    <!--<Style Selector="TextBox :focus /template/ ContentPresenter">
-      <Setter Property="BorderBrush" Value="#6a5ca9" />
-    </Style>-->
+
   </UserControl.Styles>
 
   <Grid Background="#5C4E99">
@@ -57,7 +55,8 @@
     <Grid Grid.Column="0" Grid.Row="0" Background="#6a5ca9">
       <TextBlock
             Name="Search"
-            Text="Title"
+            Text="Dialogs"
+            FontSize="15"
             TextAlignment="Center"
             VerticalAlignment="Center" />
     </Grid>
@@ -66,6 +65,8 @@
       <TextBlock
         Name="RecipientMess"
         Text="{Binding RecipTitle}"
+        Margin="10, 0, 0, 0"
+        FontSize="15"
         TextAlignment="Left"
         VerticalAlignment="Center"/>
     </Grid>
@@ -105,21 +106,28 @@
           <ColumnDefinition Width="*" />
           <ColumnDefinition Width="35" />
         </Grid.ColumnDefinitions>
-      
+      <Border Background="#6a5ca9">
+        <StackPanel VerticalAlignment="Center">
         <TextBox
           Grid.Column="0"
             Name="MessageText"   
+          FontSize="15"
+          Watermark="Type something!"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Bottom" />
-
+        </StackPanel>
+      </Border>
         <Button 
           Grid.Column="1"
             Name="SendMessage"
-            Width="35"
+            Width="60"
+          Margin="0, 0, 30, 0"
+          FontSize="20"
+          Content="Send"
             Height="35">
-          <Button.Background>
-            <!--<ImageBrush BitmapInterpolationMode="HighQuality" Source=""/>-->
-          </Button.Background>
+          <!--<Button.Background>
+            <ImageBrush BitmapInterpolationMode="HighQuality" Source="/Assets/arrow.png"/>
+          </Button.Background>-->
         </Button>
     </Grid>
   </Grid>
