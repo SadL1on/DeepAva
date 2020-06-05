@@ -1,0 +1,92 @@
+﻿<UserControl
+    x:Class="KursAuth.Views.Messengers.TlAuth"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+  <UserControl.Styles>
+    <Style Selector="Button /template/ ContentPresenter">
+      <Setter Property="CornerRadius" Value="6"/>
+    </Style>
+    <Style Selector="Button">
+      <Setter Property="Background" Value="#2D2F34"/>
+      <Setter Property="FontSize" Value="14"/>
+      <Setter Property="Foreground" Value="#C0C0C0" />
+      <Setter Property="BorderBrush" Value="#808080"/>
+    </Style>
+    
+    <Style Selector="TextBox">
+      <Setter Property="Background" Value="#383B40"/>
+      <Setter Property="Foreground" Value="#C0C0C0" />
+      <Setter Property="BorderBrush" Value="#808080"/>
+    </Style>
+    <Style Selector="TextBox /template/ Border">
+      <Setter Property="CornerRadius" Value="5" />
+    </Style>    
+  </UserControl.Styles>
+  
+    <Grid Name="TlAuth" Background="#27292D">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="300" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+        <RowDefinition Height="350" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+      <Border CornerRadius="10" Background="#1F2023" Grid.Column="1" Grid.Row="1">
+        <StackPanel>
+            <TextBlock 
+              Margin="30"
+              HorizontalAlignment="Center" 
+              FontSize="30"
+              Foreground="#D3D3D3">Authorization</TextBlock>
+            <TextBox
+                Name="Phone"
+                Width="200"
+                Height="30"
+                Watermark="Enter your phone"
+                Margin="10,30,10,30" />
+            <TextBox
+                Name="Code"
+                Width="200"
+                Height="30"
+                Watermark="Enter the code"
+                Margin="10,0,10,30"
+                IsVisible="{Binding IsVisPass}"
+                PasswordChar="*" />
+            <Button
+                Name="SendCode"
+                Width="200"
+                Height="30"
+                CommandParameter="{Binding #Phone.Text}"
+                IsVisible="{Binding !IsVisPass}">
+                Send code
+            </Button>
+          <Button
+          Name="SendCodeAgain"
+          Width="200"
+          Height="30"
+          CommandParameter="{Binding #Phone.Text}"
+          IsVisible="{Binding IsVisPass}">
+            Отправить код повторно
+          </Button>
+          <Button
+              Name="OnTl"
+              Width="200"
+              Height="30"
+              Margin="0, 5, 0, 0"
+              CommandParameter="{Binding #Code.Text}"
+              IsVisible="{Binding IsVisPass}">
+            Войти
+          </Button>
+        </StackPanel>
+      </Border>
+    </Grid>
+</UserControl>

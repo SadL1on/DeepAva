@@ -1,0 +1,124 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="**\*.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <AvaloniaResource Include="**\*.xaml">
+      <SubType>Designer</SubType>
+    </AvaloniaResource>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+  <ItemGroup>
+    
+    <AvaloniaResource Remove="Assets\Styles.xaml" />
+    <AvaloniaResource Remove="Views\MainAuth.xaml" />
+    <AvaloniaResource Remove="Views\MainReg.xaml" />
+    <AvaloniaResource Remove="Views\Messengers\TlAuth.xaml" />
+    <AvaloniaResource Remove="Views\Messengers\TlContacts.xaml" />
+    <AvaloniaResource Remove="Views\Messengers\VkAuth.xaml" />
+    <AvaloniaResource Remove="Views\Messengers\VkContacts.xaml" />
+    <AvaloniaResource Remove="Views\TestView.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Assets\Styles.xaml" />
+    <None Remove="Views\MainAuth.xaml" />
+    <None Remove="Views\MainReg.xaml" />
+    <None Remove="Views\Messengers\TlAuth.xaml" />
+    <None Remove="Views\Messengers\TlContacts.xaml" />
+    <None Remove="Views\Messengers\VkAuth.xaml" />
+    <None Remove="Views\Messengers\VkContacts.xaml" />
+    <None Remove="Views\TestView.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="0.9.10" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.9.10" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.10" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="ReactiveUI.Fody" Version="11.4.1" />
+    <PackageReference Include="StarkSoftProxy" Version="1.6.0" />
+    <PackageReference Include="System.Reactive" Version="4.4.1" />
+    <PackageReference Include="TLSharp" Version="0.1.0.555" />
+    <PackageReference Include="VkNet" Version="1.50.0" />
+    <PackageReference Include="VkNet.AudioBypassService" Version="1.5.3" />
+    <PackageReference Include="VkNet" Version="1.52.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Messengers\VkContacts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\MainAuth.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Messengers\VkAuth.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\MainReg.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Messengers\TlAuth.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Messengers\TlContacts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\TestView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Assets\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\Messengers\TlContacts.xaml.cs">
+      <DependentUpon>TlContacts.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Messengers\VkContacts.xaml.cs">
+      <DependentUpon>VkContacts.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Assets\arrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\avalonia-logo.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\logo-dark.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\tllogo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\vkontakte_PNG19.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

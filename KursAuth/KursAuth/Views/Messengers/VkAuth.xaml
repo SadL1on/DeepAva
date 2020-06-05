@@ -1,0 +1,74 @@
+﻿<UserControl
+    x:Class="KursAuth.Views.Messengers.VkAuth"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:reactiveUi="http://reactiveui.net"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+  <UserControl.Styles>
+    <Style Selector="Button /template/ ContentPresenter">
+      <Setter Property="CornerRadius" Value="6"/>
+    </Style>
+    <Style Selector="Button">
+      <Setter Property="Background" Value="#958bc2" />
+      <Setter Property="BorderBrush" Value="#5C4E99" />
+      <Setter Property="FontSize" Value="14"/>
+    </Style>
+
+    <Style Selector="TextBox /template/ Border">
+      <Setter Property="CornerRadius" Value="5" />
+    </Style>
+    <Style Selector="TextBox">
+      <Setter Property="Background" Value="#aaa2ce" />
+      <Setter Property="BorderBrush" Value="#5C4E99" />
+      <Setter Property="FontFamily" Value="Roboto" />
+    </Style>
+  </UserControl.Styles>
+  
+    <Grid Name="VkAuth" Background="#5C4E99">      
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="300" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="*" />
+        <RowDefinition Height="350" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+      <Border CornerRadius="10" Background="#6a5ca9" Grid.Column="1" Grid.Row="1">
+        <StackPanel>
+          <TextBlock
+            HorizontalAlignment="Center"
+            FontSize="30"
+            Margin="30">
+            Authorization
+          </TextBlock>
+          <TextBox
+              Name="Login"
+              Width="200"
+              Height="30"
+              Watermark="Login"
+              Margin="10,30,10,30" />
+          <TextBox
+              Name="Password"
+              Width="200"
+              Height="30"
+              Watermark="Password"
+              Margin="10,0,10,30"
+              PasswordChar="*" />
+          <Button
+              Name="On"
+              Width="200"
+              Height="30">
+            Log in
+          </Button>
+        </StackPanel>
+      </Border>
+    </Grid>
+
+</UserControl>
