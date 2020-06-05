@@ -33,6 +33,18 @@ namespace KursAuth.ViewModels.Messengers
         public ReactiveCommand<TLUser, Unit> GetMessHist { get; }
         public ReactiveCommand<Unit,Task> SendMessage { get; }
 
+        [Reactive]
+        public bool IsVisRecip { get; set; }
+
+        [Reactive]
+        public string RecipTitle { get; set; }
+
+        [Reactive]
+        public bool IsVisSendMess { get; set; }
+
+        [Reactive]
+        public Models.VK.Message SelItem { get; set; }
+
         public TlContVM()
         {
             tl = Telegram.GetInstance();
@@ -72,6 +84,8 @@ namespace KursAuth.ViewModels.Messengers
             }
             Messages = History;
 
+            IsVisSendMess = true;
+           // SelItem = ms[ms.Length - 1];
         }
 
         /// <summary>

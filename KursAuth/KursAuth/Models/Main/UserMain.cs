@@ -19,11 +19,11 @@ namespace KursAuth.Models.Main
         {
             if (flag)
             {
-                _request = WebRequest.Create("http://saber011-001-site1.htempurl.com/api/Account/login");
+                _request = WebRequest.Create("http://saberzero11-001-site1.atempurl.com/api/Account/login");
             }
             else
             {
-                _request = WebRequest.Create("http://saber011-001-site1.htempurl.com/api/Account/register");
+                _request = WebRequest.Create("http://saberzero11-001-site1.atempurl.com/api/Account/register");
             }
 
             _request.ContentType = "application/json";
