@@ -107,7 +107,7 @@ namespace KursAuth.ViewModels
             var canMoveToVkOpen = this.WhenAnyObservable(x => x.Router.CurrentViewModel).Select(current => !(current is VkAuthVM || current is VkContVM));
             vkOpenCmd = ReactiveCommand.Create(() => { Router.Navigate.Execute(new VkAuthVM()); }, canMoveToVkOpen);
 
-            var canMoveToTlOpen = this.WhenAnyObservable(x => x.Router.CurrentViewModel).Select(current => !(current is TlAuthVM));
+            var canMoveToTlOpen = this.WhenAnyObservable(x => x.Router.CurrentViewModel).Select(current => !(current is TlAuthVM || current is TlContVM));
             tlOpen = ReactiveCommand.Create(() => { Router.Navigate.Execute(new TlAuthVM()); }, canMoveToTlOpen);
 
             var canMoveToTest = this.WhenAnyObservable(x => x.Router.CurrentViewModel).Select(current => !(current is TestVM));

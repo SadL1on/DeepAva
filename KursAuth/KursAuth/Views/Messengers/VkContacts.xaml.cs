@@ -11,7 +11,7 @@ using ReactiveUI;
 using System.Collections;
 using System.Reactive.Disposables;
 using System.Threading;
-using VkNet.Model;
+
 
 namespace KursAuth.Views.Messengers
 {
@@ -20,6 +20,8 @@ namespace KursAuth.Views.Messengers
 
         private ListBox contacts => this.FindControl<ListBox>("Contacts");
         private ListBox messHist => this.FindControl<ListBox>("MessHist");
+        private Button SendMessage => this.FindControl<Button>("SendMessage");
+        private TextBox MessageText => this.FindControl<TextBox>("MessageText");
 
         public VkContacts()
         {
@@ -28,6 +30,9 @@ namespace KursAuth.Views.Messengers
             {
                 this.WhenAnyValue(x => x.contacts.SelectedItem).InvokeCommand(ViewModel.GetMessHist);
                 this.Bind(ViewModel, x => x.Messages, x => x.messHist.Items).DisposeWith(disposables);
+                this.Bind(ViewModel, x => x.SelItem, x => x.messHist.SelectedItem).DisposeWith(disposables);
+                this.Bind(ViewModel, x => x.MessageText, x => x.MessageText.Text).DisposeWith(disposables);
+                this.BindCommand(ViewModel, x => x.SendMessage, x => x.SendMessage).DisposeWith(disposables);
             });
         }
 
