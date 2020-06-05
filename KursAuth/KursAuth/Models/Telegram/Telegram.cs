@@ -14,10 +14,10 @@ namespace KursAuth.Models.Telegram
     public class Telegram
     {
 
-        TelegramClient client;
+       public TelegramClient client;
         string hash;
         string phone;
-        public bool IsAuth { get => client.IsUserAuthorized(); }
+        public bool IsAuth = false;
 
         private Telegram() { }
 
@@ -93,7 +93,6 @@ namespace KursAuth.Models.Telegram
                         AddOffset = 1,
                         OffsetId = 0
                     });
-
             return history;
 
         }

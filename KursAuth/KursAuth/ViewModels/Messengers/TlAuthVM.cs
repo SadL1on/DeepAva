@@ -37,8 +37,15 @@ namespace KursAuth.ViewModels.Messengers
         public TlAuthVM()
         {
             tl = Telegram.GetInstance();
-            VisPass = ReactiveCommand.Create<string>(async (phone) => { await SendloginAsyncImpl(phone); });
-            AuthTl = ReactiveCommand.Create<string>(async (code) => { await AuthTelegramImpl(code); });
+            if (tl.IsAuth == false)
+            {
+                VisPass = ReactiveCommand.Create<string>(async (phone) => { await SendloginAsyncImpl(phone); });
+                AuthTl = ReactiveCommand.Create<string>(async (code) => { await AuthTelegramImpl(code); });
+            }
+            else
+            {
+                MessageBus.Current.SendMessage(new RouteToTlContMessage());
+            }
         }
 
         public async Task SendloginAsyncImpl(string phone)
@@ -58,6 +65,7 @@ namespace KursAuth.ViewModels.Messengers
         public async Task AuthTelegramImpl(string code)
         {
             await tl.MakeAuth(code);
+            tl.IsAuth = true;
 
             if (tl.IsAuth)
             {
