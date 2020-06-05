@@ -8,5 +8,6 @@ namespace KursAuth.Models.Telegram
     {
         public string Text { get; set; }
         public string Alignment { get; set; }
+        public int Date { get; set; }
     }
 }

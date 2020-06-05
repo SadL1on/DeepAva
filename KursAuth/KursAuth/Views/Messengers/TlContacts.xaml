@@ -99,13 +99,11 @@
               <DataTemplate>
                 <StackPanel Margin="5">
                   <TextBlock Name="FIOFrom" Text="{Binding FirstName}" />
-                  <TextBlock Text="{Binding Message}" />
-                  <TextBlock Text="{Binding}" />
+                  <TextBlock HorizontalAlignment="{Binding Alignment}" Text="{Binding Text}" />
                 </StackPanel>
               </DataTemplate>
             </ListBox.ItemTemplate>
           </ListBox>
-
             </Grid>
 
       </Grid>
