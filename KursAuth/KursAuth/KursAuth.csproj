@@ -13,6 +13,7 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
+    
     <AvaloniaResource Remove="Assets\Styles.xaml" />
     <AvaloniaResource Remove="Views\MainAuth.xaml" />
     <AvaloniaResource Remove="Views\MainReg.xaml" />
@@ -101,6 +102,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Update="Assets\arrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Assets\avalonia-logo.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

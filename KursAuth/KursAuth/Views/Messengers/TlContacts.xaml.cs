@@ -22,6 +22,7 @@ namespace KursAuth.Views.Messengers
             {
                 this.WhenAnyValue(x => x.сontactsTelegram.SelectedItem).InvokeCommand(ViewModel.GetMessHist);
                 this.Bind(ViewModel, x => x.Messages, x => x.messHist.Items).DisposeWith(disposables);
+                this.Bind(ViewModel, x => x.SelItem, x => x.messHist.SelectedItem).DisposeWith(disposables);
             });
         }
 

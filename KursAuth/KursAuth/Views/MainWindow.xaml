@@ -73,7 +73,14 @@
       
       <reactiveUi:RoutedViewHost Grid.Column="1" Router="{Binding Router}">
         <reactiveUi:RoutedViewHost.DefaultContent>
-          
+          <Grid Background="#25181e">
+            <TextBlock
+              Foreground="#FFC0CB"
+              VerticalAlignment="Center"
+              HorizontalAlignment="Center"
+              FontSize="30"
+              Text="Hello, select any messenger!"/>
+          </Grid>
         </reactiveUi:RoutedViewHost.DefaultContent>
       </reactiveUi:RoutedViewHost>
       
@@ -81,8 +88,7 @@
             Grid.Row="0"
             Grid.RowSpan="2"
             Grid.Column="0"
-            Background="#25181e">
-            <!--  TODO Create binding for all buttons  -->
+            Background="#1d1015">
           <Button
               Name="Settings"
               Width="40"
@@ -131,7 +137,7 @@
               <ImageBrush BitmapInterpolationMode="HighQuality" Source="/Assets/tllogo.png"/>
             </Button.Background>
           </Button>
-          <Button
+          <!--<Button
             Name="Test"
                 Width="40"
                 Height="30"
@@ -139,7 +145,7 @@
                 Background="Gainsboro"
                 Content="test"
                 DockPanel.Dock="Top"
-                Command="{Binding ToTestView}" />
+                Command="{Binding ToTestView}" />-->
             
           <Image Source="/Assets/69uv2tx1nb121.png"/>
             <Grid />
