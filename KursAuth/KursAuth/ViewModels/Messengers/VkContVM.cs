@@ -77,15 +77,22 @@ namespace KursAuth.ViewModels.Messengers
                 return;
             IsVisRecip = true;
             RecipTitle = selectedItem.Name;
-            // var mess = await vk.GetHistoryAsync(selectedindex.);
-            // Messages = mess.Messages.OrderBy(x => x.Date).ToArray();
-            var MessagesHistory = vk.GetMessagesByUserId(selectedItem.Id).OrderBy(x=>x.Date).ToArray();
-            Models.VK.Message[] ms = new Models.VK.Message[MessagesHistory.Length];
-            for (int i = 0; i < MessagesHistory.Length; i++)
+            var MessagesHistory = vk.GetMessagesByUserId(selectedItem.Id);
+            var meshist = MessagesHistory.Messages.OrderBy(x=>x.Date).ToArray();
+            Models.VK.Message[] ms = new Models.VK.Message[meshist.Length];
+            for (int i = 0; i < meshist.Length; i++)
             {
                 Models.VK.Message mes = new Models.VK.Message();
-                mes.Text = MessagesHistory[i].Text;
-                if(MessagesHistory[i].FromId == selectedItem.Id)
+                mes.Text = meshist[i].Text;
+                for (int j = 0; j<MessagesHistory.Users.Count(); j++)
+                {
+                    if (MessagesHistory.Users.ToArray()[j].Id == meshist[i].FromId)
+                        mes.Name = MessagesHistory.Users.ToArray()[j].FirstName;
+                    if (MessagesHistory.Users.ToArray()[j].Id == vk.Api.UserId)
+                        mes.Name = MessagesHistory.Users.ToArray()[j].FirstName;
+                }
+
+                if(meshist[i].FromId == selectedItem.Id)
                 {
                     mes.Alignment = "Left";
                 }

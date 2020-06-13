@@ -19,6 +19,12 @@ namespace KursAuth.Models.VK
         /// Расположение сообщения в беседе
         /// </summary>
         public string Alignment { get; set; }
+
+        /// <summary>
+        /// Имя автора сообщения 
+        /// </summary>
+        public string Name { get; set; }
+
         /// <summary>
         /// Фото пользователя 
         /// </summary>
