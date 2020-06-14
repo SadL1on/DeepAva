@@ -13,13 +13,13 @@ namespace KursAuth.Models.Main
     {
         public string UserName { get; set; }
         private WebRequest _request;
-        private string _token;
+        public string _token;
 
         public async Task<int> MainAuthAsync(string log, string pass, bool flag)
         {
             if (flag)
             {
-                _request = WebRequest.Create("http://saberzero11-001-site1.atempurl.com/api/Account/login");
+                _request = WebRequest.Create("https://olimpres.azurewebsites.net/api/Account/login");
             }
             else
             {

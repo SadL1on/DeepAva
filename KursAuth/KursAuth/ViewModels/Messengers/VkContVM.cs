@@ -9,6 +9,7 @@ using ReactiveUI.Fody.Helpers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Reactive;
 using System.Text;
@@ -31,6 +32,7 @@ namespace KursAuth.ViewModels.Messengers
         /// </summary>
         [Reactive]
         public IEnumerable Dialogs { get; set; }
+
         [Reactive]
         Dialogs UserInDialog { get; set; }
 
@@ -77,8 +79,7 @@ namespace KursAuth.ViewModels.Messengers
                 return;
             IsVisRecip = true;
             RecipTitle = selectedItem.Name;
-            // var mess = await vk.GetHistoryAsync(selectedindex.);
-            // Messages = mess.Messages.OrderBy(x => x.Date).ToArray();
+
             var MessagesHistory = vk.GetMessagesByUserId(selectedItem.Id).OrderBy(x=>x.Date).ToArray();
             Models.VK.Message[] ms = new Models.VK.Message[MessagesHistory.Length];
             for (int i = 0; i < MessagesHistory.Length; i++)

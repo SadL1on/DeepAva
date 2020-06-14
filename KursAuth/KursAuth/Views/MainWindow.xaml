@@ -154,7 +154,7 @@
         <!--<vv:Contacts Grid.Column="1" IsVisible="{Binding IsVisConCtrl}" />
         <vv:ContactsTelegram Grid.Column="1" IsVisible="{Binding IsVisContactsTelegram}" />-->
         <!--<vv:VkAuth Grid.Column="1" IsVisible="{Binding IsVisVkAuth}" />-->
-        <v:MainAuth Grid.Column="0" Grid.ColumnSpan="2" IsVisible="{Binding IsVisMainAuth}" />
+        <!--<v:MainAuth Grid.Column="0" Grid.ColumnSpan="2" IsVisible="{Binding !IsVisMainAuth}" />-->
         <v:MainReg Grid.Column="0" Grid.ColumnSpan="2" IsVisible="{Binding IsVisMainReg}" />
         <!--<vv:TlAuth Grid.Column="1" IsVisible="{Binding IsVisTlAuth}" />-->
     </Grid>

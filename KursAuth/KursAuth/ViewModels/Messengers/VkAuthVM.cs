@@ -24,16 +24,21 @@ namespace KursAuth.ViewModels.Messengers
         public IScreen HostScreen { get; }
 
         /// <summary>
-        /// Логин из формы рег/авт в мессенджере
+        /// Логин из формы авторизации в мессенджере
         /// </summary>
         [Reactive]
         public string LoginMess { get; set; }
 
         /// <summary>
-        /// Пароль из формы рег/авт в мессенджере
+        /// Пароль из формы авторизации в мессенджере
         /// </summary>
         [Reactive]
         public string PassMess { get; set; }
+
+        /// <summary>
+        /// Команда авторизации ВКонтакте
+        /// </summary>
+        public ReactiveCommand<Unit, Task> MessLogin { get; }
 
         [Reactive]
         public IEnumerable Messages { get; set; }
@@ -50,7 +55,7 @@ namespace KursAuth.ViewModels.Messengers
         [Reactive]
         public bool IsVisVkAuth { get; set; }
 
-        public ReactiveCommand<Unit, Task> MessLogin { get; }
+        
 
         private ReactiveCommand<Unit, Unit> toVkCont { get; }
 

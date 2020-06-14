@@ -34,17 +34,14 @@ namespace KursAuth.ViewModels
     [DataContract]
     public class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged, IScreen, IRoutableViewModel
     {
-        private UserMain user;
+        
 
         /// <summary>
         /// Команда перехода к форме авторизации
         /// </summary>
         public ReactiveCommand<Unit, Unit> ToMainAuthCmd { get; }
 
-        /// <summary>
-        /// Команда регистрации в приложении
-        /// </summary>
-        public ReactiveCommand<string, Unit> AuthorizationMainCmd { get; }
+        
 
         /// <summary>
         /// Команда открытия окна ВК
@@ -59,17 +56,7 @@ namespace KursAuth.ViewModels
         public ICommand VkOpenCmd => vkOpenCmd;
         public ICommand TlOpen => tlOpen;
 
-        /// <summary>
-        /// Логин из формы рег/авт приложения
-        /// </summary>
-        [Reactive]
-        public string LoginMain { get; set; }
        
-        /// <summary>
-        /// Пароль из формы рег/авт приложения
-        /// </summary>
-        [Reactive]
-        public string PassMain { get; set; }
 
         /// <summary>
         /// Видимость формы регистрации в приложении
@@ -82,9 +69,6 @@ namespace KursAuth.ViewModels
         /// </summary>
         [Reactive]
         public bool IsVisMainAuth { get; set; }
-
-        [Reactive]
-        public bool IsVisAlertValid { get; set; }
 
         private RoutingState _router = new RoutingState();
 
@@ -102,7 +86,6 @@ namespace KursAuth.ViewModels
         public MainWindowViewModel()
         {
             ToMainAuthCmd = ReactiveCommand.Create(() => { IsVisMainReg = !IsVisMainReg; });
-            AuthorizationMainCmd = ReactiveCommand.Create<string>(async (flag) => { await AuthorizationMainImpl(Convert.ToBoolean(flag)); });           
 
             var canMoveToVkOpen = this.WhenAnyObservable(x => x.Router.CurrentViewModel).Select(current => !(current is VkAuthVM || current is VkContVM));
             vkOpenCmd = ReactiveCommand.Create(() => { Router.Navigate.Execute(new VkAuthVM()); }, canMoveToVkOpen);
@@ -115,21 +98,7 @@ namespace KursAuth.ViewModels
 
             MessageBus.Current.Listen<RouteToVkContMessage>().Subscribe(Observer.Create<RouteToVkContMessage>((e) => { Router.Navigate.Execute(new VkContVM()); }));
             MessageBus.Current.Listen<RouteToTlContMessage>().Subscribe(Observer.Create<RouteToTlContMessage>((e) => { Router.Navigate.Execute(new TlContVM()); }));
-        }
-
-        public async Task AuthorizationMainImpl(bool flag)
-        {            
-            user = new UserMain();
-            var code = await user.MainAuthAsync(LoginMain, PassMain, flag);
-            if (code != 0)
-            {
-                IsVisAlertValid = !IsVisAlertValid;
-            }
-            else
-            {
-                if (!flag) { IsVisMainReg = !IsVisMainReg; }
-                else { IsVisMainAuth = !IsVisMainAuth; }
-            }
-        }
+           // MessageBus.Current.Listen<RouteToMain>().Subscribe(Observer.Create<RouteToMain>((e) => { Router.Navigate.Execute(new MainWindowViewModel()); }));
+        }       
     }
 }
