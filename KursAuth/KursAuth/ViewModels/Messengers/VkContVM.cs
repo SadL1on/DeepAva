@@ -1,21 +1,11 @@
-﻿using Avalonia;
-using Avalonia.Media.Imaging;
-using Avalonia.Platform;
-using DynamicData;
-using KursAuth.Models;
+﻿using KursAuth.Models;
 using KursAuth.Models.VK;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Reactive;
-using System.Text;
 using System.Threading.Tasks;
-using VkNet.Model;
-using VkNet.Model.RequestParams;
 
 namespace KursAuth.ViewModels.Messengers
 {
@@ -61,6 +51,7 @@ namespace KursAuth.ViewModels.Messengers
         public bool IsVisSendMess { get; set; }
 
         public ReactiveCommand<Dialogs, Unit> GetMessHist { get; }
+
         public ReactiveCommand<Unit, Task> SendMessage { get; }
 
         public VkContVM()
@@ -69,7 +60,6 @@ namespace KursAuth.ViewModels.Messengers
             GetFriends();
             GetMessHist = ReactiveCommand.Create<Dialogs>(async (selectedItem) => { await GetHisVMAsync(selectedItem); });
             SendMessage = ReactiveCommand.Create(async () => { await SendMessageAsync(); });
-
         }
         
         public async Task GetHisVMAsync(Dialogs selectedItem)
