@@ -1,4 +1,4 @@
-﻿<Window
+﻿<UserControl
     x:Class="KursAuth.Views.MainWindow"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -8,19 +8,17 @@
     xmlns:v="clr-namespace:KursAuth.Views;assembly=KursAuth"
     xmlns:vm="clr-namespace:KursAuth.ViewModels;assembly=KursAuth"
     xmlns:vv="clr-namespace:KursAuth.Views.Messengers;assembly=KursAuth"
-    Title="MultiMess"
-    Width="1000"
-    Height="600"
+    MinWidth="800"
+    MinHeight="500"
     d:DesignHeight="450"
-    d:DesignWidth="800"
-    Icon="/Assets/avalonia-logo.ico"
+    d:DesignWidth="800"   
     mc:Ignorable="d">
 
     <Design.DataContext>
         <vm:MainWindowViewModel />
     </Design.DataContext>
 
-  <Window.Styles>
+  <UserControl.Styles>
     <!--<Style Selector="Button:pressed">
       <Setter Property="BorderThickness" Value="1.5" />
       <Setter Property="BorderBrush" Value="#2666ff" />
@@ -56,19 +54,12 @@
         </ControlTemplate>
       </Setter>
     </Style>
-    <!--<Style Selector="Button">
-      <Setter Property="FocusAdorner">
-        <FocusAdornerTemplate>
-          <Rectangle IsVisible="False" />
-        </FocusAdornerTemplate>
-      </Setter>
-    </Style>-->
-  </Window.Styles>
+  </UserControl.Styles>
   
     <Grid Name="MainWin">      
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition MinWidth="50" Width="50" />
+            <ColumnDefinition MinWidth="500" Width="*" />
         </Grid.ColumnDefinitions>
       
       <reactiveUi:RoutedViewHost Grid.Column="1" Router="{Binding Router}">
@@ -137,25 +128,8 @@
               <ImageBrush BitmapInterpolationMode="HighQuality" Source="/Assets/tllogo.png"/>
             </Button.Background>
           </Button>
-          <!--<Button
-            Name="Test"
-                Width="40"
-                Height="30"
-                Margin="10"
-                Background="Gainsboro"
-                Content="test"
-                DockPanel.Dock="Top"
-                Command="{Binding ToTestView}" />-->
-            
           <Image Source="/Assets/69uv2tx1nb121.png"/>
             <Grid />
         </DockPanel>
-      
-        <!--<vv:Contacts Grid.Column="1" IsVisible="{Binding IsVisConCtrl}" />
-        <vv:ContactsTelegram Grid.Column="1" IsVisible="{Binding IsVisContactsTelegram}" />-->
-        <!--<vv:VkAuth Grid.Column="1" IsVisible="{Binding IsVisVkAuth}" />-->
-        <v:MainAuth Grid.Column="0" Grid.ColumnSpan="2" IsVisible="{Binding IsVisMainAuth}" />
-        <v:MainReg Grid.Column="0" Grid.ColumnSpan="2" IsVisible="{Binding IsVisMainReg}" />
-        <!--<vv:TlAuth Grid.Column="1" IsVisible="{Binding IsVisTlAuth}" />-->
     </Grid>
-</Window>
+</UserControl>

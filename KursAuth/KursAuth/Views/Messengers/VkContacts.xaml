@@ -25,12 +25,6 @@
       <Setter Property="BorderThickness" Value="0" />
       <Setter Property="BorderBrush" Value="#6a5ca9" />
     </Style>
-    <!--<Style Selector="Border :focus /template/ ContentPresenter">
-      -->
-    <!--<Setter Property="BorderBrush" Value="#6a5ca9" />-->
-    <!--
-      <Setter Property="BorderBrush" Value="#6a5ca9" />
-    </Style>-->
 
     <Style Selector="Button">
       <Setter Property="Background" Value="#958bc2"/>

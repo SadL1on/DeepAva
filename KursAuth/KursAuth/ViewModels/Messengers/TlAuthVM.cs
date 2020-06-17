@@ -1,14 +1,8 @@
 ﻿using KursAuth.Models.Telegram;
-using KursAuth.Utils.Messages;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Reactive;
-using System.Reactive.Linq;
-using System.Runtime.Serialization;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace KursAuth.ViewModels.Messengers
@@ -44,7 +38,7 @@ namespace KursAuth.ViewModels.Messengers
             }
             else
             {
-                MessageBus.Current.SendMessage(new RouteToTlContMessage());
+                MessageBus.Current.SendMessage(new TlContVM());
             }
         }
 
@@ -69,7 +63,7 @@ namespace KursAuth.ViewModels.Messengers
 
             if (tl.IsAuth)
             {
-                MessageBus.Current.SendMessage(new RouteToTlContMessage());
+                MessageBus.Current.SendMessage(new TlContVM());
             }
         }
     }

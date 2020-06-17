@@ -8,12 +8,12 @@ using System.Reactive.Disposables;
 
 namespace KursAuth.Views
 {
-    public class MainAuth : ReactiveUserControl<MainWindowViewModel>
+    public class MainAuth : ReactiveUserControl<MainAuthVM>
     {
         private Button mainAuth => this.FindControl<Button>("MainAuth");
         private Button mainAuthReg => this.FindControl<Button>("MainAuthReg");
         private TextBox login => this.FindControl<TextBox>("Login");
-        private TextBox password => this.FindControl<TextBox>("Pass");
+        private TextBox password => this.FindControl<TextBox>("Password");
         private TextBlock alert => this.FindControl<TextBlock>("Alert");
 
         public MainAuth()
@@ -24,7 +24,7 @@ namespace KursAuth.Views
                 this.Bind(ViewModel, x => x.LoginMain, x => x.login.Text).DisposeWith(disposables);
                 this.Bind(ViewModel, x => x.PassMain, x => x.password.Text).DisposeWith(disposables);
               //  this.Bind(ViewModel, x => x.IsVisAlertValid, x => x.alert.Text).DisposeWith(disposables);
-                this.BindCommand(ViewModel, x => x.ToMainAuthCmd, x => x.mainAuthReg).DisposeWith(disposables);
+              //  this.BindCommand(ViewModel, x => x.ToMainAuthCmd, x => x.mainAuthReg).DisposeWith(disposables);
                 this.BindCommand(ViewModel, x => x.AuthorizationMainCmd, x => x.mainAuth).DisposeWith(disposables);
             });
             alert.Text = "Неверный логин или пароль";

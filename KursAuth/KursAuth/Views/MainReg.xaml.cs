@@ -21,13 +21,13 @@ namespace KursAuth.Views
         {
             InitializeComponent();
 
-            this.WhenActivated(disposables =>
-            {
-                this.Bind(ViewModel, x => x.LoginMain, x => x.regLog.Text).DisposeWith(disposables);
-                this.Bind(ViewModel, x => x.PassMain, x => x.regPass.Text).DisposeWith(disposables);
-                this.BindCommand(ViewModel, x => x.ToMainAuthCmd, x => x.back).DisposeWith(disposables);
-                this.BindCommand(ViewModel, x => x.AuthorizationMainCmd, x => x.register).DisposeWith(disposables);
-            });
+            //this.WhenActivated(disposables =>
+            //{
+            //    this.Bind(ViewModel, x => x.LoginMain, x => x.regLog.Text).DisposeWith(disposables);
+            //    this.Bind(ViewModel, x => x.PassMain, x => x.regPass.Text).DisposeWith(disposables);
+            //    this.BindCommand(ViewModel, x => x.ToMainAuthCmd, x => x.back).DisposeWith(disposables);
+            //    this.BindCommand(ViewModel, x => x.AuthorizationMainCmd, x => x.register).DisposeWith(disposables);
+            //});
         }
 
         private void InitializeComponent()
