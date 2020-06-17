@@ -34,11 +34,16 @@ namespace KursAuth.Models
         private string password;
         public VkApi Api => api;
 
-        public IEnumerable<Message> GetMessagesByUserId(long peerid)
+        public MessageGetHistoryObject GetMessagesByUserId(long peerid)
         {
-            var mess = Api.Messages.GetHistory(new MessagesGetHistoryParams() { PeerId = peerid });
+            var mess = Api.Messages.GetHistory(new MessagesGetHistoryParams() 
+            {
+                PeerId = peerid,
+                Extended = true
+            
+            });
            
-            return mess.Messages;
+            return mess;
         }
 
         public bool IsAuth = false;
@@ -125,9 +130,11 @@ namespace KursAuth.Models
             var getHistory = await api.Messages.GetHistoryAsync(new MessagesGetHistoryParams
             {
                 Count = 200,
-                UserId = userid
+                UserId = userid,
+                Extended = true
 
-            });
+
+            });;
             return getHistory;
         }
         /// <summary>

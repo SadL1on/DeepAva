@@ -94,7 +94,10 @@
       <ListBox HorizontalAlignment="Stretch" Background="Transparent" Name="MessHist">
         <ListBox.ItemTemplate>
           <DataTemplate>
+            <StackPanel Margin="5">
+              <TextBlock HorizontalAlignment="{Binding Alignment}" Text="{Binding Name}" Foreground="White" FontSize="16" FontStyle="Oblique" />
             <TextBlock HorizontalAlignment="{Binding Alignment}" Text="{Binding Text}" />
+            </StackPanel>
           </DataTemplate>
         </ListBox.ItemTemplate>
       </ListBox>

@@ -38,6 +38,18 @@ namespace KursAuth.Models.Telegram
 
             return tcp;
         }
+
+
+
+        public async Task AuthWithToken(string phone)
+        {
+            var apiId = 1360689;
+            var apiHash = "57c360c3d2605bbb0bc9930b151dd937";
+
+
+            client = new TelegramClient(apiId, apiHash, handler: TcpHandler);
+            await client.ConnectAsync();
+        }
         public async Task SendCodeToAuth(string phone)
         {
             var apiId = 1360689;
@@ -48,7 +60,6 @@ namespace KursAuth.Models.Telegram
             await client.ConnectAsync();
             hash = await client.SendCodeRequestAsync(phone);
             this.phone = phone;
-          var token =  client.Session.SessionUserId;
         }
 
         public async Task MakeAuth(string code)
@@ -78,6 +89,7 @@ namespace KursAuth.Models.Telegram
         public async Task<IEnumerable<object>> GetFriendsAsync()
         {          
             var dialogs = (TLDialogs)client.GetUserDialogsAsync().Result;
+
             return dialogs.Users.ToArray();
         }
 
