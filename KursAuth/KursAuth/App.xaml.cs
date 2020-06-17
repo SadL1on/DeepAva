@@ -22,19 +22,19 @@ namespace KursAuth
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                desktop.MainWindow = new MainWindow
+                desktop.MainWindow = new TestView
                 {
-                    DataContext = new MainWindowViewModel()
-                };               
+                    DataContext = new TestVM()
+                };                
             }
-            
-            Locator.CurrentMutable.RegisterConstant<IScreen>(new MainWindowViewModel());
-            Locator.CurrentMutable.Register<IViewFor<TestVM>>(() => new TestView());
+            Locator.CurrentMutable.RegisterConstant<IScreen>(new TestVM());
+            Locator.CurrentMutable.Register<IViewFor<MainWindowViewModel>>(() => new MainWindow());
+            Locator.CurrentMutable.Register<IViewFor<MainAuthVM>>(() => new MainAuth());
             Locator.CurrentMutable.Register<IViewFor<VkAuthVM>>(() => new VkAuth());
             Locator.CurrentMutable.Register<IViewFor<TlAuthVM>>(() => new TlAuth());
             Locator.CurrentMutable.Register<IViewFor<TlContVM>>(() => new TlContacts());
             Locator.CurrentMutable.Register<IViewFor<VkContVM>>(() => new VkContacts());
-           
+            
             base.OnFrameworkInitializationCompleted();
         }
     }

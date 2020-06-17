@@ -6,7 +6,7 @@ using KursAuth.ViewModels;
 
 namespace KursAuth.Views
 {
-    public class TestView : ReactiveUserControl<TestVM>
+    public class TestView : ReactiveWindow<TestVM>
     {
         public TestView()
         {

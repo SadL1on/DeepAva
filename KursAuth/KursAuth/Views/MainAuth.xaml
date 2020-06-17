@@ -6,6 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="450"
     d:DesignWidth="700"
+    MinWidth="800"
+    MinHeight="500"
     mc:Ignorable="d">
 
   <UserControl.Styles>
@@ -35,6 +37,7 @@
   </UserControl.Styles>
 
   <Grid Name="mainAuth" Background="#1d1015">
+    
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="*" />
       <ColumnDefinition Width="300" />
@@ -45,6 +48,7 @@
       <RowDefinition Height="350" />
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
+    
     <Border CornerRadius="10" Background="#25181e" Grid.Column="1" Grid.Row="1">
       <StackPanel>
         <TextBlock

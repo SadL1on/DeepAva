@@ -2,15 +2,9 @@
 using KursAuth.Utils.Messages;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using Splat;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reactive;
-using System.Runtime.Serialization;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace KursAuth.ViewModels.Messengers
@@ -24,16 +18,21 @@ namespace KursAuth.ViewModels.Messengers
         public IScreen HostScreen { get; }
 
         /// <summary>
-        /// Логин из формы рег/авт в мессенджере
+        /// Логин из формы авторизации в мессенджере
         /// </summary>
         [Reactive]
         public string LoginMess { get; set; }
 
         /// <summary>
-        /// Пароль из формы рег/авт в мессенджере
+        /// Пароль из формы авторизации в мессенджере
         /// </summary>
         [Reactive]
         public string PassMess { get; set; }
+
+        /// <summary>
+        /// Команда авторизации ВКонтакте
+        /// </summary>
+        public ReactiveCommand<Unit, Task> MessLogin { get; }
 
         [Reactive]
         public IEnumerable Messages { get; set; }
@@ -50,18 +49,13 @@ namespace KursAuth.ViewModels.Messengers
         [Reactive]
         public bool IsVisVkAuth { get; set; }
 
-        public ReactiveCommand<Unit, Task> MessLogin { get; }
+        private string path = @"D:\Не токен";
 
-        private ReactiveCommand<Unit, Unit> toVkCont { get; }
-
-        string path = @"D:\Не токен";
         public VkAuthVM()
         {
+            vk = VKModel.GetInstance();
             try
             {
-               
-
-                vk = VKModel.GetInstance();
                 using (FileStream fstream = File.OpenRead($@"{path}\note.txt"))
                 {
                     // преобразуем строку в байты
@@ -72,39 +66,25 @@ namespace KursAuth.ViewModels.Messengers
                     string token = System.Text.Encoding.Default.GetString(array);
                     vk.VkAuthTokenAsync(token);
                     vk.IsAuth = true;
-                    MessageBus.Current.SendMessage(new RouteToVkContMessage());
+                    MessageBus.Current.SendMessage(new VkContVM());
                 }
             }
-            catch
+            catch(DirectoryNotFoundException)
             {
-
-
-
-                vk = VKModel.GetInstance();
-                if (vk.IsAuth == true)
-                {
-                    MessageBus.Current.SendMessage(new RouteToVkContMessage());
-                }
-                else
-                {
-                    MessLogin = ReactiveCommand.Create(async () => { await AuthMessImpl(LoginMess, PassMess); });
-                }
+                MessLogin = ReactiveCommand.Create(async () => { await AuthMessImpl(LoginMess, PassMess); });
             }
         }
 
         public async Task AuthMessImpl(string login, string password)
-        {
-           
+        {           
             string token = await vk.VkAuthAsync(login, password);
             vk.IsAuth = true;
             await Encode(token);
-            MessageBus.Current.SendMessage(new RouteToVkContMessage());
-            
+            MessageBus.Current.SendMessage(new VkContVM());            
         }
 
         public async Task Encode(string token)
-        {
-           
+        {           
             DirectoryInfo dirInfo = new DirectoryInfo(path);
             if (!dirInfo.Exists)
             {
@@ -118,7 +98,6 @@ namespace KursAuth.ViewModels.Messengers
                 // запись массива байтов в файл
                 fstream.Write(array, 0, array.Length);
             }
-
         }
     }
 }

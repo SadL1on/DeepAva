@@ -1,15 +1,11 @@
 ﻿using KursAuth.Models.Telegram;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
-using System.Text;
 using System.Threading.Tasks;
 using TeleSharp.TL;
-using TeleSharp.TL.Messages;
 
 namespace KursAuth.ViewModels.Messengers
 {
@@ -30,7 +26,9 @@ namespace KursAuth.ViewModels.Messengers
 
         [Reactive]
         public string MessageText { get; set; }
+
         public ReactiveCommand<TLUser, Unit> GetMessHist { get; }
+
         public ReactiveCommand<Unit,Task> SendMessage { get; }
 
         [Reactive]
@@ -98,8 +96,7 @@ namespace KursAuth.ViewModels.Messengers
 
         public async Task SendMessageAsync()
         {
-            tl.SendMessage(MessageText, UserInDialog.Phone);
-
+            await tl.SendMessage(MessageText, UserInDialog.Phone);
         }
     }
 }
