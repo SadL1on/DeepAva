@@ -33,24 +33,23 @@ namespace KursAuth.ViewModels
 
         public TestVM()
         {
-            try
-            {
-                using (FileStream fstream = File.OpenRead($@"{path}\note.txt"))
-                {
-                    // преобразуем строку в байты
-                    byte[] array = new byte[fstream.Length];
-                    // считываем данные
-                    fstream.Read(array, 0, array.Length);
-                    // декодируем байты в строку
-                    string token = System.Text.Encoding.Default.GetString(array);
-                }
-                Router.Navigate.Execute(new MainWindowViewModel());
-            }
-            catch(DirectoryNotFoundException)
-            {
-                Router.Navigate.Execute(new MainAuthVM());
-            }
-            MessageBus.Current.Listen<MainWindowViewModel>().Subscribe(Observer.Create<MainWindowViewModel>((e) => { Router.Navigate.Execute(new MainWindowViewModel()); }));
+            //try
+            //{
+            //    using (FileStream fstream = File.OpenRead($@"{path}\note.txt"))
+            //    {
+            //        byte[] array = new byte[fstream.Length];
+            //        fstream.Read(array, 0, array.Length);
+            //        string token = System.Text.Encoding.Default.GetString(array);
+            //    }
+            //    Router.Navigate.Execute(new MainWindowViewModel());
+            //}
+            //catch(DirectoryNotFoundException)
+            //{
+            //    Router.Navigate.Execute(new MainAuthVM());
+            //}
+            //MessageBus.Current.Listen<MainWindowViewModel>().Subscribe(Observer.Create<MainWindowViewModel>((e) => { Router.Navigate.Execute(new MainWindowViewModel()); }));
+
+            Router.Navigate.Execute(new MainWindowViewModel());
         }
     }
 }
