@@ -31,13 +31,13 @@ namespace KursAuth.Models.Telegram
             return _instance;
         }
 
-        static System.Net.Sockets.TcpClient TcpHandler(string address, int port)
-        {
-            var socks = new Socks5ProxyClient("orbtl.s5.opennetwork.cc", 999, "262852885", "vmNeknLh");
-            var tcp = socks.CreateConnection(address, port);
+        //static System.Net.Sockets.TcpClient TcpHandler(string address, int port)
+        //{
+        //    var socks = new Socks5ProxyClient("orbtl.s5.opennetwork.cc", 999, "262852885", "vmNeknLh");
+        //    var tcp = socks.CreateConnection(address, port);
 
-            return tcp;
-        }
+        //    return tcp;
+        //}
 
 
 
@@ -47,7 +47,7 @@ namespace KursAuth.Models.Telegram
             var apiHash = "57c360c3d2605bbb0bc9930b151dd937";
 
 
-            client = new TelegramClient(apiId, apiHash, handler: TcpHandler);
+            client = new TelegramClient(apiId, apiHash);
             await client.ConnectAsync();
         }
         public async Task SendCodeToAuth(string phone)
@@ -56,7 +56,7 @@ namespace KursAuth.Models.Telegram
             var apiHash = "57c360c3d2605bbb0bc9930b151dd937";
 
 
-            client = new TelegramClient(apiId, apiHash, handler: TcpHandler);
+            client = new TelegramClient(apiId, apiHash);
             await client.ConnectAsync();
             hash = await client.SendCodeRequestAsync(phone);
             this.phone = phone;
